@@ -15,7 +15,7 @@ Project is created with:
 To run this project, follow the steps below:
 
 ```
-$ cd portfolio
+$ cd personal-website
 $ cp .env.example .env
 $ composer install 
 $ php artisan storage:link
