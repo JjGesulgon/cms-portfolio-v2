@@ -9,13 +9,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AboutMe extends Model
 {
-  use SoftDeletes, Filtering, Imaging;
+    use SoftDeletes, Filtering, Imaging;
 
-  /**
-     * AboutMe table.
-     *
-     * @var string
-     */
+    /**
+       * AboutMe table.
+       *
+       * @var string
+       */
     protected $table = 'about_me';
 
     /**
@@ -27,28 +27,28 @@ class AboutMe extends Model
       'user_id', 'body', 'image'
   ];
 
-  /**
-     * Run functions on boot.
-     *
-     * @return void
-     */
+    /**
+       * Run functions on boot.
+       *
+       * @return void
+       */
     public static function boot()
     {
-      parent::boot();
+        parent::boot();
 
-      static::creating(function ($model) {
-        $model->user_id = auth('api')->user()->id;
-        static::storeImage($model);
-      });
+        static::creating(function ($model) {
+            $model->user_id = auth('api')->user()->id;
+            static::storeImage($model);
+        });
 
-      static::updating(function ($model) {
-        $model->user_id = auth('api')->user()->id;
-        static::updateImage($model);
-      });
+        static::updating(function ($model) {
+            $model->user_id = auth('api')->user()->id;
+            static::updateImage($model);
+        });
 
-      static::deleting(function ($model) {
-        static::deleteImage($model);
-      });
+        static::deleting(function ($model) {
+            static::deleteImage($model);
+        });
     }
 
     /**

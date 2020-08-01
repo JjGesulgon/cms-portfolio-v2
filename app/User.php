@@ -46,4 +46,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    /**
+     * The user has one aboutMe
+     *
+     * @return array object
+     */
+    public function aboutMe()
+    {
+        return $this->hasOne(AboutMe::class);
+    }
 }
