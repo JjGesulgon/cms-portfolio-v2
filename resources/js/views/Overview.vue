@@ -1,10 +1,19 @@
 <template>
-  <div class="container">
-    <div class="image-container">
-      <img class="img-fluid accent-image" src="/images/undraw_content.svg" alt="Image" />
+  <div class="card">
+      <div class="card-header clearfix">
+        <div class="float-left">
+          <span class="text-secondary">Overview</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="container">
+          <div class="image-container">
+            <img class="img-fluid accent-image" src="/images/undraw_content.svg" alt="Image" />
+          </div>
+          <div class="display-3 font-weight-lighter text-center">Welcome to the Content Management and Web Traffic Analysis System</div>
+        </div>
+      </div>
     </div>
-    <div class="display-1 font-weight-lighter text-center">Welcome to the CMS Module.</div>
-  </div>
 </template>
 
 <script>

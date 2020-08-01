@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="sticky-top">
+    <div class="">
       <ul class="nav flex-column background py-1 mt-3 sidebar-nav">
         <li class="nav-item">
           <router-link class="nav-link" :to="{ name: 'overview' }">Overview</router-link>
         </li>
       </ul>
     </div>
-    <div class="sticky-top">
+    <div class="">
       <ul class="nav flex-column background py-1 mt-3 sidebar-nav">
         <li class="nav-item">
           <span class="nav-link">Content Management</span>
@@ -28,7 +28,7 @@
         <div class="collapse" id="about">
           <ul class="nav flex-column nav-sub-menu">
             <li class="nav-item">
-              <router-link class="nav-link" :to="{ name: 'users.create' }">About Me</router-link>
+              <router-link class="nav-link" :to="{ name: 'about-me.index' }">About Me</router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link" :to="{ name: 'users.index' }">Tech Stack</router-link>
@@ -51,7 +51,7 @@
         </li>
       </ul>
     </div>
-    <div class="sticky-top">
+    <div class="">
       <ul class="nav flex-column background py-1 mt-3 sidebar-nav">
         <li class="nav-item">
           <span class="nav-link">User Management</span>
@@ -62,7 +62,7 @@
         </li>
       </ul>
     </div>
-    <div class="sticky-top">
+    <div class="">
       <ul class="nav flex-column background py-1 mt-3 sidebar-nav">
         <li class="nav-item">
           <span class="nav-link">Monitoring</span>

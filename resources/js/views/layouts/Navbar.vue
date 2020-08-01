@@ -4,7 +4,7 @@
       <router-link
         class="navbar-brand"
         :to="{ name: 'overview' }"
-      >Content Management And Site Monitoring</router-link>
+      >Content Management And Web Traffic Analysis</router-link>
 
       <button
         class="navbar-toggler"
