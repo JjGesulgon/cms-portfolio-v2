@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\AboutMe;
 
-class AboutRepository extends Repository
+class AboutMeRepository extends Repository
 {
     /**
      * Create new instance of about repository.

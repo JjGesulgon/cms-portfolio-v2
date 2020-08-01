@@ -29,6 +29,7 @@ import App from './views/layouts/App';
 import router from './router';
 import store from './store';
 import VueSelect from 'vue-select';
+import Editor from '@tinymce/tinymce-vue'
 
 // Component to Component Broadcasting
 window.Broadcast = new Vue();
@@ -40,9 +41,12 @@ Vue.component('vue-select', VueSelect);
 Vue.component('navbar', require('./views/layouts/Navbar.vue'));
 Vue.component('sidebar', require('./views/layouts/Sidebar.vue'));
 
+// Tiny MCE
+Vue.component('Editor', require('@tinymce/tinymce-vue').default);
+
 const app = new Vue({
     el: '#app',
-    components: { 'app': App },
+    components: { 'app': App},
     store,
     router
 });
