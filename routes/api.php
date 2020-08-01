@@ -16,4 +16,11 @@ Route::group(['middleware' => ['auth:api']], function () {
             'index', 'store', 'show', 'update', 'destroy'
         ]
     ]);
+
+    // AboutMe
+    Route::resource('aboutMe', 'AboutMeController', [
+        'only' => [
+            'index', 'store', 'show', 'update', 'destroy'
+        ]
+    ]);
 });
