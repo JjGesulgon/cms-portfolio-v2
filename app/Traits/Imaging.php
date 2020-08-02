@@ -142,10 +142,12 @@ trait Imaging
                 }
             }
 
-            Image::make($image)->resize(
-                $resolutions[$defaultResolution]['width'],
-                $resolutions[$defaultResolution]['height']
-            )->encode('jpg', $compressionRate)->save(
+            // Image::make($image)->resize(
+            //     $resolutions[$defaultResolution]['width'],
+            //     $resolutions[$defaultResolution]['height']
+            // )
+            Image::make($image)
+            ->encode('jpg', $compressionRate)->save(
                 storage_path('app/public/' . $storagePath . '/' . $imageName),
                 $compressionRate
             );
