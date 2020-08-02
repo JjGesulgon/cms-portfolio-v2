@@ -15,7 +15,6 @@
                 </div>
             </div>
         </div>
-
         <div id="toast-message" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false" style="position: absolute; bottom: 0; right: 0; margin-right: 30px; margin-bottom: 30px;">
             <div class="toast-header">
                 <strong class="mr-auto">System Notification</strong>
@@ -30,7 +29,6 @@
         </div>
     </div>
 </template>
-
 <script>
     export default {
         data() {
@@ -38,7 +36,6 @@
                 message: ''
             }
         },
-
         created() {
             Echo.connector.socket.on('disconnect', (reason) => {
                 alert('No Internet Connection');
@@ -52,7 +49,6 @@
                 console.log(event);
             });
         },
-
         mounted() {
             Broadcast.$on('ToastMessage', (event) => {
                 this.message = event.message;
@@ -66,3 +62,12 @@
         }
     }
 </script>
+<style>
+  .accent-image {
+    max-width: 50%;
+    height: auto;
+  }
+  .image-container {
+    text-align: center;
+  }
+</style>

@@ -22,7 +22,7 @@
             <button
               type="button"
               class="btn btn-danger btn-sm"
-              @click.prevent.default="openDeleteAboutMeModal()"
+              @click.prevent="openDeleteAboutMeModal()"
             >
               <i class="fas fa-trash-alt"></i>&nbsp; Delete Content
             </button>
@@ -41,16 +41,22 @@
           ></div>
         </div>
         <div v-if="ifReady">
-          <img
-            v-if="hasContent"
-            class="img-fluid about-me-image"
-            :src="'storage/images/' + aboutMe.image"
-            alt="Image"
-          />
-          <p class="text-center" v-if="!hasContent">No Content</p>
-          <br />
-          <div class="body mt-5" v-html="aboutMe.body"></div>
-          <br />
+          <div v-if="!hasContent">
+            <div class="image-container">
+              <img class="img-fluid accent-image" src="/images/undraw_not_found.svg" alt="Image" />
+            </div>
+            <p class="text-center display-4">No Content</p>
+          </div>
+          <div v-else>
+            <img
+              class="img-fluid about-me-image"
+              :src="'storage/images/' + aboutMe.image"
+              alt="Image"
+            />
+            <br />
+            <div class="body mt-5" v-html="aboutMe.body"></div>
+            <br />
+          </div>
         </div>
       </div>
     </div>
@@ -75,7 +81,7 @@
             <button
               type="button"
               class="btn btn-danger btn-sm"
-              @click.prevent.default="deleteAboutMe()"
+              @click.prevent="deleteAboutMe()"
             >Confirm Delete</button>
             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
           </div>

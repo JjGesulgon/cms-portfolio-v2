@@ -15,7 +15,6 @@
             <div class="form-group">
               <label>Content</label>
               <editor
-                :disbled="{aboutMe}"
                 v-model="aboutMe.body"
                 api-key="v8631ogi6aq7uc2h9z8tr72t2r3krmwlsbj5k4swk4i448f9"
                 :init="{
@@ -65,7 +64,7 @@ export default {
       errors: [],
     };
   },
-  created() {
+  mounted() {
     let promise = new Promise((resolve, reject) => {
       axios
         .get("/api/aboutMe")
