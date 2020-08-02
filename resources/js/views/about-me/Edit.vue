@@ -31,7 +31,6 @@
               />
             </div>
             <br />
-
             <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'about-me.index' }">
               <i class="fas fa-chevron-left"></i> &nbsp;Back
             </router-link>
@@ -40,7 +39,6 @@
             </button>
           </form>
         </div>
-
         <div v-else>
           <div class="progress">
             <div
@@ -57,7 +55,6 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   data() {

@@ -30,7 +30,6 @@
               />
             </div>
             <br />
-
             <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'users.index' }">
               <i class="fas fa-chevron-left"></i> &nbsp;Back
             </router-link>
@@ -39,7 +38,6 @@
             </button>
           </form>
         </div>
-
         <div v-else>
           <div class="progress">
             <div
@@ -56,7 +54,6 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   data() {
@@ -71,13 +68,11 @@ export default {
     onFileSelected(event) {
       this.image = event.target.files[0];
     },
-
     createNewAboutMe() {
       this.ifReady = false;
-
       let formData = new FormData();
-
       formData.append('body', tinyMCE.activeEditor.getContent());
+
       if (this.image != null) {
         formData.append('image', this.image);
       }
@@ -88,7 +83,6 @@ export default {
           Broadcast.$emit("ToastMessage", {
             message: "About Me Content Created Successfully",
           });
-
           this.$router.push({ name: "about-me.index" });
         })
         .catch((err) => {

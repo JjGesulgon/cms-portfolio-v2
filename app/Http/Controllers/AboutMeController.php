@@ -79,27 +79,6 @@ class AboutMeController extends Controller
   }
 
   /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function show($id)
-  {
-    if (! $aboutMe = $this->aboutMe->findOrFail($id)) {
-      return response()->json([
-        'message' => 'Resource does not exist'
-      ], 400);
-    }
-
-    return response()->json([
-      'response' => true,
-      'message'  => 'Resource successfully retrieve',
-      'aboutMe'  => $aboutMe
-    ], 200);
-  }
-
-  /**
    * Update the specified resource in storage.
    *
    * @param  \Illuminate\Http\Request  $request

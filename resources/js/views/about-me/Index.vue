@@ -26,9 +26,6 @@
             >
               <i class="fas fa-trash-alt"></i>&nbsp; Delete Content
             </button>
-            <!-- <router-link class="btn btn-danger btn-sm" :to="{ name: 'about-me.create' }">
-              <i class="fas fa-trash-alt"></i>&nbsp; Delete Content
-            </router-link>-->
           </div>
         </div>
       </div>
@@ -135,10 +132,9 @@ export default {
   },
 };
 </script>
-
 <style scoped>
-.about-me-image {
-  max-width: 25%;
-  height: auto;
-}
+  .about-me-image {
+    max-width: 25%;
+    height: auto;
+  }
 </style>
