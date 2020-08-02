@@ -110,7 +110,7 @@ class AboutMeController extends Controller
   {
     $validator = Validator::make($request->all(), [
       'body'    => 'required|min:2',
-      'image'   => 'required|max:2000',
+      'image'   => 'max:2000',
     ]);
 
     if ($validator->fails()) {

@@ -2,12 +2,12 @@
   <div>
     <div class="card">
       <div class="card-header">
-        <router-link class="text-primary" :to="{ name: 'users.index' }">About Me</router-link>/
-        <span class="text-secondary">Create New Content</span>
+        <router-link class="text-primary" :to="{ name: 'about-me.index' }">About Me</router-link> /
+        <span class="text-secondary">Update Content</span>
       </div>
       <div class="card-body">
         <div v-if="ifReady">
-          <form v-on:submit.prevent="createNewAboutMe()">
+          <form v-on:submit.prevent="updateAboutMe()">
             <div class="form-group">
               <label>Image (optional)</label>
               <input type="file" class="form-control-file" @change="onFileSelected">
@@ -15,7 +15,8 @@
             <div class="form-group">
               <label>Content</label>
               <editor
-                v-model="body"
+                :disbled="{aboutMe}"
+                v-model="aboutMe.body"
                 api-key="v8631ogi6aq7uc2h9z8tr72t2r3krmwlsbj5k4swk4i448f9"
                 :init="{
                   height: 500,
@@ -32,11 +33,11 @@
             </div>
             <br />
 
-            <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'users.index' }">
+            <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'about-me.index' }">
               <i class="fas fa-chevron-left"></i> &nbsp;Back
             </router-link>
             <button type="submit" class="btn btn-success btn-sm">
-              <i class="fas fa-plus"></i> &nbsp;Create New Content
+              <i class="fas fa-plus"></i> &nbsp;Update Content
             </button>
           </form>
         </div>
@@ -62,32 +63,49 @@
 export default {
   data() {
     return {
-      ifReady: true,
-      body: '',
-      image: '',
+      ifReady: false,
+      aboutMe:'',
+      image: null,
       errors: [],
     };
+  },
+  created() {
+    let promise = new Promise((resolve, reject) => {
+      axios
+        .get("/api/aboutMe")
+        .then((res) => {
+          this.aboutMe = res.data.aboutMe;
+          tinyMCE.activeEditor.setContent(this.aboutMe.body);
+          this.hasContent = true;
+          this.ifReady = true;
+          resolve();
+        })
+        .catch((error) => {
+          this.ifReady = true;
+        });
+    });
   },
   methods: {
     onFileSelected(event) {
       this.image = event.target.files[0];
     },
 
-    createNewAboutMe() {
+    updateAboutMe() {
       this.ifReady = false;
 
       let formData = new FormData();
-
+      formData.append('_method','PATCH');
       formData.append('body', tinyMCE.activeEditor.getContent());
+
       if (this.image != null) {
         formData.append('image', this.image);
       }
 
       axios
-        .post("/api/aboutMe", formData)
+        .post("/api/aboutMe/" + this.aboutMe.id, formData)
         .then((res) => {
           Broadcast.$emit("ToastMessage", {
-            message: "About Me Content Created Successfully",
+            message: "About Me Content Updated Successfully",
           });
 
           this.$router.push({ name: "about-me.index" });

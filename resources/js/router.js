@@ -18,8 +18,7 @@ const UsersEdit   = () => import('./views/users/Edit');
  */
 const AboutMeIndex  = () => import('./views/about-me/Index');
 const AboutMeCreate = () => import('./views/about-me/Create');
-// const UsersView   = () => import('./views/users/View');
-// const UsersEdit   = () => import('./views/users/Edit');
+const AboutMeEdit   = () => import('./views/about-me/Edit');
 
 export default new Router({
     mode: 'history',
@@ -36,7 +35,6 @@ export default new Router({
         // About Me
         { path: '/about-me', name: 'about-me.index', component: AboutMeIndex },
         { path: '/about-me/create', name: 'about-me.create', component: AboutMeCreate },
-        // { path: '/users/:id', name: 'users.view', component: UsersView },
-        // { path: '/users/:id/edit', name: 'users.edit', component: UsersEdit }
+        { path: '/about-me/:id/edit', name: 'about-me.edit', component: AboutMeEdit }
     ]
 });
