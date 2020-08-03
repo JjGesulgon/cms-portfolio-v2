@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header clearfix">
         <div class="float-left">
-          <router-link class="text-primary" :to="{ name: 'users.index' }">Users</router-link>/
+          <router-link class="text-primary" :to="{ name: 'users.index' }">Users</router-link> /
           <span class="text-secondary">View Users</span>
         </div>
         <div class="float-right">

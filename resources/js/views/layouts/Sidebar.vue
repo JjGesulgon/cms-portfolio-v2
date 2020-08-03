@@ -31,10 +31,29 @@
               <router-link class="nav-link" :to="{ name: 'about-me.index' }">About Me</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" :to="{ name: 'users.index' }">Tech Stack</router-link>
+              <a
+                class="nav-link"
+                href="#techStack"
+                data-toggle="collapse"
+                aria-expanded="false"
+                aria-controls="techStack"
+              >
+                Tech Stack
+                <i class="float-right fas fa-caret-down"></i>
+              </a>
+              <div class="collapse" id="techStack">
+                <ul class="nav flex-column nav-sub-menu">
+                  <li class="nav-item pl-3">
+                    <router-link class="nav-link" :to="{ name: 'about-me.index' }">Content</router-link>
+                  </li>
+                  <li class="nav-item pl-3">
+                    <router-link class="nav-link" :to="{ name: 'about-me.index' }">Stack List</router-link>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" :to="{ name: 'users.index' }">Process / Workflow</router-link>
+              <router-link class="nav-link" :to="{ name: 'users.index' }">Passion</router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link" :to="{ name: 'users.index' }">History</router-link>
