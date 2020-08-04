@@ -3,11 +3,11 @@
     <div class="card">
       <div class="card-header clearfix">
         <div class="float-left">
-          <router-link class="text-primary" :to="{ name: 'users.index' }">Users</router-link> /
+          <router-link class="text-primary" :to="{ name: 'users.index' }">Users</router-link>&nbsp;/
           <span class="text-secondary">View Users</span>
         </div>
         <div class="float-right">
-          <router-link class="btn btn-success btn-sm" :to="{ name: 'users.create' }">
+          <router-link class="btn btn-primary btn-sm" :to="{ name: 'users.create' }">
             <i class="fas fa-plus"></i>&nbsp; Create New User
           </router-link>
         </div>
@@ -56,7 +56,14 @@
                 >
                   <i class="fas fa-edit"></i>&nbsp;
                   <strong>Edit</strong>
-                </router-link>
+                </router-link>&nbsp; | &nbsp;
+                <label
+                  class="text-danger clickableText"
+                  @click.prevent="openDeleteUserModal(user.id)"
+                >
+                  <i class="fas fa-trash-alt"></i>&nbsp;
+                  <strong>Delete</strong>
+                </label>
               </td>
             </tr>
           </tbody>
@@ -226,6 +233,34 @@
         </div>
       </div>
     </div>
+    <div
+      class="modal fade"
+      id="delete-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="deleteUserTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">You're about to delete this User?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">Are you sure?</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-danger btn-sm"
+              @click.prevent.default="deleteUser()"
+            >Confirm Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -253,6 +288,7 @@ export default {
   data() {
     return {
       users: null,
+      userID: "",
       name: "",
       email: "",
       order_by: "desc",
@@ -523,6 +559,26 @@ export default {
     },
     openSearchModal() {
       $("#search-modal").modal("show");
+    },
+    openDeleteUserModal(id) {
+      $("#delete-modal").modal("show");
+      this.userID = id
+    },
+    deleteUser() {
+      $("#delete-modal").modal("hide");
+      this.showProgress = true;
+
+      axios
+        .delete("/api/users/" + this.userID)
+        .then((res) => {
+          Broadcast.$emit("ToastMessage", {
+            message: "User Deleted Successfully",
+          });
+          this.$router.go();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };

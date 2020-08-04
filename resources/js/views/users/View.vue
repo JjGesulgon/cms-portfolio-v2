@@ -2,9 +2,14 @@
     <div>
         <div class="card">
             <div class="card-header">
+              <div class="float-left">
                 <router-link class="text-primary" :to="{ name: 'users.index' }">Users</router-link>
                 /
                 <span class="text-secondary">View User</span>
+              </div>
+              <div class="float-right">
+                <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'users.index' }"><i class="fas fa-chevron-left"></i>&nbsp; Back</router-link>
+              </div>
             </div>
             <div class="card-body">
                 <div v-if="ifReady">
@@ -26,8 +31,6 @@
                     </fieldset>
 
                     <br>
-
-                    <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'users.index' }"><i class="fas fa-chevron-left"></i>&nbsp; Back</router-link>
                     <router-link class="btn btn-primary btn-sm" :to="{ name: 'users.edit' , params: { id: user.id }}"><i class="fas fa-edit"></i>&nbsp; Edit User</router-link>
                     <button type="button" class="btn btn-danger btn-sm" @click.prevent.default="openDeleteUserModal()"><i class="fas fa-trash-alt"></i>&nbsp; Delete User</button>
                 </div>
@@ -49,11 +52,11 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Are you sure you want to delete this User?
+                        Are you sure?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger btn-sm" @click.prevent.default="deleteUser()">Confirm Delete</button>
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger btn-sm" @click.prevent.default="deleteUser()">Confirm Delete</button>
                     </div>
                 </div>
             </div>

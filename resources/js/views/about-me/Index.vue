@@ -3,22 +3,16 @@
     <div class="card">
       <div class="card-header clearfix">
         <div class="float-left">
-          <router-link class="text-primary" :to="{ name: 'about-me.index' }">About Me</router-link>/
+          <router-link class="text-primary" :to="{ name: 'about-me.index' }">About Me</router-link>&nbsp;/
           <span class="text-secondary">Content</span>
         </div>
         <div v-if="ifReady">
           <div class="float-right" v-if="!hasContent">
-            <router-link class="btn btn-success btn-sm" :to="{ name: 'about-me.create' }">
+            <router-link class="btn btn-primary btn-sm" :to="{ name: 'about-me.create' }">
               <i class="fas fa-plus"></i>&nbsp; Create New Content
             </router-link>
           </div>
           <div class="float-right" v-else>
-            <router-link
-              class="btn btn-success btn-sm"
-              :to="{ name: 'about-me.edit', params: { id: aboutMe.id }}"
-            >
-              <i class="fas fa-edit"></i>&nbsp; Edit Content
-            </router-link>
             <button
               type="button"
               class="btn btn-danger btn-sm"
@@ -26,6 +20,12 @@
             >
               <i class="fas fa-trash-alt"></i>&nbsp; Delete Content
             </button>
+            <router-link
+              class="btn btn-primary btn-sm"
+              :to="{ name: 'about-me.edit', params: { id: aboutMe.id }}"
+            >
+              <i class="fas fa-edit"></i>&nbsp; Edit Content
+            </router-link>
           </div>
         </div>
       </div>
@@ -76,14 +76,14 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">Are you sure you?</div>
+          <div class="modal-body">Are you sure?</div>
           <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
             <button
               type="button"
               class="btn btn-danger btn-sm"
               @click.prevent="deleteAboutMe()"
             >Confirm Delete</button>
-            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>

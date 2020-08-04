@@ -2,8 +2,15 @@
   <div>
     <div class="card">
       <div class="card-header">
-        <router-link class="text-primary" :to="{ name: 'about-me.index' }">About Me</router-link> /
-        <span class="text-secondary">Update Content</span>
+        <div class="float-left">
+          <router-link class="text-primary" :to="{ name: 'about-me.index' }">About Me</router-link>&nbsp;/
+          <span class="text-secondary">Update Content</span>
+        </div>
+        <div class="float-right">
+          <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'about-me.index' }">
+            <i class="fas fa-chevron-left"></i> &nbsp;Back
+          </router-link>
+        </div>
       </div>
       <div class="card-body">
         <div v-if="ifReady">
@@ -30,11 +37,8 @@
               />
             </div>
             <br />
-            <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'about-me.index' }">
-              <i class="fas fa-chevron-left"></i> &nbsp;Back
-            </router-link>
-            <button type="submit" class="btn btn-success btn-sm">
-              <i class="fas fa-plus"></i> &nbsp;Update Content
+            <button type="submit" class="btn btn-primary btn-sm">
+              <i class="fas fa-edit"></i> &nbsp;Update Content
             </button>
           </form>
         </div>

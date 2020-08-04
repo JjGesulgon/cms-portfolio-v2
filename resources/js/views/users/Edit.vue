@@ -2,9 +2,14 @@
     <div>
         <div class="card">
             <div class="card-header">
+              <div class="float-left">
                 <router-link class="text-primary" :to="{ name: 'users.index' }">Users</router-link>
                 /
                 <span class="text-secondary">Edit User</span>
+              </div>
+              <div class="float-right">
+                <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'users.index' }"><i class="fas fa-chevron-left"></i>&nbsp; Back</router-link>
+              </div>
             </div>
             <div class="card-body">
                 <div v-if="ifReady">
@@ -26,8 +31,7 @@
 
                         <br>
 
-                        <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'users.index' }"><i class="fas fa-chevron-left"></i>&nbsp; Back</router-link>
-                        <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-edit"></i>&nbsp; Update User</button>
+                        <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i>&nbsp; Update User</button>
                     </form>
                 </div>
                 <div v-else>
