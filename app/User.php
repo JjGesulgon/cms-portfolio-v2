@@ -56,4 +56,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(AboutMe::class);
     }
+
+    /**
+     * The user has one techStackContent
+     *
+     * @return array object
+     */
+    public function techStackContent()
+    {
+        return $this->hasOne(TechStackContent::class);
+    }
 }

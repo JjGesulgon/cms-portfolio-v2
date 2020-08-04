@@ -102,7 +102,7 @@ export default {
   mounted() {
     let promise = new Promise((resolve, reject) => {
       axios
-        .get("/api/aboutMe")
+        .get("/api/about-me")
         .then((res) => {
           console.log(res);
           this.aboutMe = res.data.aboutMe;

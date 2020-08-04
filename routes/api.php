@@ -17,10 +17,17 @@ Route::group(['middleware' => ['auth:api']], function () {
         ]
     ]);
 
-    // AboutMe
-    Route::resource('aboutMe', 'AboutMeController', [
+    // About Me
+    Route::resource('about-me', 'AboutMeController', [
         'only' => [
-            'index', 'store', 'show', 'update', 'destroy'
+            'index', 'store', 'update', 'destroy'
         ]
     ]);
+
+    // Tech Stack Content
+    Route::resource('tech-stack-content', 'AboutMeController', [
+      'only' => [
+          'index', 'store', 'update', 'destroy'
+      ]
+  ]);
 });

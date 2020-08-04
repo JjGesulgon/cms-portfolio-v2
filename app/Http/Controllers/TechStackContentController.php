@@ -5,26 +5,26 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Repositories\AboutMeRepository;
-use App\Http\Resources\AboutMeResource;
+use App\Repositories\TechStackContentRepository;
+use App\Http\Resources\TechStackContentResource;
 
-class AboutMeController extends Controller
+class TechStackContentController extends Controller
 {
   /**
-   * About Me repository.
+   * Tech Stack Content repository.
    *
-   * @var App\Repositories\AboutMeRepository
+   * @var App\Repositories\TeckStackContentRepository
    */
-  protected $aboutMe;
+  protected $techStackContent;
 
   /**
    * Create new instance of about controller.
    *
-   * @param AboutMeRepository aboutMe AboutMe repository
+   * @param TechStackContentRepository techStackContent TechStackContent repository
    */
-  public function __construct(AboutMeRepository $aboutMe)
+  public function __construct(TechStackContentRepository $techStackContent)
   {
-    $this->aboutMe = $aboutMe;
+    $this->techStackContent = $techStackContent;
   }
 
   /**
@@ -34,7 +34,7 @@ class AboutMeController extends Controller
    */
   public function index()
   {
-    if (! $aboutMe = $this->aboutMe->getAboutMe()) {
+    if (! $techStackContent = $this->techStackContent->getTechStackContent()) {
       return response()->json([
         'message' => 'Resource does not exist'
       ], 400);
@@ -43,7 +43,7 @@ class AboutMeController extends Controller
     return response()->json([
       'response' => true,
       'message'  => 'Resource successfully retrieve',
-      'aboutMe'  => $aboutMe
+      'techStackContent'  => $techStackContent
     ], 200);
   }
 
@@ -57,7 +57,6 @@ class AboutMeController extends Controller
   {
     $validator = Validator::make($request->all(), [
       'body'  => 'required|min:2',
-      'image'   => 'required|max:2000',
     ]);
 
     if ($validator->fails()) {
@@ -67,7 +66,7 @@ class AboutMeController extends Controller
       ], 400);
     }
 
-    if (! $this->aboutMe->store($request)) {
+    if (! $this->techStackContent->store($request)) {
       return response()->json([
           'message' => 'Failed to store resource'
       ], 500);
@@ -89,7 +88,6 @@ class AboutMeController extends Controller
   {
     $validator = Validator::make($request->all(), [
       'body'    => 'required|min:2',
-      'image'   => 'max:2000',
     ]);
 
     if ($validator->fails()) {
@@ -99,7 +97,7 @@ class AboutMeController extends Controller
       ], 400);
     }
 
-    if (! $this->aboutMe->update($request, $id)) {
+    if (! $this->techStackContent->update($request, $id)) {
       return response()->json([
         'message' => 'Failed to update resource'
       ], 500);
@@ -118,7 +116,7 @@ class AboutMeController extends Controller
    */
   public function destroy($id)
   {
-    if (! $this->aboutMe->findOrFail($id)->delete()) {
+    if (! $this->techStackContent->findOrFail($id)->delete()) {
       return response()->json([
         'message' => 'Failed to delete resource'
       ], 400);

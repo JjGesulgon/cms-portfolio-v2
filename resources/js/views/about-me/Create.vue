@@ -78,7 +78,7 @@ export default {
       }
 
       axios
-        .post("/api/aboutMe", formData)
+        .post("/api/about-me", formData)
         .then((res) => {
           Broadcast.$emit("ToastMessage", {
             message: "About Me Content Created Successfully",

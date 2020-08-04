@@ -67,7 +67,7 @@ export default {
   mounted() {
     let promise = new Promise((resolve, reject) => {
       axios
-        .get("/api/aboutMe")
+        .get("/api/about-me")
         .then((res) => {
           this.aboutMe = res.data.aboutMe;
           tinyMCE.activeEditor.setContent(this.aboutMe.body);
@@ -97,7 +97,7 @@ export default {
       }
 
       axios
-        .post("/api/aboutMe/" + this.aboutMe.id, formData)
+        .post("/api/about-me/" + this.aboutMe.id, formData)
         .then((res) => {
           Broadcast.$emit("ToastMessage", {
             message: "About Me Content Updated Successfully",
