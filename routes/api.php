@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     ]);
 
     // Tech Stack Content
-    Route::resource('tech-stack-content', 'AboutMeController', [
+    Route::resource('tech-stack-content', 'TechStackContentController', [
       'only' => [
           'index', 'store', 'update', 'destroy'
       ]

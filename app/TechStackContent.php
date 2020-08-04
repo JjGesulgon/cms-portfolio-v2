@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TechStackContent extends Model
 {
-    use SoftDeletes, Filtering, Imaging;
+    use SoftDeletes, Filtering;
     /**
       * AboutMe table.
       *

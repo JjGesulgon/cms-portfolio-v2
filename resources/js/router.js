@@ -20,6 +20,13 @@ const AboutMeIndex  = () => import('./views/about-me/Index');
 const AboutMeCreate = () => import('./views/about-me/Create');
 const AboutMeEdit   = () => import('./views/about-me/Edit');
 
+/**
+ * Tech Stack Content
+ */
+// const AboutMeIndex  = () => import('./views/about-me/Index');
+const TechStackContentCreate = () => import('./views/tech-stack/content/Create');
+// const AboutMeEdit   = () => import('./views/about-me/Edit');
+
 export default new Router({
     mode: 'history',
     routes: [
@@ -35,6 +42,11 @@ export default new Router({
         // About Me
         { path: '/about-me', name: 'about-me.index', component: AboutMeIndex },
         { path: '/about-me/create', name: 'about-me.create', component: AboutMeCreate },
-        { path: '/about-me/:id/edit', name: 'about-me.edit', component: AboutMeEdit }
+        { path: '/about-me/:id/edit', name: 'about-me.edit', component: AboutMeEdit },
+
+        // Tech Stack Content
+        // { path: '/about-me', name: 'about-me.index', component: AboutMeIndex },
+        { path: '/tech-stack-content/create', name: 'tech-stack-content.create', component: TechStackContentCreate },
+        // { path: '/about-me/:id/edit', name: 'about-me.edit', component: AboutMeEdit }
     ]
 });
