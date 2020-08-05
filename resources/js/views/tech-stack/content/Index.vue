@@ -3,12 +3,12 @@
     <div class="card">
       <div class="card-header clearfix">
         <div class="float-left">
-          <router-link class="text-primary" :to="{ name: 'about-me.index' }">About Me</router-link>&nbsp;/
+          <router-link class="text-primary" :to="{ name: 'tech-stack-content.index' }">Tech Stack Content</router-link>&nbsp;/
           <span class="text-secondary">Content</span>
         </div>
         <div v-if="ifReady">
           <div class="float-right" v-if="!hasContent">
-            <router-link class="btn btn-primary btn-sm" :to="{ name: 'about-me.create' }">
+            <router-link class="btn btn-primary btn-sm" :to="{ name: 'tech-stack-content.create' }">
               <i class="fas fa-plus"></i>&nbsp; Create New Content
             </router-link>
           </div>
@@ -16,13 +16,13 @@
             <button
               type="button"
               class="btn btn-danger btn-sm"
-              @click.prevent="openDeleteAboutMeModal()"
+              @click.prevent="openDeleteTechStackContentModal()"
             >
               <i class="fas fa-trash-alt"></i>&nbsp; Delete Content
             </button>
             <router-link
               class="btn btn-primary btn-sm"
-              :to="{ name: 'about-me.edit', params: { id: aboutMe.id }}"
+              :to="{ name: 'tech-stack-content.edit', params: { id: techStackContent.id }}"
             >
               <i class="fas fa-edit"></i>&nbsp; Edit Content
             </router-link>
@@ -48,13 +48,7 @@
             <p class="text-center display-4">No Content</p>
           </div>
           <div v-else>
-            <img
-              class="img-fluid about-me-image"
-              :src="'storage/images/' + aboutMe.image"
-              alt="Image"
-            />
-            <br />
-            <div class="body mt-5" v-html="aboutMe.body"></div>
+            <div class="body mt-5" v-html="techStackContent.body"></div>
             <br />
           </div>
         </div>
@@ -65,7 +59,7 @@
       id="delete-modal"
       tabindex="-1"
       role="dialog"
-      aria-labelledby="deleteAboutMe"
+      aria-labelledby="deleteTechStackContent"
       aria-hidden="true"
     >
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -82,7 +76,7 @@
             <button
               type="button"
               class="btn btn-danger btn-sm"
-              @click.prevent="deleteAboutMe()"
+              @click.prevent="deleteTechStackContent()"
             >Confirm Delete</button>
           </div>
         </div>
@@ -95,17 +89,17 @@ export default {
   data() {
     return {
       ifReady: false,
-      aboutMe: "",
+      techStackContent: "",
       hasContent: false,
     };
   },
   mounted() {
     let promise = new Promise((resolve, reject) => {
       axios
-        .get("/api/about-me")
+        .get("/api/tech-stack-content")
         .then((res) => {
           console.log(res);
-          this.aboutMe = res.data.aboutMe;
+          this.techStackContent = res.data.techStackContent;
           this.hasContent = true;
           this.ifReady = true;
           resolve();
@@ -116,17 +110,17 @@ export default {
     });
   },
   methods: {
-    openDeleteAboutMeModal() {
+    openDeleteTechStackContentModal() {
       $("#delete-modal").modal("show");
     },
-    deleteAboutMe() {
+    deleteTechStackContent() {
       $("#delete-modal").modal("hide");
       this.ifReady = false;
       axios
-        .delete("/api/abou-me/" + this.aboutMe.id)
+        .delete("/api/tech-stack-content/" + this.techStackContent.id)
         .then((res) => {
           Broadcast.$emit("ToastMessage", {
-            message: "About Me Deleted Successfully",
+            message: "Tech Stack Content Deleted Successfully",
           });
 
           this.$router.go();

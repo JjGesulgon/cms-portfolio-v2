@@ -9,7 +9,6 @@
         <div v-if="ifReady">
           <form v-on:submit.prevent="createNewTechStackContent()">
             <div class="form-group">
-              <label>Content</label>
               <editor
                 v-model="body"
                 api-key="v8631ogi6aq7uc2h9z8tr72t2r3krmwlsbj5k4swk4i448f9"
@@ -54,11 +53,30 @@
 export default {
   data() {
     return {
-      ifReady: true,
+      ifReady: false,
       body: '',
       image: '',
+      techStackContent: null,
       errors: [],
     };
+  },
+  created() {
+    let promise = new Promise((resolve, reject) => {
+      axios
+        .get("/api/tech-stack-content")
+        .then((res) => {
+          this.techStackContent = res.data.techStackContent;
+          if(this.techStackContent){
+            this.$router.push({ name: "tech-stack-content.index" });
+          }else{
+            this.ifReady = true
+          }
+          resolve();
+        })
+        .catch((error) => {
+          this.ifReady = true;
+        });
+    });
   },
   methods: {
     createNewTechStackContent() {
@@ -72,7 +90,7 @@ export default {
           Broadcast.$emit("ToastMessage", {
             message: "Tech Stack Content Created Successfully",
           });
-          // this.$router.push({ name: "about-me.index" });
+          this.$router.push({ name: "tech-stack-content.index" });
         })
         .catch((err) => {
           this.ifReady = true;

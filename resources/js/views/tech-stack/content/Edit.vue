@@ -2,20 +2,23 @@
   <div>
     <div class="card">
       <div class="card-header">
-        <router-link class="text-primary" :to="{ name: 'users.index' }">About Me</router-link>&nbsp;/
-        <span class="text-secondary">Create New Content</span>
+        <div class="float-left">
+          <router-link class="text-primary" :to="{ name: 'tech-stack-content.index' }">Tech Stack Content</router-link>&nbsp;/
+          <span class="text-secondary">Update Content</span>
+        </div>
+        <div class="float-right">
+          <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'tech-stack-content.index' }">
+            <i class="fas fa-chevron-left"></i> &nbsp;Back
+          </router-link>
+        </div>
       </div>
       <div class="card-body">
         <div v-if="ifReady">
-          <form v-on:submit.prevent="createNewAboutMe()">
-            <div class="form-group">
-              <label>Image (optional)</label>
-              <input type="file" class="form-control-file" @change="onFileSelected">
-            </div>
+          <form v-on:submit.prevent="updateTechStackContent()">
             <div class="form-group">
               <label>Content</label>
               <editor
-                v-model="body"
+                v-model="techStackContent.body"
                 api-key="v8631ogi6aq7uc2h9z8tr72t2r3krmwlsbj5k4swk4i448f9"
                 :init="{
                   height: 500,
@@ -30,11 +33,8 @@
               />
             </div>
             <br />
-            <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'users.index' }">
-              <i class="fas fa-chevron-left"></i> &nbsp;Back
-            </router-link>
             <button type="submit" class="btn btn-primary btn-sm">
-              <i class="fas fa-plus"></i> &nbsp;Create New Content
+              <i class="fas fa-edit"></i> &nbsp;Update Content
             </button>
           </form>
         </div>
@@ -59,23 +59,19 @@ export default {
   data() {
     return {
       ifReady: false,
-      aboutMeContent: null,
-      body: '',
-      image: '',
+      techStackContent:'',
       errors: [],
     };
   },
-  created() {
+  mounted() {
     let promise = new Promise((resolve, reject) => {
       axios
-        .get("/api/about-me")
+        .get("/api/tech-stack-content")
         .then((res) => {
-          this.aboutMeContent = res.data.aboutMe;
-          if(this.aboutMeContent){
-            this.$router.push({ name: "about-me.index" });
-          }else{
-            this.ifReady = true
-          }
+          this.techStackContent = res.data.techStackContent;
+          tinyMCE.activeEditor.setContent(this.techStackContent.body);
+          this.hasContent = true;
+          this.ifReady = true;
           resolve();
         })
         .catch((error) => {
@@ -87,9 +83,12 @@ export default {
     onFileSelected(event) {
       this.image = event.target.files[0];
     },
-    createNewAboutMe() {
+
+    updateTechStackContent() {
       this.ifReady = false;
+
       let formData = new FormData();
+      formData.append('_method','PATCH');
       formData.append('body', tinyMCE.activeEditor.getContent());
 
       if (this.image != null) {
@@ -97,12 +96,13 @@ export default {
       }
 
       axios
-        .post("/api/about-me", formData)
+        .post("/api/tech-stack-content/" + this.techStackContent.id, formData)
         .then((res) => {
           Broadcast.$emit("ToastMessage", {
-            message: "About Me Content Created Successfully",
+            message: "Tech Stack Content Updated Successfully",
           });
-          this.$router.push({ name: "about-me.index" });
+
+          this.$router.push({ name: "tech-stack-content.index" });
         })
         .catch((err) => {
           this.ifReady = true;

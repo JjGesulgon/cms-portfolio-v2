@@ -44,7 +44,7 @@
               <div class="collapse" id="techStack">
                 <ul class="nav flex-column nav-sub-menu">
                   <li class="nav-item pl-3">
-                    <router-link class="nav-link" :to="{ name: 'about-me.index' }">Content</router-link>
+                    <router-link class="nav-link" :to="{ name: 'tech-stack-content.index' }">Content</router-link>
                   </li>
                   <li class="nav-item pl-3">
                     <router-link class="nav-link" :to="{ name: 'about-me.index' }">Stack List</router-link>
