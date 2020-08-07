@@ -66,4 +66,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(TechStackContent::class);
     }
+
+    /**
+     * The user has many techStackItems
+     *
+     * @return array object
+     */
+    public function techStackItems()
+    {
+        return $this->hasMany(techStackItems::class);
+    }
 }

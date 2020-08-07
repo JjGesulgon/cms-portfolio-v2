@@ -25,7 +25,7 @@ class AboutMe extends Model
      */
     protected $fillable = [
       'user_id', 'body', 'image'
-  ];
+    ];
 
     /**
        * Run functions on boot.
