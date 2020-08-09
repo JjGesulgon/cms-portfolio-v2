@@ -11,10 +11,10 @@ class TechStackItemRepository extends Repository
      *
      * @param TechStackItem Tech Stack Item techStackItem model
      */
-    public function __construct(TechStackContent $techStackContent)
+    public function __construct(TechStackItem $techStackItem)
     {
-        parent::__construct($techStackContent);
-        $this->techStackContent = $techStackContent;
+        parent::__construct($techStackItem);
+        $this->techStackItem = $techStackItem;
     }
 
     /**

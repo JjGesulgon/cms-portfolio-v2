@@ -27,6 +27,14 @@ const TechStackContentIndex  = () => import('./views/tech-stack/content/Index');
 const TechStackContentCreate = () => import('./views/tech-stack/content/Create');
 const TechStackContentEdit   = () => import('./views/tech-stack/content/Edit');
 
+/**
+ * Tech Stack Item
+ */
+// const TechStackContentIndex  = () => import('./views/tech-stack/content/Index');
+const TechStackItemCreate = () => import('./views/tech-stack/item/Create');
+// const UsersView   = () => import('./views/users/View');
+// const TechStackContentEdit   = () => import('./views/tech-stack/content/Edit');
+
 export default new Router({
     mode: 'history',
     routes: [
@@ -47,6 +55,9 @@ export default new Router({
         // Tech Stack Content
         { path: '/tech-stack-content', name: 'tech-stack-content.index', component: TechStackContentIndex },
         { path: '/tech-stack-content/create', name: 'tech-stack-content.create', component: TechStackContentCreate },
-        { path: '/tech-stack-content/:id/edit', name: 'tech-stack-content.edit', component: TechStackContentEdit }
+        { path: '/tech-stack-content/:id/edit', name: 'tech-stack-content.edit', component: TechStackContentEdit },
+
+        // Tech Stack Items
+        { path: '/tech-stack-item/create', name: 'tech-stack-item.create', component: TechStackItemCreate },
     ]
 });
