@@ -2,14 +2,14 @@
 
 namespace App\Repositories;
 
-use App\TechStackContent;
+use App\TechStackItem;
 
-class TechStackContentRepository extends Repository
+class TechStackItemRepository extends Repository
 {
     /**
-     * Create new instance of techStackItem repository.
+     * Create new instance of tech stack item repository.
      *
-     * @param TechStackContent Tech Stack Item techStackItem model
+     * @param TechStackItem Tech Stack Item techStackItem model
      */
     public function __construct(TechStackContent $techStackContent)
     {
@@ -18,12 +18,12 @@ class TechStackContentRepository extends Repository
     }
 
     /**
-      * Get the tech stack content
+      * Get the tech stack item
       *
       * @return array json object
       */
-    public function getTechStackContent()
+    public function getTechStackItem()
     {
-        return $this->model->first();
+        return $this->model->all();
     }
 }
