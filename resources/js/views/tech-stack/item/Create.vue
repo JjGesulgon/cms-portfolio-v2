@@ -3,12 +3,14 @@
         <div class="card">
             <div class="card-header">
               <div class="float-left">
-                <router-link class="text-primary" :to="{ name: 'users.index' }">Tech Stack Item</router-link>
+                <router-link class="text-primary" :to="{ name: 'tech-stack-item.index' }">Tech Stack Item</router-link>
+                /
+                <span class="text-secondary">Tech Stack Item List</span> 
                 /
                 <span class="text-secondary">Add Tech Stack Item</span>
               </div>
               <div class="float-right">
-                <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'about-me.index' }">
+                <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'tech-stack-item.index' }">
                   <i class="fas fa-chevron-left"></i> &nbsp;Back
                 </router-link>
               </div>
@@ -65,7 +67,7 @@
                         message: 'Tech Stack Item Added Successfully'
                     });
 
-                    // this.$router.push({ name: 'tech-stack-item.index' });
+                    this.$router.push({ name: 'tech-stack-item.index' });
                 }).catch(err => {
                     this.ifReady = true;
                     console.log(err);
