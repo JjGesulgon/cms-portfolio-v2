@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header clearfix">
         <div class="float-left">
-          <router-link class="text-primary" :to="{ name: 'users.index' }">Tech Stack Item</router-link>&nbsp;/
+          <router-link class="text-primary" :to="{ name: 'tech-stack-item.index' }">Tech Stack Item</router-link>&nbsp;/
           <span class="text-secondary">View Tech Stack Items</span>
         </div>
         <div class="float-right">
@@ -39,7 +39,7 @@
             </tr>
           </thead>
           <tbody v-if="techStackItems">
-            <tr v-for="item in techStackItems">
+            <tr v-for="item in techStackItems" :key="item.id">
               <td>{{ item.name }}</td>
               <td>{{ item.proficiency }}</td>
               <td>
@@ -59,7 +59,7 @@
                 </router-link>&nbsp; | &nbsp;
                 <label
                   class="text-danger clickableText"
-                  @click.prevent="openDeleteUserModal(item.id)"
+                  @click.prevent="openDeleteTechStackItemModal(item.id)"
                 >
                   <i class="fas fa-trash-alt"></i>&nbsp;
                   <strong>Delete</strong>
@@ -91,6 +91,7 @@
               class="page-item"
               v-for="pageNumber in pageNumbers"
               v-bind:class="isPageActive(pageNumber)"
+              :key="pageNumber"
             >
               <a class="page-link" href="#" @click.prevent="goToPage(pageNumber)">
                 <strong>{{ pageNumber }}</strong>
@@ -126,6 +127,7 @@
               class="page-item"
               v-for="pageNumber in pageNumbers"
               v-bind:class="isPageActive(pageNumber)"
+              :key="pageNumber"
             >
               <a class="page-link" href="#" @click.prevent="goToPage(pageNumber)">
                 <strong>{{ pageNumber }}</strong>
@@ -150,7 +152,7 @@
           <button
             type="button"
             class="btn btn-primary mr-2"
-            @click.prevent.default="openSearchModal()"
+            @click.prevent="openSearchModal()"
           >
             <i class="fas fa-search"></i>&nbsp;
             Search Tech Stack Item
@@ -212,11 +214,11 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger btn-sm" @click.prevent.default="clear">Clear</button>
+            <button type="button" class="btn btn-danger btn-sm" @click.prevent="clear">Clear</button>
             <button
               type="button"
               class="btn btn-success btn-sm"
-              @click.prevent.default="search"
+              @click.prevent="search"
             >Search</button>
             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
           </div>
@@ -228,13 +230,13 @@
       id="delete-modal"
       tabindex="-1"
       role="dialog"
-      aria-labelledby="deleteUserTitle"
+      aria-labelledby="deleteTechStackTitle"
       aria-hidden="true"
     >
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">You're about to delete this User?</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">You're about to delete this Tech Stack Item</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -245,7 +247,7 @@
             <button
               type="button"
               class="btn btn-danger btn-sm"
-              @click.prevent.default="deleteUser()"
+              @click.prevent="deleteTechStackItem()"
             >Confirm Delete</button>
           </div>
         </div>
@@ -255,7 +257,7 @@
 </template>
 
 <script>
-const getUsers = (page, per_page, name, order_by, callback) => {
+const getTechStackItem = (page, per_page, name, order_by, callback) => {
   const params = { page, per_page, name, order_by };
 
   axios
@@ -304,7 +306,7 @@ export default {
 
   beforeRouteEnter(to, from, next) {
     if (to.query.per_page == null) {
-      getUsers(
+      getTechStackItem(
         to.query.page,
         10,
         to.query.name,
@@ -314,7 +316,7 @@ export default {
         }
       );
     } else {
-      getUsers(
+      getTechStackItem(
         to.query.page,
         to.query.per_page,
         to.query.name,
@@ -327,7 +329,7 @@ export default {
   },
 
   beforeRouteUpdate(to, from, next) {
-    getUsers(
+    getTechStackItem(
       to.query.page,
       this.meta.per_page,
       this.name,
@@ -538,11 +540,11 @@ export default {
     openSearchModal() {
       $("#search-modal").modal("show");
     },
-    openDeleteUserModal(id) {
+    openDeleteTechStackItemModal(id) {
       $("#delete-modal").modal("show");
       this.techStackItemID = id
     },
-    deleteUser() {
+    deleteTechStackItem() {
       $("#delete-modal").modal("hide");
       this.showProgress = true;
 
