@@ -79,26 +79,6 @@ class TechStackItemController extends Controller
   }
 
   /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        if (! $user = $this->techStackItem->findOrFail($id)) {
-            return response()->json([
-                'message' => 'Resource does not exist'
-            ], 400);
-        }
-
-        return response()->json([
-            'message' => 'Resource successfully retrieve',
-            'techStackItem' => $techStackItem
-        ], 200);
-    }
-
-  /**
    * Update the specified resource in storage.
    *
    * @param  \Illuminate\Http\Request  $request

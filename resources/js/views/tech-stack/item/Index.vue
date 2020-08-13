@@ -45,13 +45,6 @@
               <td>
                 <router-link
                   class="text-secondary"
-                  :to="{ name: 'tech-stack-item.view', params: { id: item.id } }"
-                >
-                  <i class="fas fa-eye"></i>&nbsp;
-                  <strong>View</strong>
-                </router-link>&nbsp; | &nbsp;
-                <router-link
-                  class="text-secondary"
                   :to="{ name: 'tech-stack-item.edit', params: { id: item.id }}"
                 >
                   <i class="fas fa-edit"></i>&nbsp;

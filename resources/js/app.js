@@ -40,6 +40,7 @@ Vue.component('vue-select', VueSelect);
 // Layouts
 Vue.component('navbar', require('./views/layouts/Navbar.vue'));
 Vue.component('sidebar', require('./views/layouts/Sidebar.vue'));
+Vue.component('footer-component', require('./views/layouts/Footer.vue'));
 
 // Tiny MCE
 Vue.component('Editor', require('@tinymce/tinymce-vue').default);
