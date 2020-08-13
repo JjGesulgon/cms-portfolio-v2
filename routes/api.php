@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     // Tech Stack Item
     Route::resource('tech-stack-item', 'TechStackItemController', [
       'only' => [
-          'index', 'store', 'update', 'destroy'
+          'index', 'store', 'show', 'update', 'destroy'
       ]
     ]);
 });

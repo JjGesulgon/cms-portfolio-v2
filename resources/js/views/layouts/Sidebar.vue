@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mr-3 mr-md-0">
     <div class="">
       <ul class="nav flex-column background py-1 mt-3 sidebar-nav">
         <li class="nav-item">
@@ -87,7 +87,7 @@
           <span class="nav-link">Monitoring</span>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'users.index' }">Project Analytics</router-link>
+          <router-link class="nav-link" :to="{ name: 'users.index' }">Website Analytics</router-link>
         </li>
       </ul>
     </div>

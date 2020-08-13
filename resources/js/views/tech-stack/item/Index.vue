@@ -4,7 +4,7 @@
       <div class="card-header clearfix">
         <div class="float-left">
           <router-link class="text-primary" :to="{ name: 'tech-stack-item.index' }">Tech Stack Item</router-link>&nbsp;/
-          <span class="text-secondary">View Tech Stack Items</span>
+          <span class="text-secondary">Tech Stack Item List</span>
         </div>
         <div class="float-right">
           <router-link class="btn btn-primary btn-sm" :to="{ name: 'tech-stack-item.create' }">

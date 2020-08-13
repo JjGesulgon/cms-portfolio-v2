@@ -4,7 +4,7 @@
       <div class="card-header clearfix">
         <div class="float-left">
           <router-link class="text-primary" :to="{ name: 'users.index' }">Users</router-link>&nbsp;/
-          <span class="text-secondary">View Users</span>
+          <span class="text-secondary">User List</span>
         </div>
         <div class="float-right">
           <router-link class="btn btn-primary btn-sm" :to="{ name: 'users.create' }">
@@ -39,7 +39,7 @@
             </tr>
           </thead>
           <tbody v-if="users">
-            <tr v-for="user in users">
+            <tr v-for="user in users" :key="user.id">
               <td>{{ user.name }}</td>
               <td>{{ user.email }}</td>
               <td>
@@ -91,6 +91,7 @@
               class="page-item"
               v-for="pageNumber in pageNumbers"
               v-bind:class="isPageActive(pageNumber)"
+              :key="pageNumber"
             >
               <a class="page-link" href="#" @click.prevent="goToPage(pageNumber)">
                 <strong>{{ pageNumber }}</strong>
@@ -126,6 +127,7 @@
               class="page-item"
               v-for="pageNumber in pageNumbers"
               v-bind:class="isPageActive(pageNumber)"
+              :key="pageNumber"
             >
               <a class="page-link" href="#" @click.prevent="goToPage(pageNumber)">
                 <strong>{{ pageNumber }}</strong>
@@ -150,7 +152,7 @@
           <button
             type="button"
             class="btn btn-primary mr-2"
-            @click.prevent.default="openSearchModal()"
+            @click.prevent="openSearchModal()"
           >
             <i class="fas fa-search"></i>&nbsp;
             Search Users
@@ -222,11 +224,11 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger btn-sm" @click.prevent.default="clear">Clear</button>
+            <button type="button" class="btn btn-danger btn-sm" @click.prevent="clear">Clear</button>
             <button
               type="button"
               class="btn btn-success btn-sm"
-              @click.prevent.default="search"
+              @click.prevent="search"
             >Search</button>
             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
           </div>
@@ -255,7 +257,7 @@
             <button
               type="button"
               class="btn btn-danger btn-sm"
-              @click.prevent.default="deleteUser()"
+              @click.prevent="deleteUser()"
             >Confirm Delete</button>
           </div>
         </div>

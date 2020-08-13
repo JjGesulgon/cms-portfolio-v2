@@ -2,9 +2,13 @@
   <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
     <div class="container-fluid">
       <router-link
-        class="navbar-brand"
+        class="navbar-brand d-none d-sm-block"
         :to="{ name: 'overview' }"
       >Content Management And Web Traffic Analysis</router-link>
+      <router-link
+        class="navbar-brand d-block d-sm-none"
+        :to="{ name: 'overview' }"
+      >CMS with Analytics</router-link>
 
       <button
         class="navbar-toggler"

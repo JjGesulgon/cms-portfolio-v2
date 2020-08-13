@@ -5,7 +5,9 @@
               <div class="float-left">
                 <router-link class="text-primary" :to="{ name: 'users.index' }">Users</router-link>
                 /
-                <span class="text-secondary">View User</span>
+                <span class="text-secondary">User List</span>
+                /
+                <span class="text-secondary">User Details</span>
               </div>
               <div class="float-right">
                 <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'users.index' }"><i class="fas fa-chevron-left"></i>&nbsp; Back</router-link>
@@ -32,7 +34,7 @@
 
                     <br>
                     <router-link class="btn btn-primary btn-sm" :to="{ name: 'users.edit' , params: { id: user.id }}"><i class="fas fa-edit"></i>&nbsp; Edit User</router-link>
-                    <button type="button" class="btn btn-danger btn-sm" @click.prevent.default="openDeleteUserModal()"><i class="fas fa-trash-alt"></i>&nbsp; Delete User</button>
+                    <button type="button" class="btn btn-danger btn-sm" @click.prevent="openDeleteUserModal()"><i class="fas fa-trash-alt"></i>&nbsp; Delete User</button>
                 </div>
                 <div v-else>
                     <div class="progress">
@@ -56,7 +58,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger btn-sm" @click.prevent.default="deleteUser()">Confirm Delete</button>
+                        <button type="button" class="btn btn-danger btn-sm" @click.prevent="deleteUser()">Confirm Delete</button>
                     </div>
                 </div>
             </div>

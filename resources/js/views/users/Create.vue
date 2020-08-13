@@ -2,9 +2,16 @@
     <div>
         <div class="card">
             <div class="card-header">
+              <div class="float-left">
                 <router-link class="text-primary" :to="{ name: 'users.index' }">Users</router-link>
                 /
-                <span class="text-secondary">Create New User</span>
+                <span class="text-secondary">User List</span>
+                /
+                <span class="text-secondary">Add User</span>
+              </div>
+              <div class="float-right">
+                <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'users.index' }"><i class="fas fa-chevron-left"></i>&nbsp; Back</router-link>
+              </div>
             </div>
             <div class="card-body">
                 <div v-if="ifReady">

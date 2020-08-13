@@ -32,8 +32,7 @@ const TechStackContentEdit   = () => import('./views/tech-stack/content/Edit');
  */
 const TechStackItemIndex  = () => import('./views/tech-stack/item/Index');
 const TechStackItemCreate = () => import('./views/tech-stack/item/Create');
-// const UsersView   = () => import('./views/users/View');
-// const TechStackContentEdit   = () => import('./views/tech-stack/content/Edit');
+const TechStackItemEdit   = () => import('./views/tech-stack/item/Edit');
 
 export default new Router({
     mode: 'history',
@@ -60,5 +59,6 @@ export default new Router({
         // Tech Stack Items
         { path: '/tech-stack-item', name: 'tech-stack-item.index', component: TechStackItemIndex },
         { path: '/tech-stack-item/create', name: 'tech-stack-item.create', component: TechStackItemCreate },
+        { path: '/tech-stack-item/:id/edit', name: 'tech-stack-item.edit', component: TechStackItemEdit },
     ]
 });

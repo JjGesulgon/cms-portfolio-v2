@@ -6,11 +6,13 @@
   </div>
 </template>
 <style>
+@media only screen and (min-width: 768px) {
   .footer {
-      background-color: #1E82BB;
-      color: white;
-      position: absolute;
-      bottom: 0;
-      width: 100%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #1e82bb;
+    color: white;
   }
+}
 </style>

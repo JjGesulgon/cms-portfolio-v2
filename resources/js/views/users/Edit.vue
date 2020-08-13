@@ -5,6 +5,8 @@
               <div class="float-left">
                 <router-link class="text-primary" :to="{ name: 'users.index' }">Users</router-link>
                 /
+                <span class="text-secondary">User List</span>
+                /
                 <span class="text-secondary">Edit User</span>
               </div>
               <div class="float-right">
