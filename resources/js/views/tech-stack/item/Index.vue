@@ -2,14 +2,16 @@
   <div>
     <div class="card">
       <div class="card-header clearfix">
-        <div class="float-left">
-          <router-link class="text-primary" :to="{ name: 'tech-stack-item.index' }">Tech Stack Item</router-link>&nbsp;/
-          <span class="text-secondary">Tech Stack Item List</span>
-        </div>
-        <div class="float-right">
-          <router-link class="btn btn-primary btn-sm" :to="{ name: 'tech-stack-item.create' }">
-            <i class="fas fa-plus"></i>&nbsp; Add Tech Stack Item
-          </router-link>
+        <div class="row">
+          <div class="float-left col-md-6">
+            <router-link class="text-primary" :to="{ name: 'tech-stack-item.index' }">Tech Stack Item</router-link>&nbsp;/
+            <span class="text-secondary">Tech Stack Item List</span>
+          </div>
+          <div class="text-md-right mt-1 mt-md-0 col-md-6">
+            <router-link class="btn btn-primary btn-sm" :to="{ name: 'tech-stack-item.create' }">
+              <i class="fas fa-plus"></i>&nbsp; Add Tech Stack Item
+            </router-link>
+          </div>
         </div>
       </div>
       <div class="card-body">
@@ -144,7 +146,7 @@
         <form class="form-inline">
           <button
             type="button"
-            class="btn btn-primary mr-2"
+            class="btn btn-primary mr-2 mb-1 mb-md-0 "
             @click.prevent="openSearchModal()"
           >
             <i class="fas fa-search"></i>&nbsp;

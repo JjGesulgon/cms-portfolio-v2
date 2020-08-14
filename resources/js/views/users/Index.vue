@@ -151,7 +151,7 @@
         <form class="form-inline">
           <button
             type="button"
-            class="btn btn-primary mr-2"
+            class="btn btn-primary mr-2 mb-1 mb-md-0"
             @click.prevent="openSearchModal()"
           >
             <i class="fas fa-search"></i>&nbsp;
