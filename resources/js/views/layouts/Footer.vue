@@ -13,8 +13,6 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    /* background-color: #1e82bb;
-    color: white; */
   }
 }
 </style>
