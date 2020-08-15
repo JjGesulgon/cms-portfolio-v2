@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Repositories\TechStackItemRepository;
 use App\Http\Resources\TechStackItemResource;
 
-class TechStackItemController extends Controller
+class TechStackItemsController extends Controller
 {
   /**
    * Tech Stack Item repository.

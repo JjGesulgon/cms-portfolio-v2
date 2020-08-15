@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\TechStackItems;
+use App\TechStackItem;
 
 class TechStackItemRepository extends Repository
 {
     /**
      * Create new instance of tech stack item repository.
      *
-     * @param TechStackItems Tech Stack Item techStackItem model
+     * @param TechStackItem Tech Stack Item techStackItem model
      */
-    public function __construct(TechStackItems $techStackItem)
+    public function __construct(TechStackItem $techStackItem)
     {
         parent::__construct($techStackItem);
         $this->techStackItem = $techStackItem;

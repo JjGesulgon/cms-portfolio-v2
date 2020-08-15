@@ -32,9 +32,16 @@ Route::group(['middleware' => ['auth:api']], function () {
     ]);
 
     // Tech Stack Item
-    Route::resource('tech-stack-item', 'TechStackItemController', [
+    Route::resource('tech-stack-item', 'TechStackItemsController', [
       'only' => [
           'index', 'store', 'show', 'update', 'destroy'
+      ]
+    ]);
+
+    // Passion
+    Route::resource('passion', 'PassionsController', [
+      'only' => [
+          'index', 'show', 'update'
       ]
     ]);
 });
