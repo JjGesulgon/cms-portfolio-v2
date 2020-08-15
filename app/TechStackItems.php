@@ -6,7 +6,7 @@ use App\Traits\Filtering;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TechStackItem extends Model
+class TechStackItems extends Model
 {
     use SoftDeletes, Filtering;
 
