@@ -38,7 +38,7 @@ const TechStackItemEdit   = () => import('./views/tech-stack/item/Edit');
  * Passion
  */
 const PassionIndex  = () => import('./views/passion/Index');
-// const PassionEdit   = () => import('./views/tech-stack/item/Edit');
+const PassionEdit   = () => import('./views/passion/Edit');
 
 export default new Router({
     mode: 'history',
@@ -69,6 +69,6 @@ export default new Router({
 
         // Passions
         { path: '/passion', name: 'passion.index', component: PassionIndex },
-        // { path: '/passion/:id/edit', name: 'passion.edit', component: PassionEdit },
+        { path: '/passion/:id/edit', name: 'passion.edit', component: PassionEdit },
     ]
 });

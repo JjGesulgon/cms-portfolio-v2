@@ -4,7 +4,7 @@
       <div class="card-header clearfix">
         <div class="row">
           <div class="float-left col-md-6">
-            <router-link class="text-primary" :to="{ name: 'tech-stack-item.index' }">Passion</router-link>&nbsp;/
+            <router-link class="text-primary" :to="{ name: 'passion.index' }">Passion</router-link>&nbsp;/
             <span class="text-secondary">Passion List</span>
           </div>
         </div>
@@ -12,12 +12,17 @@
       <div class="card-body">
         <div class="card-columns" v-if="passions">
           <div class="card" v-for="passion in passions" :key="passion.id">
-            <div v-if="passion.image" class="text-center">
-              <img class="card-img-top imageCard" :src="'storage/images/' + image" alt />
+            <div class="card-header clearfix mb-2">
+              <router-link class="btn btn-primary btn-sm float-right" :to="{ name: 'passion.edit', params: { id: passion.id }}">
+                <i class="fas fa-edit"></i>&nbsp; Edit
+              </router-link>
             </div>
-            <div class="card-body">
-              <h5 class="card-title">{{ passion.name }}</h5>
-              <div v-html="passion.description"></div>
+            <div v-if="passion.image" class="text-center">
+              <img class="img-fluid mw-50 h-auto" :src="'storage/images/' + passion.image" alt />
+            </div>
+            <div class="card-body"> 
+              <h5 class="card-title text-center">{{ passion.name }}</h5>
+              <div class="text-center" v-html="passion.description"></div>
             </div>
           </div>
         </div>
