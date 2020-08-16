@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Repositories\PassionRepository;
 use App\Http\Resources\PassionResource;
 
-class PassionController extends Controller
+class PassionsController extends Controller
 {
     /**
      * Passion repository.
@@ -35,7 +35,7 @@ class PassionController extends Controller
     public function index()
     {
         $passion = PassionResource::collection(
-            $this->passion->paginateWithFilters(request(), request()->per_page, request()->order_by)
+            $this->passion->getPassions()
         );
 
         if (! $passion) {

@@ -2,14 +2,12 @@
 
 namespace App;
 
-use App\Traits\Filtering;
 use App\Traits\Imaging;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Passion extends Model
 {
-    use SoftDeletes, Filtering, Imaging;
+    use Imaging;
 
     /**
        * passion table.

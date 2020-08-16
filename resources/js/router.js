@@ -34,6 +34,12 @@ const TechStackItemIndex  = () => import('./views/tech-stack/item/Index');
 const TechStackItemCreate = () => import('./views/tech-stack/item/Create');
 const TechStackItemEdit   = () => import('./views/tech-stack/item/Edit');
 
+/**
+ * Passion
+ */
+const PassionIndex  = () => import('./views/passion/Index');
+// const PassionEdit   = () => import('./views/tech-stack/item/Edit');
+
 export default new Router({
     mode: 'history',
     routes: [
@@ -60,5 +66,9 @@ export default new Router({
         { path: '/tech-stack-item', name: 'tech-stack-item.index', component: TechStackItemIndex },
         { path: '/tech-stack-item/create', name: 'tech-stack-item.create', component: TechStackItemCreate },
         { path: '/tech-stack-item/:id/edit', name: 'tech-stack-item.edit', component: TechStackItemEdit },
+
+        // Passions
+        { path: '/passion', name: 'passion.index', component: PassionIndex },
+        // { path: '/passion/:id/edit', name: 'passion.edit', component: PassionEdit },
     ]
 });
