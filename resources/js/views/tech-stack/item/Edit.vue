@@ -19,7 +19,7 @@
         <div v-if="ifReady">
           <form v-on:submit.prevent="updateTechStackItem()">
             <div class="row">
-              <div class="col-lg-6">
+              <div class="col-lg-4">
                 <div class="form-group">
                   <label for="name">Name</label>
                   <input
@@ -33,7 +33,21 @@
                   />
                 </div>
               </div>
-              <div class="col-lg-6">
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="experience">Experience</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="experience"
+                    autocomplete="off"
+                    minlength="2"
+                    maxlength="255"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-lg-4">
                 <div class="form-group">
                   <label for="proficiency">Proficiency</label>
                   <input type="text" class="form-control" v-model="proficiency"/>
@@ -70,8 +84,9 @@ export default {
   data() {
     return {
       ifReady: false,
-      name: "",
-      proficiency: "",
+      name: '',
+      experience: '',
+      proficiency: '',
     };
   },
 
@@ -80,6 +95,7 @@ export default {
       axios.get("/api/tech-stack-item/" + this.$route.params.id).then((res) => {
         this.id = res.data.techStackItem.id;
         this.name = res.data.techStackItem.name;
+        this.experience = res.data.techStackItem.experience;
         this.proficiency = res.data.techStackItem.proficiency;
 
         resolve();
@@ -97,6 +113,7 @@ export default {
 
       let data = {
         name: this.name,
+        experience: this.experience,
         proficiency: this.proficiency
       };
 

@@ -57,6 +57,7 @@ class TechStackItemsController extends Controller
   {
     $validator = Validator::make($request->all(), [
       'name'          => 'required',
+      'experience'    => 'required',
       'proficiency'   => 'required|numeric',
     ]);
 
@@ -109,6 +110,7 @@ class TechStackItemsController extends Controller
   {
     $validator = Validator::make($request->all(), [
       'name'          => 'required',
+      'experience'    => 'required',
       'proficiency'   => 'required|numeric',
     ]);
 

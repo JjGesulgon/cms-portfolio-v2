@@ -23,7 +23,7 @@ class TechStackItem extends Model
      * @var array
      */
     protected $fillable = [
-      'user_id', 'name', 'proficiency'
+      'user_id', 'name', 'experience', 'proficiency'
     ];
 
     /**

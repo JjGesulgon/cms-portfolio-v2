@@ -18,6 +18,7 @@ class CreateTechStackItemsTable extends Migration
           $table->bigInteger('user_id')->unsigned();
           $table->foreign('user_id')->references('id')->on('users');
           $table->string('name');
+          $table->string('experience');
           $table->decimal('proficiency', 3, 1);
           $table->timestamps();
           $table->softDeletes();

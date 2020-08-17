@@ -36,6 +36,7 @@
           <thead>
             <tr>
               <th scope="col">Name</th>
+              <th scope="col">Experience</th>
               <th scope="col">Proficiency</th>
               <th scope="col">Options</th>
             </tr>
@@ -43,6 +44,7 @@
           <tbody v-if="techStackItems">
             <tr v-for="item in techStackItems" :key="item.id">
               <td>{{ item.name }}</td>
+              <td>{{ item.experience }}</td>
               <td>{{ item.proficiency }}</td>
               <td>
                 <router-link

@@ -19,16 +19,22 @@
                 <div v-if="ifReady">
                     <form v-on:submit.prevent="createNewtechStackItem()">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input type="text" class="form-control" v-model="name" autocomplete="off" minlength="2" maxlength="255" required>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="proficiency">Proficiency (1-10)</label>
                                     <input type="number" class="form-control" v-model="proficiency" autocomplete="off" step=".01" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="experience">Experience length</label>
+                                    <input type="text" class="form-control" v-model="experience" autocomplete="off" minlength="2" maxlength="255" required>
                                 </div>
                             </div>
                         </div>
@@ -55,6 +61,7 @@
             return {
                 ifReady: true,
                 name: '',
+                experience: '',
                 proficiency: '',
             };
         },
