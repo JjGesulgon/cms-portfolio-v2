@@ -44,4 +44,11 @@ Route::group(['middleware' => ['auth:api']], function () {
           'index', 'show', 'update'
       ]
     ]);
+
+    // Contact
+    Route::resource('contact', 'ContactController', [
+      'only' => [
+          'index', 'store', 'update', 'destroy'
+      ]
+  ]);
 });

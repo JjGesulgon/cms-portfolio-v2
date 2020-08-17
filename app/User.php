@@ -86,4 +86,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(passions::class);
     }
+
+    /**
+     * The user has one contact
+     *
+     * @return array object
+     */
+    public function contact()
+    {
+        return $this->hasOne(Contact::class);
+    }
 }
