@@ -15,7 +15,7 @@
         </div>
       </div>
     </div>
-    <footer-component></footer-component>
+    <!-- <footer-component></footer-component> -->
     <div
       id="toast-message"
       class="toast"

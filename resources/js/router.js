@@ -40,6 +40,13 @@ const TechStackItemEdit   = () => import('./views/tech-stack/item/Edit');
 const PassionIndex  = () => import('./views/passion/Index');
 const PassionEdit   = () => import('./views/passion/Edit');
 
+/**
+ * Contact
+ */
+// const AboutMeIndex  = () => import('./views/about-me/Index');
+const ContactCreate = () => import('./views/contact/Create');
+// const AboutMeEdit   = () => import('./views/about-me/Edit');
+
 export default new Router({
     mode: 'history',
     routes: [
@@ -70,5 +77,10 @@ export default new Router({
         // Passions
         { path: '/passion', name: 'passion.index', component: PassionIndex },
         { path: '/passion/:id/edit', name: 'passion.edit', component: PassionEdit },
+
+        // Contact
+        // { path: '/contact', name: 'about-me.index', component: AboutMeIndex },
+        { path: '/contact/create', name: 'contact.create', component: ContactCreate },
+        // { path: '/about-me/:id/edit', name: 'about-me.edit', component: AboutMeEdit },
     ]
 });
