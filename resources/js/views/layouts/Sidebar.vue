@@ -63,7 +63,7 @@
         </li>
 
         <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'users.index' }">Contact Me</router-link>
+          <router-link class="nav-link" :to="{ name: 'contact.index' }">Contact Me</router-link>
         </li>
       </ul>
     </div>

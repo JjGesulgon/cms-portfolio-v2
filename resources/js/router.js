@@ -43,7 +43,7 @@ const PassionEdit   = () => import('./views/passion/Edit');
 /**
  * Contact
  */
-// const AboutMeIndex  = () => import('./views/about-me/Index');
+const ContactIndex  = () => import('./views/contact/Index');
 const ContactCreate = () => import('./views/contact/Create');
 // const AboutMeEdit   = () => import('./views/about-me/Edit');
 
@@ -79,7 +79,7 @@ export default new Router({
         { path: '/passion/:id/edit', name: 'passion.edit', component: PassionEdit },
 
         // Contact
-        // { path: '/contact', name: 'about-me.index', component: AboutMeIndex },
+        { path: '/contact', name: 'contact.index', component: ContactIndex },
         { path: '/contact/create', name: 'contact.create', component: ContactCreate },
         // { path: '/about-me/:id/edit', name: 'about-me.edit', component: AboutMeEdit },
     ]

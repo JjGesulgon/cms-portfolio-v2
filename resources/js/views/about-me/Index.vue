@@ -123,7 +123,7 @@ export default {
       $("#delete-modal").modal("hide");
       this.ifReady = false;
       axios
-        .delete("/api/abou-me/" + this.aboutMe.id)
+        .delete("/api/about-me/" + this.aboutMe.id)
         .then((res) => {
           Broadcast.$emit("ToastMessage", {
             message: "About Me Deleted Successfully",
