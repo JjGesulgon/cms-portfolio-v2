@@ -1,35 +1,42 @@
 <template>
   <div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><router-link class="text-primary" :to="{ name: 'contact.index' }">Contact</router-link></li>
+            <li class="breadcrumb-item active" aria-current="page">Contact</li>
+        </ol>
+    </nav>
+
     <div class="card">
-      <div class="card-header clearfix">
-        <div class="float-left">
-          <router-link class="text-primary" :to="{ name: 'contact.index' }">Contact</router-link>&nbsp;/
-          <span class="text-secondary">Content</span>
-        </div>
-        <div v-if="ifReady">
-          <div class="float-right" v-if="!hasContent">
-            <router-link class="btn btn-primary btn-sm" :to="{ name: 'contact.create' }">
-              <i class="fas fa-plus"></i>&nbsp; Create New Content
-            </router-link>
-          </div>
-          <div class="float-right" v-else>
-            <button
-              type="button"
-              class="btn btn-danger btn-sm"
-              @click.prevent="openDeleteContactModal()"
-            >
-              <i class="fas fa-trash-alt"></i>&nbsp; Delete Content
-            </button>
-            <router-link
-              class="btn btn-primary btn-sm"
-              :to="{ name: 'contact.edit', params: { id: contact.id }}"
-            >
-              <i class="fas fa-edit"></i>&nbsp; Edit Content
-            </router-link>
-          </div>
-        </div>
-      </div>
       <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 text-left">
+            <h3 class="font-weight-light">Contact</h3>
+          </div>
+          <div class="col-md-6 text-right" v-if="ifReady">
+            <div class="" v-if="!hasContent">
+              <router-link class="btn btn-primary btn-sm" :to="{ name: 'contact.create' }">
+                <i class="fas fa-plus"></i>&nbsp; Create New Content
+              </router-link>
+            </div>
+            <div class="" v-else>
+              <button
+                type="button"
+                class="btn btn-danger btn-sm"
+                @click.prevent="openDeleteContactModal()"
+              >
+                <i class="fas fa-trash-alt"></i>&nbsp; Delete Content
+              </button>
+              <router-link
+                class="btn btn-primary btn-sm"
+                :to="{ name: 'contact.edit', params: { id: contact.id }}"
+              >
+                <i class="fas fa-edit"></i>&nbsp; Edit Content
+              </router-link>
+            </div>
+          </div>
+        </div>
+        <hr>
         <div class="progress" height="30px;" v-if="!ifReady">
           <div
             class="progress-bar progress-bar-striped progress-bar-animated"
@@ -113,7 +120,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="form-group">
                   <label for="devto_link">Dev.to Link</label>
                   <input
@@ -147,7 +154,6 @@
                 }"
               />
             </div>
-            <br />
           </div>
         </div>
       </div>
