@@ -16,7 +16,11 @@ class CreateContactTable extends Migration
         Schema::create('contact', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->longText('content');
             $table->string('email');
             $table->string('instagram_link');

@@ -16,7 +16,11 @@ class CreatePassionsTable extends Migration
         Schema::create('passions', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->string('name');
             $table->longText('description');
             $table->string('image')->nullable();

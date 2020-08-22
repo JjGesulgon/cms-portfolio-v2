@@ -16,7 +16,11 @@ class CreateTechStackItemsTable extends Migration
         Schema::create('tech_stack_items', function (Blueprint $table) {
           $table->id();
           $table->bigInteger('user_id')->unsigned();
-          $table->foreign('user_id')->references('id')->on('users');
+          $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
           $table->string('name');
           $table->string('experience');
           $table->decimal('proficiency', 3, 1);
