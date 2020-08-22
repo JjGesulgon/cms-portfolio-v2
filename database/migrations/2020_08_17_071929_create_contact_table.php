@@ -22,6 +22,7 @@ class CreateContactTable extends Migration
             $table->string('instagram_link');
             $table->string('twitter_link');
             $table->string('linkedin_link');
+            $table->string('devto_link');
             $table->timestamps();
             $table->softDeletes();
         });

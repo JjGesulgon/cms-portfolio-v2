@@ -60,6 +60,7 @@
                     minlength="2"
                     maxlength="255"
                     required
+                    disabled
                   />
                 </div>
               </div>
@@ -74,6 +75,7 @@
                     minlength="2"
                     maxlength="255"
                     required
+                    disabled
                   />
                 </div>
               </div>
@@ -90,6 +92,7 @@
                     minlength="2"
                     maxlength="255"
                     required
+                    disabled
                   />
                 </div>
               </div>
@@ -104,6 +107,24 @@
                     minlength="2"
                     maxlength="255"
                     required
+                    disabled
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="devto_link">Dev.to Link</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="contact.devto_link"
+                    autocomplete="off"
+                    minlength="2"
+                    maxlength="255"
+                    required
+                    disabled
                   />
                 </div>
               </div>

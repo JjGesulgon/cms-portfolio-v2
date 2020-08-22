@@ -73,6 +73,18 @@
                 required
               />
             </div>
+            <div class="form-group">
+              <label for="devto_link">Dev.to Link</label>
+              <input
+                type="text"
+                class="form-control"
+                v-model="devto_link"
+                autocomplete="off"
+                minlength="2"
+                maxlength="255"
+                required
+              />
+            </div>
             <br />
             <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'users.index' }">
               <i class="fas fa-chevron-left"></i> &nbsp;Back
@@ -104,11 +116,12 @@ export default {
     return {
       ifReady: false,
       contactContent: null,
-      content: "",
-      email: "",
-      instagram_link: "",
-      twitter_link: "",
-      linkedin_link: "",
+      content: '',
+      email: '',
+      instagram_link: '',
+      twitter_link: '',
+      linkedin_link: '',
+      devto_link: '',
       errors: [],
     };
   },
@@ -142,6 +155,7 @@ export default {
       formData.append("instagram_link", this.instagram_link);
       formData.append("twitter_link", this.twitter_link);
       formData.append("linkedin_link", this.linkedin_link);
+      formData.append("devto_link", this.devto_link);
       
 
       axios
@@ -150,7 +164,7 @@ export default {
           Broadcast.$emit("ToastMessage", {
             message: "About Me Content Created Successfully",
           });
-          this.$router.push({ name: "about-me.index" });
+          this.$router.push({ name: "contact.index" });
         })
         .catch((err) => {
           this.ifReady = true;

@@ -28,7 +28,8 @@ class Contact extends Model
       'email',
       'instagram_link',
       'twitter_link',
-      'linkedin_link'
+      'linkedin_link',
+      'devto_link',
     ];
 
     /**

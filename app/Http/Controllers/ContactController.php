@@ -61,6 +61,7 @@ class ContactController extends Controller
       'instagram_link' => 'required|string|max:255',
       'twitter_link' => 'required|string|max:255',
       'linkedin_link' => 'required|string|max:255',
+      'devto_link' => 'required|string|max:255',
     ]);
 
     if ($validator->fails()) {
@@ -96,6 +97,7 @@ class ContactController extends Controller
       'instagram_link' => 'required|string|max:255',
       'twitter_link' => 'required|string|max:255',
       'linkedin_link' => 'required|string|max:255',
+      'devto_link' => 'required|string|max:255',
     ]);
 
     if ($validator->fails()) {
