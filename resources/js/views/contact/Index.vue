@@ -138,21 +138,7 @@
             </div>
             <div class="form-group">
               <label>Content</label>
-              <editor
-                disabled
-                v-model="contact.content"
-                api-key="v8631ogi6aq7uc2h9z8tr72t2r3krmwlsbj5k4swk4i448f9"
-                :init="{
-                  height: 500,
-                  menubar: false,
-                  plugins: [
-                  'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
-                  ],
-                  menubar: 'file edit view insert format tools table help',
-                  toolbar: 'undo redo | bold italic underline strikethrough | fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
-                  toolbar_sticky: true,
-                }"
-              />
+              <div class="border field-boxes rounded p-2" v-html="contact.content"> </div>
             </div>
           </div>
         </div>
@@ -236,3 +222,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+ .field-boxes{
+   border-color: #ced4da;
+   background-color: #e9ecef;
+ }
+</style>
