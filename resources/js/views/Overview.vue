@@ -1,10 +1,5 @@
 <template>
   <div class="card">
-      <div class="card-header clearfix">
-        <div class="float-left">
-          <span class="text-secondary">Overview</span>
-        </div>
-      </div>
       <div class="card-body">
         <div class="container">
           <div class="image-container">
