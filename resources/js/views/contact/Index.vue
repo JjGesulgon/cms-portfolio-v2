@@ -1,11 +1,12 @@
 <template>
   <div>
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><router-link class="text-primary" :to="{ name: 'contact.index' }">Contact</router-link></li>
-            <li class="breadcrumb-item active" aria-current="page">Contact</li>
-        </ol>
-    </nav>
+    <breadcrumbs
+      :routePrefixName="routePrefixName"
+      :action="action"
+      :singularName="singularName"
+      :pluralName="pluralName"
+      :useName="useName"
+    ></breadcrumbs>
 
     <div class="card">
       <div class="card-body">
@@ -14,12 +15,12 @@
             <h3 class="font-weight-light">Contact</h3>
           </div>
           <div class="col-md-6 text-right" v-if="ifReady">
-            <div class="" v-if="!hasContent">
+            <div class v-if="!hasContent">
               <router-link class="btn btn-primary btn-sm" :to="{ name: 'contact.create' }">
                 <i class="fas fa-plus"></i>&nbsp; Create New Content
               </router-link>
             </div>
-            <div class="" v-else>
+            <div class v-else>
               <button
                 type="button"
                 class="btn btn-danger btn-sm"
@@ -36,7 +37,7 @@
             </div>
           </div>
         </div>
-        <hr>
+        <hr />
         <div class="progress" height="30px;" v-if="!ifReady">
           <div
             class="progress-bar progress-bar-striped progress-bar-animated"
@@ -138,7 +139,7 @@
             </div>
             <div class="form-group">
               <label>Content</label>
-              <div class="border field-boxes rounded p-2" v-html="contact.content"> </div>
+              <div class="border field-boxes rounded p-2" v-html="contact.content"></div>
             </div>
           </div>
         </div>
@@ -181,6 +182,12 @@ export default {
       ifReady: false,
       contact: null,
       hasContent: false,
+
+      action: 'View',
+      routePrefixName: 'contact',
+      useName: "plural",
+      pluralName: "Contacts",
+      singularName: "Contact",
     };
   },
   mounted() {
@@ -224,8 +231,8 @@ export default {
 </script>
 
 <style scoped>
- .field-boxes{
-   border-color: #ced4da;
-   background-color: #e9ecef;
- }
+.field-boxes {
+  border-color: #ced4da;
+  background-color: #e9ecef;
+}
 </style>
