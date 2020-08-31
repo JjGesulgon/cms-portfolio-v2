@@ -130,7 +130,7 @@ export default {
       contact: null,
       hasContent: false,
       action: 'View',
-      title: "View Contact",
+      title: "Contact",
       routePrefixName: 'contact',
       useName: "plural",
       pluralName: "Contacts",
@@ -160,7 +160,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .field-boxes {
   border-color: #ced4da;
