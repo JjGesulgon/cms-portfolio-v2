@@ -10,33 +10,7 @@
 
     <div class="card">
       <div class="card-body">
-        <div class="row">
-          <div class="col-md-6 text-left">
-            <h3 class="font-weight-light">Contact</h3>
-          </div>
-          <div class="col-md-6 text-right" v-if="ifReady">
-            <div class v-if="!hasContent">
-              <router-link class="btn btn-primary btn-sm" :to="{ name: 'contact.create' }">
-                <i class="fas fa-plus"></i>&nbsp; Create New Content
-              </router-link>
-            </div>
-            <div class v-else>
-              <button
-                type="button"
-                class="btn btn-danger btn-sm"
-                @click.prevent="openDeleteContactModal()"
-              >
-                <i class="fas fa-trash-alt"></i>&nbsp; Delete Content
-              </button>
-              <router-link
-                class="btn btn-primary btn-sm"
-                :to="{ name: 'contact.edit', params: { id: contact.id }}"
-              >
-                <i class="fas fa-edit"></i>&nbsp; Edit Content
-              </router-link>
-            </div>
-          </div>
-        </div>
+        <form-title :routePrefixName="routePrefixName" :title="title" :singularName="singularName" :apiPath="apiPath" :moduleID="moduleID" :toastMessage="toastMessage" v-bind:showRightSide="false"></form-title>
         <hr />
         <div class="progress" height="30px;" v-if="!ifReady">
           <div
@@ -145,34 +119,7 @@
         </div>
       </div>
     </div>
-    <div
-      class="modal fade"
-      id="delete-modal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="deleteContact"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">You're about to delete this content?</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">Are you sure?</div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-            <button
-              type="button"
-              class="btn btn-danger btn-sm"
-              @click.prevent="deleteContact()"
-            >Confirm Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    
   </div>
 </template>
 <script>
@@ -182,12 +129,16 @@ export default {
       ifReady: false,
       contact: null,
       hasContent: false,
-
       action: 'View',
+      title: "View Contact",
       routePrefixName: 'contact',
       useName: "plural",
       pluralName: "Contacts",
       singularName: "Contact",
+      apiPath: '/api/contact',
+      toastMessage: 'Contact',
+      moduleID: null,
+
     };
   },
   mounted() {
@@ -197,6 +148,7 @@ export default {
         .then((res) => {
           console.log(res);
           this.contact = res.data.contact;
+          this.moduleID = res.data.contact.id;
           this.hasContent = true;
           this.ifReady = true;
           resolve();
@@ -205,27 +157,6 @@ export default {
           this.ifReady = true;
         });
     });
-  },
-  methods: {
-    openDeleteContactModal() {
-      $("#delete-modal").modal("show");
-    },
-    deleteContact() {
-      $("#delete-modal").modal("hide");
-      this.ifReady = false;
-      axios
-        .delete("/api/contact/" + this.contact.id)
-        .then((res) => {
-          Broadcast.$emit("ToastMessage", {
-            message: "Record Deleted Successfully",
-          });
-
-          this.$router.go();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
   },
 };
 </script>
