@@ -44,6 +44,7 @@ Vue.component('footer-component', require('./views/layouts/Footer.vue'));
 
 Vue.component('breadcrumbs', require('./components/Breadcrumbs.vue'));
 Vue.component('form-title', require('./components/FormTitle.vue'));
+Vue.component('form-create', require('./components/FormCreate.vue'));
 
 // Tiny MCE
 Vue.component('Editor', require('@tinymce/tinymce-vue').default);

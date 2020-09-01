@@ -9,32 +9,39 @@
 
     <div class="col-md-6 text-right">
       <slot name="right-items">
-        <div v-if="$parent.ifReady">
-          <router-link
-            v-if="!$parent.hasContent"
-            class="btn btn-primary btn-sm"
-            :to="{ name: `${routePrefixName}.create` }"
-          >
-            <i class="fas fa-plus"></i>
-            &nbsp; Create New {{ singularName }}
+        <div v-if="$parent.showBack && $parent.ifReady">
+          <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: `${routePrefixName}.index` }">
+            <i class="fas fa-chevron-left"></i> &nbsp;Back
           </router-link>
-          <div v-else>
-            <button
-              type="button"
-              class="btn btn-danger btn-sm"
-              @click.prevent="openDeleteModal()"
-            >
-              <i class="fas fa-trash-alt"></i>
-              &nbsp; Delete {{ singularName }}
-            </button>
-
+        </div>
+        <div v-if="$parent.ifReady">
+          <div v-if="$parent.showButtons">
             <router-link
+              v-if="$parent.showButtons && !$parent.hasContent"
               class="btn btn-primary btn-sm"
-              :to="{ name: `${routePrefixName}.edit`, params: { id: moduleID }}"
+              :to="{ name: `${routePrefixName}.create` }"
             >
-              <i class="fas fa-edit"></i>
-              &nbsp; Edit {{ singularName }}
+              <i class="fas fa-plus"></i>
+              &nbsp; Create New {{ singularName }}
             </router-link>
+            <div v-else-if="$parent.showButtons && $parent.hasContent">
+              <button
+                type="button"
+                class="btn btn-danger btn-sm"
+                @click.prevent="openDeleteModal()"
+              >
+                <i class="fas fa-trash-alt"></i>
+                &nbsp; Delete {{ singularName }}
+              </button>
+
+              <router-link
+                class="btn btn-primary btn-sm"
+                :to="{ name: `${routePrefixName}.edit`, params: { id: moduleID }}"
+              >
+                <i class="fas fa-edit"></i>
+                &nbsp; Edit {{ singularName }}
+              </router-link>
+            </div>
           </div>
         </div>
 

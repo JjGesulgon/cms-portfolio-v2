@@ -126,6 +126,7 @@
 export default {
   data() {
     return {
+      showBack: false,
       ifReady: false,
       contact: null,
       hasContent: false,
@@ -138,6 +139,7 @@ export default {
       apiPath: '/api/contact',
       toastMessage: 'Contact',
       moduleID: null,
+      showButtons: true,
 
     };
   },
