@@ -39,9 +39,6 @@
         // },
 
         methods: {
-            // backToIndex() {
-            //     this.$router.push({ name: `${this.routePrefixName}.index` });
-            // },
             update() {
                 this.$parent.ifReady = false;
                 axios.post(`${this.apiPath}/${this.$route.params.id}`,  this.fieldColumns).then(() => {

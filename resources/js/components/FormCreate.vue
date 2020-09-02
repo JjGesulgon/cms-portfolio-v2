@@ -46,9 +46,6 @@ export default {
   },
 
   methods: {
-    backToIndex() {
-      this.$router.push({ name: `${this.routePrefixName}.index` });
-    },
     create() {
       this.$parent.ifReady = false;
 
