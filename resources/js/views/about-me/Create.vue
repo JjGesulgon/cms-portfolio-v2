@@ -1,21 +1,42 @@
 <template>
   <div>
+    <breadcrumbs
+      :routePrefixName="routePrefixName"
+      :action="action"
+      :singularName="singularName"
+      :pluralName="pluralName"
+      :useName="useName"
+    ></breadcrumbs>
+
     <div class="card">
-      <div class="card-header">
-        <router-link class="text-primary" :to="{ name: 'users.index' }">About Me</router-link>&nbsp;/
-        <span class="text-secondary">Create New Content</span>
-      </div>
       <div class="card-body">
-        <div v-if="ifReady">
-          <form v-on:submit.prevent="createNewAboutMe()">
-            <div class="form-group">
-              <label>Image (optional)</label>
-              <input type="file" class="form-control-file" @change="onFileSelected">
+        <form-title :routePrefixName="routePrefixName" :title="title" v-bind:showRightSide="false"></form-title>
+        <hr />
+        <form-create
+          :apiPath="apiPath"
+          :routePrefixName="routePrefixName"
+          :singularName="singularName"
+          :toastMessage="toastMessage"
+          :fieldColumns="getFieldColumns()"
+        >
+          <template v-bind:data="$data">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="image">Image</label>
+                  <input id="image" type="file" class="form-control-file" @change="onFileSelected" />
+                </div>
+              </div>
             </div>
             <div class="form-group">
-              <label>Content</label>
+              <label for="content">
+                Content
+                <small class="text-danger">* Required</small>
+              </label>
               <editor
-                v-model="body"
+                @onInit="initFunction"
+                id="body"
+                v-model="$data.body"
                 api-key="v8631ogi6aq7uc2h9z8tr72t2r3krmwlsbj5k4swk4i448f9"
                 :init="{
                   height: 500,
@@ -29,27 +50,8 @@
                 }"
               />
             </div>
-            <br />
-            <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'users.index' }">
-              <i class="fas fa-chevron-left"></i> &nbsp;Back
-            </router-link>
-            <button type="submit" class="btn btn-primary btn-sm">
-              <i class="fas fa-plus"></i> &nbsp;Create New Content
-            </button>
-          </form>
-        </div>
-        <div v-else>
-          <div class="progress">
-            <div
-              class="progress-bar progress-bar-striped progress-bar-animated"
-              role="progressbar"
-              aria-valuenow="100"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              style="width: 100%;"
-            ></div>
-          </div>
-        </div>
+          </template>
+        </form-create>
       </div>
     </div>
   </div>
@@ -58,11 +60,26 @@
 export default {
   data() {
     return {
-      ifReady: false,
+      createbuttonShow: false,
+      ifReady: true,
+      action: "Create New",
+      title: "Create New About Me",
+      singularName: "About Me",
+      pluralName: "About Me",
+      apiPath: "/api/about-me",
+      routePrefixName: "about-me",
+      useName: "singular",
+      toastMessage: "About Me",
+
       aboutMeContent: null,
-      body: '',
-      image: '',
+      body: "",
+      image: "",
+
+      showButtons: false,
+      showBack: true,
+      contactContent: null,
       errors: [],
+      tinyMCEReady: false,
     };
   },
   created() {
@@ -71,10 +88,10 @@ export default {
         .get("/api/about-me")
         .then((res) => {
           this.aboutMeContent = res.data.aboutMe;
-          if(this.aboutMeContent){
+          if (this.aboutMeContent) {
             this.$router.push({ name: "about-me.index" });
-          }else{
-            this.ifReady = true
+          } else {
+            this.ifReady = true;
           }
           resolve();
         })
@@ -90,10 +107,10 @@ export default {
     createNewAboutMe() {
       this.ifReady = false;
       let formData = new FormData();
-      formData.append('body', tinyMCE.activeEditor.getContent());
+      formData.append("body", tinyMCE.activeEditor.getContent());
 
       if (this.image != null) {
-        formData.append('image', this.image);
+        formData.append("image", this.image);
       }
 
       axios
@@ -108,6 +125,22 @@ export default {
           this.ifReady = true;
           console.log(err);
         });
+    },
+    getFieldColumns() {
+      if (this.tinyMCEReady) {
+        let formData = new FormData();
+        if (this.image != null) {
+          formData.append("image", this.image);
+        }
+        formData.append("body", tinyMCE.activeEditor.getContent());
+        
+        return formData;
+      } else {
+        return null;
+      }
+    },
+    initFunction() {
+      this.tinyMCEReady = true;
     },
   },
 };
