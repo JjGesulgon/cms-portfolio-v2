@@ -1,20 +1,25 @@
 <template>
   <div>
+    <breadcrumbs
+      :routePrefixName="routePrefixName"
+      :action="action"
+      :singularName="singularName"
+      :pluralName="pluralName"
+      :useName="useName"
+    ></breadcrumbs>
+
     <div class="card">
-      <div class="card-header">
-        <div class="float-left">
-          <router-link class="text-primary" :to="{ name: 'about-me.index' }">About Me</router-link>&nbsp;/
-          <span class="text-secondary">Update Content</span>
-        </div>
-        <div class="float-right">
-          <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'about-me.index' }">
-            <i class="fas fa-chevron-left"></i> &nbsp;Back
-          </router-link>
-        </div>
-      </div>
       <div class="card-body">
-        <div v-if="ifReady">
-          <form v-on:submit.prevent="updateAboutMe()">
+        <form-title :routePrefixName="routePrefixName" :title="title" v-bind:showRightSide="false"></form-title>
+        <hr />
+        <form-edit
+          :apiPath="apiPath"
+          :routePrefixName="routePrefixName"
+          :singularName="singularName"
+          :toastMessage="toastMessage"
+          :fieldColumns="getFieldColumns()"
+        >
+          <template v-bind:data="$data">
             <div class="form-group">
               <label>Image (optional)</label>
               <input type="file" class="form-control-file" @change="onFileSelected">
@@ -22,7 +27,7 @@
             <div class="form-group">
               <label>Content</label>
               <editor
-                v-model="aboutMe.body"
+                v-model="$data.body"
                 api-key="v8631ogi6aq7uc2h9z8tr72t2r3krmwlsbj5k4swk4i448f9"
                 :init="{
                   height: 500,
@@ -36,83 +41,73 @@
                 }"
               />
             </div>
-            <br />
-            <button type="submit" class="btn btn-primary btn-sm">
-              <i class="fas fa-edit"></i> &nbsp;Update Content
-            </button>
-          </form>
-        </div>
-        <div v-else>
-          <div class="progress">
-            <div
-              class="progress-bar progress-bar-striped progress-bar-animated"
-              role="progressbar"
-              aria-valuenow="100"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              style="width: 100%;"
-            ></div>
-          </div>
-        </div>
+          </template>
+        </form-edit>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
     return {
       ifReady: false,
-      aboutMe:'',
+      action: "Edit",
+      title: "Edit About Me",
+      singularName: "About Me",
+      pluralName: "About Me",
+      apiPath: "/api/about-me",
+      routePrefixName: "about-me",
+      useName: "singular",
+      selectedProperty: "body",
+      toastMessage: "About Me Content",
+
+      body: '',
       image: null,
+
+      moduleID: null,
+      showButtons: false,
+      showBack: true,
+      aboutMeContent: null,
       errors: [],
     };
   },
+
   mounted() {
     let promise = new Promise((resolve, reject) => {
       axios
-        .get("/api/about-me")
+        .get(this.apiPath)
         .then((res) => {
-          this.aboutMe = res.data.aboutMe;
-          tinyMCE.activeEditor.setContent(this.aboutMe.body);
-          this.hasContent = true;
-          this.ifReady = true;
+          this.moduleID = res.data.aboutMe.id;
+          this.body = res.data.aboutMe.body,
+
           resolve();
         })
-        .catch((error) => {
-          this.ifReady = true;
+        .catch((err) => {
+          reject();
         });
     });
+
+    promise.then(() => {
+      this.ifReady = true;
+    });
   },
+
   methods: {
     onFileSelected(event) {
       this.image = event.target.files[0];
     },
 
-    updateAboutMe() {
-      this.ifReady = false;
-
-      let formData = new FormData();
+    getFieldColumns() {
+      let formData = new FormData()
       formData.append('_method','PATCH');
-      formData.append('body', tinyMCE.activeEditor.getContent());
-
+      formData.append('body', this.body);
       if (this.image != null) {
         formData.append('image', this.image);
       }
-
-      axios
-        .post("/api/about-me/" + this.aboutMe.id, formData)
-        .then((res) => {
-          Broadcast.$emit("ToastMessage", {
-            message: "About Me Content Updated Successfully",
-          });
-
-          this.$router.push({ name: "about-me.index" });
-        })
-        .catch((err) => {
-          this.ifReady = true;
-          console.log(err);
-        });
+      
+      return formData;
     },
   },
 };

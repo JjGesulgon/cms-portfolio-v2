@@ -62,17 +62,14 @@
           <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                   <div class="modal-header">
-                      <h5 class="modal-title" id="delete-modal-title">You're about to delete this.</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                      </button>
+                      <h5 class="modal-title" id="delete-modal-title"> <strong class="text-danger">WARNING:</strong> You're about to delete this.</h5>
                   </div>
                   <div class="modal-body">
                       Are you sure you want to delete {{ singularName }}?
                   </div>
                   <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
                       <button type="button" class="btn btn-danger btn-sm" @click.prevent="deleteItem()">Confirm Delete</button>
-                      <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
                   </div>
               </div>
           </div>
