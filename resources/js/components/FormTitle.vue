@@ -10,7 +10,10 @@
     <div class="col-md-6 text-right">
       <slot name="right-items">
         <div v-if="$parent.showBack && $parent.ifReady">
-          <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: `${routePrefixName}.index` }">
+          <router-link
+            class="btn btn-outline-secondary btn-sm"
+            :to="{ name: `${routePrefixName}.index` }"
+          >
             <i class="fas fa-chevron-left"></i> &nbsp;Back
           </router-link>
         </div>
@@ -45,34 +48,56 @@
           </div>
         </div>
 
-        <!-- <button v-if="showRightSide == true" type="button" class="btn btn-sm btn-primary mr-1" @click.prevent="$parent.$refs.searchModal.openSearchModal()">
-                    <i class="fas fa-search"></i>
-                    &nbsp;
-                    <strong>Search {{ pluralName }}</strong>
-                </button>
+        <div v-if="isIndex">
+          <button
+            type="button"
+            class="btn btn-sm btn-dark mr-1"
+            @click.prevent="$parent.$refs.searchModal.openSearchModal()"
+          >
+            <i class="fas fa-search"></i>
+            &nbsp;
+            <strong>Search {{ pluralName }}</strong>
+          </button>
 
-                <button v-if="showRightSide == true && showClearSearch" type="button" class="btn btn-sm btn-info" @click.prevent="clearSearch()">
-                    <i class="fas fa-eraser"></i>
-                    &nbsp;
-                    <strong>Clear Search</strong>
-        </button>-->
+          <button
+            v-if="showClearSearch"
+            type="button"
+            class="btn btn-sm btn-light"
+            @click.prevent="clearSearch()"
+          >
+            <i class="fas fa-eraser"></i>
+            &nbsp;
+            <strong>Clear Search</strong>
+          </button>
+        </div>
       </slot>
       <slot name="other-buttons"></slot>
-      <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-title" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title" id="delete-modal-title"> <strong class="text-danger">WARNING:</strong> You're about to delete this.</h5>
-                  </div>
-                  <div class="modal-body">
-                      Are you sure you want to delete {{ singularName }}?
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
-                      <button type="button" class="btn btn-danger btn-sm" @click.prevent="deleteItem()">Confirm Delete</button>
-                  </div>
-              </div>
+      <div
+        class="modal fade"
+        id="delete-modal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="delete-modal-title"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="delete-modal-title">
+                <strong class="text-danger">WARNING:</strong> You're about to delete this.
+              </h5>
+            </div>
+            <div class="modal-body">Are you sure you want to delete {{ singularName }}?</div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
+              <button
+                type="button"
+                class="btn btn-danger btn-sm"
+                @click.prevent="deleteItem()"
+              >Confirm Delete</button>
+            </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
@@ -83,7 +108,7 @@ export default {
   props: {
     apiPath: String,
     moduleID: Number,
-    toastMessage:String,
+    toastMessage: String,
     routePrefixName: {
       type: String,
       required: false,
