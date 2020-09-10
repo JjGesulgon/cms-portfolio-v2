@@ -1,24 +1,29 @@
 <template>
   <div>
+    <breadcrumbs
+      :routePrefixName="routePrefixName"
+      :action="action"
+      :singularName="singularName"
+      :pluralName="pluralName"
+      :useName="useName"
+    ></breadcrumbs>
+
     <div class="card">
-      <div class="card-header">
-        <div class="float-left">
-          <router-link class="text-primary" :to="{ name: 'tech-stack-content.index' }">Tech Stack Content</router-link>&nbsp;/
-          <span class="text-secondary">Update Content</span>
-        </div>
-        <div class="float-right">
-          <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'tech-stack-content.index' }">
-            <i class="fas fa-chevron-left"></i> &nbsp;Back
-          </router-link>
-        </div>
-      </div>
       <div class="card-body">
-        <div v-if="ifReady">
-          <form v-on:submit.prevent="updateTechStackContent()">
+        <form-title :routePrefixName="routePrefixName" :title="title" v-bind:showRightSide="false"></form-title>
+        <hr />
+        <form-edit
+          :apiPath="apiPath"
+          :routePrefixName="routePrefixName"
+          :singularName="singularName"
+          :toastMessage="toastMessage"
+          :fieldColumns="getFieldColumns()"
+        >
+          <template v-bind:data="$data">
             <div class="form-group">
-              <label>Content</label>
+              <label>Content <small class="text-danger">* Required</small></label>
               <editor
-                v-model="techStackContent.body"
+                v-model="$data.body"
                 api-key="v8631ogi6aq7uc2h9z8tr72t2r3krmwlsbj5k4swk4i448f9"
                 :init="{
                   height: 500,
@@ -32,82 +37,67 @@
                 }"
               />
             </div>
-            <br />
-            <button type="submit" class="btn btn-primary btn-sm">
-              <i class="fas fa-edit"></i> &nbsp;Update Content
-            </button>
-          </form>
-        </div>
-        <div v-else>
-          <div class="progress">
-            <div
-              class="progress-bar progress-bar-striped progress-bar-animated"
-              role="progressbar"
-              aria-valuenow="100"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              style="width: 100%;"
-            ></div>
-          </div>
-        </div>
+          </template>
+        </form-edit>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
     return {
       ifReady: false,
-      techStackContent:'',
+      action: "Edit",
+      title: "Edit Technology Stack Content",
+      singularName: "Technology Stack Content",
+      pluralName: "Technology Stack Content",
+      apiPath: "/api/tech-stack-content",
+      routePrefixName: "tech-stack-content",
+      useName: "singular",
+      selectedProperty: "body",
+      toastMessage: "Technology Stack Content",
+
+      body: '',
+      image: null,
+
+      moduleID: null,
+      showButtons: false,
+      showSearch: false,
+      showBack: true,
+      aboutMeContent: null,
       errors: [],
     };
   },
+
   mounted() {
     let promise = new Promise((resolve, reject) => {
       axios
-        .get("/api/tech-stack-content")
+        .get(this.apiPath)
         .then((res) => {
-          this.techStackContent = res.data.techStackContent;
-          tinyMCE.activeEditor.setContent(this.techStackContent.body);
-          this.hasContent = true;
-          this.ifReady = true;
+          this.moduleID = res.data.techStackContent.id;
+          this.body = res.data.techStackContent.body,
+
           resolve();
         })
-        .catch((error) => {
-          this.ifReady = true;
+        .catch((err) => {
+          reject();
         });
     });
+
+    promise.then(() => {
+      this.ifReady = true;
+    });
   },
+
   methods: {
-    onFileSelected(event) {
-      this.image = event.target.files[0];
-    },
-
-    updateTechStackContent() {
-      this.ifReady = false;
-
-      let formData = new FormData();
+    getFieldColumns() {
+      let formData = new FormData()
       formData.append('_method','PATCH');
-      formData.append('body', tinyMCE.activeEditor.getContent());
-
-      if (this.image != null) {
-        formData.append('image', this.image);
-      }
-
-      axios
-        .post("/api/tech-stack-content/" + this.techStackContent.id, formData)
-        .then((res) => {
-          Broadcast.$emit("ToastMessage", {
-            message: "Tech Stack Content Updated Successfully",
-          });
-
-          this.$router.push({ name: "tech-stack-content.index" });
-        })
-        .catch((err) => {
-          this.ifReady = true;
-          console.log(err);
-        });
+      formData.append('body', this.body);
+      
+      return formData;
     },
   },
 };

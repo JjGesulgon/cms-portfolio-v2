@@ -155,6 +155,7 @@ export default {
       devto_link: "",
 
       showButtons: false,
+      showSearch: false,
       showBack: true,
       contactContent: null,
       errors: [],

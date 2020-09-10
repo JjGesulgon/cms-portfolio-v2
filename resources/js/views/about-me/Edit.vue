@@ -25,7 +25,7 @@
               <input type="file" class="form-control-file" @change="onFileSelected">
             </div>
             <div class="form-group">
-              <label>Content</label>
+              <label>Content <small class="text-danger">* Required</small></label>
               <editor
                 v-model="$data.body"
                 api-key="v8631ogi6aq7uc2h9z8tr72t2r3krmwlsbj5k4swk4i448f9"
@@ -68,6 +68,7 @@ export default {
 
       moduleID: null,
       showButtons: false,
+      showSearch: false,
       showBack: true,
       aboutMeContent: null,
       errors: [],

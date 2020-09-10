@@ -76,6 +76,7 @@ export default {
       image: "",
 
       showButtons: false,
+      showSearch: false,
       showBack: true,
       contactContent: null,
       errors: [],
@@ -103,28 +104,6 @@ export default {
   methods: {
     onFileSelected(event) {
       this.image = event.target.files[0];
-    },
-    createNewAboutMe() {
-      this.ifReady = false;
-      let formData = new FormData();
-      formData.append("body", tinyMCE.activeEditor.getContent());
-
-      if (this.image != null) {
-        formData.append("image", this.image);
-      }
-
-      axios
-        .post("/api/about-me", formData)
-        .then((res) => {
-          Broadcast.$emit("ToastMessage", {
-            message: "About Me Content Created Successfully",
-          });
-          this.$router.push({ name: "about-me.index" });
-        })
-        .catch((err) => {
-          this.ifReady = true;
-          console.log(err);
-        });
     },
     getFieldColumns() {
       if (this.tinyMCEReady) {

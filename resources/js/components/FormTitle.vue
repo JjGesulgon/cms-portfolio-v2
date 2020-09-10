@@ -48,7 +48,7 @@
           </div>
         </div>
 
-        <div v-if="isIndex">
+        <div v-if="$parent.showSearch">
           <button
             type="button"
             class="btn btn-sm btn-dark mr-1"

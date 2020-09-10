@@ -62,6 +62,7 @@ export default {
       toastMessage: 'About Me Content',
       moduleID: null,
       showButtons: true,
+      showSearch: false,
     };
   },
   mounted() {

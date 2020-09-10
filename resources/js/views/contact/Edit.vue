@@ -157,6 +157,7 @@ export default {
 
       moduleID: null,
       showButtons: false,
+      showSearch: false,
       showBack: true,
       contactContent: null,
       errors: [],

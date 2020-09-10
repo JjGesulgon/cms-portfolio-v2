@@ -140,7 +140,7 @@ export default {
       toastMessage: 'Contact',
       moduleID: null,
       showButtons: true,
-
+      showSearch: false
     };
   },
   mounted() {

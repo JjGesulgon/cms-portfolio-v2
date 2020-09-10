@@ -1,35 +1,17 @@
 <template>
   <div>
+    <breadcrumbs
+      :routePrefixName="routePrefixName"
+      :action="action"
+      :singularName="singularName"
+      :pluralName="pluralName"
+      :useName="useName"
+    ></breadcrumbs>
+
     <div class="card">
-      <div class="card-header clearfix">
-        <div class="float-left">
-          <router-link class="text-primary" :to="{ name: 'tech-stack-content.index' }">Tech Stack Content</router-link>&nbsp;/
-          <span class="text-secondary">Content</span>
-        </div>
-        <div v-if="ifReady">
-          <div class="float-right" v-if="!hasContent">
-            <router-link class="btn btn-primary btn-sm" :to="{ name: 'tech-stack-content.create' }">
-              <i class="fas fa-plus"></i>&nbsp; Create New Content
-            </router-link>
-          </div>
-          <div class="float-right" v-else>
-            <button
-              type="button"
-              class="btn btn-danger btn-sm"
-              @click.prevent="openDeleteTechStackContentModal()"
-            >
-              <i class="fas fa-trash-alt"></i>&nbsp; Delete Content
-            </button>
-            <router-link
-              class="btn btn-primary btn-sm"
-              :to="{ name: 'tech-stack-content.edit', params: { id: techStackContent.id }}"
-            >
-              <i class="fas fa-edit"></i>&nbsp; Edit Content
-            </router-link>
-          </div>
-        </div>
-      </div>
       <div class="card-body">
+        <form-title :routePrefixName="routePrefixName" :title="title" :singularName="singularName" :apiPath="apiPath" :moduleID="moduleID" :toastMessage="toastMessage" v-bind:showRightSide="false"></form-title>
+        <hr />
         <div class="progress" height="30px;" v-if="!ifReady">
           <div
             class="progress-bar progress-bar-striped progress-bar-animated"
@@ -48,36 +30,9 @@
             <p class="text-center display-4">No Content</p>
           </div>
           <div v-else>
-            <div class="body mt-5" v-html="techStackContent.body"></div>
             <br />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      class="modal fade"
-      id="delete-modal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="deleteTechStackContent"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">You're about to delete this content?</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">Are you sure?</div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-            <button
-              type="button"
-              class="btn btn-danger btn-sm"
-              @click.prevent="deleteTechStackContent()"
-            >Confirm Delete</button>
+            <div class="border field-boxes rounded p-2" v-html="techStackContent.body"></div>
+            <br />
           </div>
         </div>
       </div>
@@ -88,9 +43,21 @@
 export default {
   data() {
     return {
+      showBack: false,
       ifReady: false,
-      techStackContent: "",
+      techStackContent: null,
       hasContent: false,
+      action: 'View',
+      title: "Technology Stack Content",
+      routePrefixName: 'tech-stack-content',
+      useName: "plural",
+      pluralName: "Technology Stack Content",
+      singularName: "Technology Stack Content",
+      apiPath: '/api/tech-stack-content',
+      toastMessage: 'Technology Stack Content',
+      moduleID: null,
+      showButtons: true,
+      showSearch: false
     };
   },
   mounted() {
@@ -98,8 +65,8 @@ export default {
       axios
         .get("/api/tech-stack-content")
         .then((res) => {
-          console.log(res);
           this.techStackContent = res.data.techStackContent;
+          this.moduleID = res.data.techStackContent.id;
           this.hasContent = true;
           this.ifReady = true;
           resolve();
@@ -109,32 +76,5 @@ export default {
         });
     });
   },
-  methods: {
-    openDeleteTechStackContentModal() {
-      $("#delete-modal").modal("show");
-    },
-    deleteTechStackContent() {
-      $("#delete-modal").modal("hide");
-      this.ifReady = false;
-      axios
-        .delete("/api/tech-stack-content/" + this.techStackContent.id)
-        .then((res) => {
-          Broadcast.$emit("ToastMessage", {
-            message: "Tech Stack Content Deleted Successfully",
-          });
-
-          this.$router.go();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-  },
 };
 </script>
-<style scoped>
-  .about-me-image {
-    max-width: 25%;
-    height: auto;
-  }
-</style>
