@@ -1,15 +1,17 @@
 <template>
   <div>
+    <breadcrumbs
+      :routePrefixName="routePrefixName"
+      :action="action"
+      :singularName="singularName"
+      :pluralName="pluralName"
+      :useName="useName"
+    ></breadcrumbs>
+
     <div class="card">
-      <div class="card-header clearfix">
-        <div class="row">
-          <div class="float-left col-md-6">
-            <router-link class="text-primary" :to="{ name: 'passion.index' }">Passion</router-link>&nbsp;/
-            <span class="text-secondary">Passion List</span>
-          </div>
-        </div>
-      </div>
       <div class="card-body">
+        <form-title :routePrefixName="routePrefixName" :title="title" :singularName="singularName" :apiPath="apiPath" :moduleID="moduleID" :toastMessage="toastMessage" v-bind:showRightSide="false"></form-title>
+        <hr>
         <div class="card-columns" v-if="passions">
           <div class="card" v-for="passion in passions" :key="passion.id">
             <div class="card-header clearfix mb-2">
@@ -47,6 +49,14 @@ export default {
   data() {
     return {
       passions: null,
+
+      action: 'View',
+      title: 'Passion',
+      routePrefixName: 'passion',
+      useName: "plural",
+      pluralName: "Passions",
+      singularName: "Passion",
+      showButtons: false
     };
   },
   mounted() {
