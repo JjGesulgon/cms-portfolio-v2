@@ -1,73 +1,62 @@
 <template>
   <div>
+    <breadcrumbs
+      :routePrefixName="routePrefixName"
+      :action="action"
+      :singularName="singularName"
+      :pluralName="pluralName"
+      :useName="useName"
+    ></breadcrumbs>
+
     <div class="card">
-      <div class="card-header">
-        <div class="float-left">
-          <router-link class="text-primary" :to="{ name: 'passion.index' }">Passion</router-link>/
-          <span class="text-secondary">Passion List</span>
-          /
-          <span class="text-secondary">Edit Passion</span>
-        </div>
-        <div class="float-right">
-          <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'passion.index' }">
-            <i class="fas fa-chevron-left"></i>&nbsp; Back
-          </router-link>
-        </div>
-      </div>
       <div class="card-body">
-        <div v-if="ifReady">
-          <form v-on:submit.prevent="updatePassion()">
+        <form-title :routePrefixName="routePrefixName" :title="title" v-bind:showRightSide="false"></form-title>
+        <hr />
+        <form-edit
+          :apiPath="apiPath"
+          :routePrefixName="routePrefixName"
+          :singularName="singularName"
+          :toastMessage="toastMessage"
+          :fieldColumns="getFieldColumns()"
+        >
+          <template v-bind:data="$data">
             <div class="form-group">
               <label>Image (optional)</label>
               <input type="file" class="form-control-file" @change="onFileSelected">
             </div>
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input
-                type="text"
-                class="form-control"
-                v-model="passion.name"
-                autocomplete="off"
-                minlength="2"
-                maxlength="255"
-                required
-              />
+            <div class="row">
+              <div class="form-group col-md-3">
+                <label for="name">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="$data.name"
+                  autocomplete="off"
+                  minlength="2"
+                  maxlength="255"
+                  required
+                />
+              </div>
             </div>
             <div class="form-group">
-              <label for="description">Description</label>
+              <label>Content <small class="text-danger">* Required</small></label>
               <editor
-                v-model="passion.description"
+                v-model="$data.description"
                 api-key="v8631ogi6aq7uc2h9z8tr72t2r3krmwlsbj5k4swk4i448f9"
                 :init="{
-                      height: 500,
-                      menubar: false,
-                      plugins: [
-                      'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
-                      ],
-                      menubar: 'file edit view insert format tools table help',
-                      toolbar: 'undo redo | bold italic underline strikethrough | fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
-                      toolbar_sticky: true,
-                    }"
+                  height: 500,
+                  menubar: false,
+                  plugins: [
+                  'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+                  ],
+                  menubar: 'file edit view insert format tools table help',
+                  toolbar: 'undo redo | bold italic underline strikethrough | fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+                  toolbar_sticky: true,
+                }"
               />
             </div>
-            <br />
-            <button type="submit" class="btn btn-primary btn-sm">
-              <i class="fas fa-edit"></i>&nbsp; Update Passion
-            </button>
-          </form>
-        </div>
-        <div v-else>
-          <div class="progress">
-            <div
-              class="progress-bar progress-bar-striped progress-bar-animated"
-              role="progressbar"
-              aria-valuenow="100"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              style="width: 100%;"
-            ></div>
-          </div>
-        </div>
+          </template>
+        </form-edit>
       </div>
     </div>
   </div>
@@ -78,52 +67,65 @@ export default {
   data() {
     return {
       ifReady: false,
-      passion: null,
+      action: "Edit",
+      title: "Edit Passion",
+      singularName: "Passion",
+      pluralName: "Passions",
+      apiPath: "/api/passion",
+      routePrefixName: "passion",
+      useName: "singular",
+      selectedProperty: "name",
+      toastMessage: "Passion Content",
+
+      description: '',
+      name: '',
       image: null,
+
+      moduleID: null,
+      showButtons: false,
+      showSearch: false,
+      showBack: true,
+      aboutMeContent: null,
+      errors: [],
     };
   },
+
   mounted() {
-    let retrievePassionPromise = new Promise((resolve, reject) => {
-      axios.get("/api/passion/" + this.$route.params.id).then((res) => {
-        this.passion = res.data.passion;
-        resolve();
-      });
+    let promise = new Promise((resolve, reject) => {
+      axios
+        .get(`${this.apiPath}/${this.$route.params.id}`)
+        .then((res) => {
+          this.moduleID = res.data.passion.id;
+          this.description = res.data.passion.description,
+          this.name = res.data.passion.name
+
+          resolve();
+        })
+        .catch((err) => {
+          reject();
+        });
     });
 
-    Promise.all([retrievePassionPromise]).then(() => {
+    promise.then(() => {
       this.ifReady = true;
     });
   },
+
   methods: {
     onFileSelected(event) {
       this.image = event.target.files[0];
     },
 
-    updatePassion() {
-      this.ifReady = false;
-
-      let formData = new FormData();
+    getFieldColumns() {
+      let formData = new FormData()
       formData.append('_method','PATCH');
-      formData.append('name', this.passion.name);
-      formData.append('description', tinyMCE.activeEditor.getContent());
-
+      formData.append('description', this.description);
+      formData.append('name', this.name);
       if (this.image != null) {
         formData.append('image', this.image);
       }
-
-      axios
-        .post("/api/passion/" + this.$route.params.id, formData)
-        .then((res) => {
-          Broadcast.$emit("ToastMessage", {
-            message: "Passion Updated Successfully",
-          });
-
-          this.$router.push({ name: "passion.index" });
-        })
-        .catch((err) => {
-          this.ifReady = true;
-          console.log(err);
-        });
+      
+      return formData;
     },
   },
 };

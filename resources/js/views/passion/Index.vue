@@ -56,12 +56,15 @@ export default {
       useName: "plural",
       pluralName: "Passions",
       singularName: "Passion",
+      apiPath: '/api/passion/',
+      toastMessage: 'Passion Content',
+      moduleID: null,
       showButtons: false
     };
   },
   mounted() {
     let promise = new Promise((resolve, reject) => {
-      axios.get("/api/passion/").then((res) => {
+      axios.get(this.apiPath).then((res) => {
         this.passions = res.data.data;
         resolve();
       });
