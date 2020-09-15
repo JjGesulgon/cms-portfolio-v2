@@ -38,7 +38,7 @@
                   :apiPath="apiPath"
                   :toastMessage="toastMessage"
                   :routePrefixName="routePrefixName"
-                  :disableView="false"
+                  :disableView="true"
                   :singularName="singularName"
                   :object="item"
                 ></data-table-row-action>
@@ -70,7 +70,7 @@
     >
       <template v-bind:data="$data">
         <div class="row">
-          <div class="col-md-6 form-group">
+          <div class="col-md-12 form-group">
             <label for="name">Name</label>
             <input
               id="name"

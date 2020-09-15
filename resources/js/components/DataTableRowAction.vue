@@ -4,9 +4,9 @@
       <i class="fas fa-trash-alt"></i>&nbsp;
       <strong>Delete</strong>
     </label>
-    <span v-if="disableView && ! disableEdit">&nbsp; | &nbsp;</span>
+    <span v-if="!disableView && ! disableEdit">&nbsp; | &nbsp;</span>
     <router-link
-      v-if="disableView"
+      v-if="!disableView"
       class="text-secondary"
       :to="{ name: `${routePrefixName}.view`, params: { id: object.id }}"
     >
@@ -14,7 +14,7 @@
       &nbsp;
       <strong>View</strong>
     </router-link>
-    <span v-if="! disableView && ! disableEdit">&nbsp; | &nbsp;</span>
+    <span v-if="disableView && ! disableEdit">&nbsp; | &nbsp;</span>
     <router-link
       v-if="! disableEdit"
       class="text-secondary"
