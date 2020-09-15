@@ -1,8 +1,5 @@
 <template>
     <vue-select :id="idAttribute" :class="styleClass" :label="labelAttribute" :filterable="false" v-model="option" @input="select" :options="options" @search="onSearch" :placeholder="placeholder">
-        <!-- <template #search="{attributes, events}">
-            <input class="vs__search" :required="! option" v-bind="attributes" v-on="events"/>
-        </template> -->
         <template slot="no-options">
             {{ placeholder }}
         </template>
