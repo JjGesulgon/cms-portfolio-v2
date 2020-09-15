@@ -140,7 +140,8 @@ export default {
       toastMessage: 'Contact',
       moduleID: null,
       showButtons: true,
-      showSearch: false
+      showSearch: false,
+      showDelete: true
     };
   },
   mounted() {
@@ -148,7 +149,6 @@ export default {
       axios
         .get("/api/contact")
         .then((res) => {
-          console.log(res);
           this.contact = res.data.contact;
           this.moduleID = res.data.contact.id;
           this.hasContent = true;

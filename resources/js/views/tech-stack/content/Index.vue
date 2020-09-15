@@ -57,7 +57,8 @@ export default {
       toastMessage: 'Technology Stack Content',
       moduleID: null,
       showButtons: true,
-      showSearch: false
+      showSearch: false,
+      showDelete: true
     };
   },
   mounted() {

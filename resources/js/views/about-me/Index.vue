@@ -63,6 +63,7 @@ export default {
       moduleID: null,
       showButtons: true,
       showSearch: false,
+      showDelete: true
     };
   },
   mounted() {
