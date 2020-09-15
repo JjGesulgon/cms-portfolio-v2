@@ -27,7 +27,7 @@
               <i class="fas fa-plus"></i>
               &nbsp; Create New {{ singularName }}
             </router-link>
-            <div v-else-if="$parent.showButtons && $parent.hasContent">
+            <div v-else-if="$parent.showDelete && $parent.hasContent">
               <button
                 type="button"
                 class="btn btn-danger btn-sm"
@@ -45,30 +45,29 @@
                 &nbsp; Edit {{ singularName }}
               </router-link>
             </div>
+
+              <button
+                type="button"
+                class="btn btn-sm btn-dark mr-1"
+                v-if="$parent.showSearch"
+                @click.prevent="$parent.$refs.searchModal.openSearchModal()"
+              >
+                <i class="fas fa-search"></i>
+                &nbsp;
+                <strong>Search {{ pluralName }}</strong>
+              </button>
+
+              <button
+                v-if="showClearSearch"
+                type="button"
+                class="btn btn-sm btn-light"
+                @click.prevent="clearSearch()"
+              >
+                <i class="fas fa-eraser"></i>
+                &nbsp;
+                <strong>Clear Search</strong>
+              </button>
           </div>
-        </div>
-
-        <div v-if="$parent.showSearch">
-          <button
-            type="button"
-            class="btn btn-sm btn-dark mr-1"
-            @click.prevent="$parent.$refs.searchModal.openSearchModal()"
-          >
-            <i class="fas fa-search"></i>
-            &nbsp;
-            <strong>Search {{ pluralName }}</strong>
-          </button>
-
-          <button
-            v-if="showClearSearch"
-            type="button"
-            class="btn btn-sm btn-light"
-            @click.prevent="clearSearch()"
-          >
-            <i class="fas fa-eraser"></i>
-            &nbsp;
-            <strong>Clear Search</strong>
-          </button>
         </div>
       </slot>
       <slot name="other-buttons"></slot>
