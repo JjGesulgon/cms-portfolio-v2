@@ -3,7 +3,7 @@
         <table class="table table-hover table-sm">
             <caption>
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-9 ideal-font">
                         List of {{ pluralName }} <span v-if="$parent.data">- <strong>Total Items {{ $parent.data.meta.total }}</strong></span>
                     </div>
                     <div class="col-md-3">

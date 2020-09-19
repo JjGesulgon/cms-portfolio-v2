@@ -22,17 +22,17 @@
         <data-table :pluralName="pluralName">
           <template v-slot:thead>
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Experience</th>
-              <th scope="col">Proficiency</th>
-              <th scope="col">Options</th>
+              <th scope="col" class="ideal-font">Name</th>
+              <th scope="col" class="ideal-font">Experience</th>
+              <th scope="col" class="ideal-font">Proficiency</th>
+              <th scope="col" class="ideal-font">Options</th>
             </tr>
           </template>
           <template v-slot:tbody v-bind:data="$data">
             <tr :id="item.id" v-for="item in data.data" :key="item.id">
-              <td>{{ item.name }}</td>
-              <td>{{ item.experience }}</td>
-              <td>{{ item.proficiency }}</td>
+              <td class="ideal-font">{{ item.name }}</td>
+              <td class="ideal-font">{{ item.experience }}</td>
+              <td class="ideal-font">{{ item.proficiency }}</td>
               <td>
                 <data-table-row-action
                   :apiPath="apiPath"

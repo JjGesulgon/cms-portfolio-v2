@@ -1,13 +1,13 @@
 <template>
   <div>
-    <label class="text-danger clickableText" @click.prevent="openDeleteModalTable()">
+    <label class="text-danger clickableText ideal-font" @click.prevent="openDeleteModalTable()">
       <i class="fas fa-trash-alt"></i>&nbsp;
       <strong>Delete</strong>
     </label>
     <span v-if="!disableView && ! disableEdit">&nbsp; | &nbsp;</span>
     <router-link
       v-if="!disableView"
-      class="text-secondary"
+      class="text-secondary ideal-font"
       :to="{ name: `${routePrefixName}.view`, params: { id: object.id }}"
     >
       <i class="fas fa-eye"></i>
@@ -17,7 +17,7 @@
     <span v-if="disableView && ! disableEdit">&nbsp; | &nbsp;</span>
     <router-link
       v-if="! disableEdit"
-      class="text-secondary"
+      class="text-secondary ideal-font"
       :to="{ name: `${routePrefixName}.edit`, params: { id: object.id }}"
     >
       <i class="fas fa-edit"></i>

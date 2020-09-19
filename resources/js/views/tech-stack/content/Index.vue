@@ -31,7 +31,7 @@
           </div>
           <div v-else>
             <br />
-            <div class="border field-boxes rounded p-2" v-html="techStackContent.body"></div>
+            <div class="border field-boxes rounded p-2 ideal-font" v-html="techStackContent.body"></div>
             <br />
           </div>
         </div>

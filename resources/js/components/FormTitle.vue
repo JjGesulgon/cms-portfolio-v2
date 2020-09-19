@@ -53,8 +53,7 @@
                 @click.prevent="$parent.$refs.searchModal.openSearchModal()"
               >
                 <i class="fas fa-search"></i>
-                &nbsp;
-                <strong>Search {{ pluralName }}</strong>
+                &nbsp; Search {{ pluralName }}
               </button>
 
               <button
@@ -64,8 +63,7 @@
                 @click.prevent="clearSearch()"
               >
                 <i class="fas fa-eraser"></i>
-                &nbsp;
-                <strong>Clear Search</strong>
+                &nbsp; Clear Search
               </button>
           </div>
         </div>

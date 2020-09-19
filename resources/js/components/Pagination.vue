@@ -4,19 +4,19 @@
             <nav class="float-left">
                 <ul class="pagination">
                     <li class="page-item" v-bind:class="isPrevDisabled">
-                        <a class="page-link" href="#" @click.prevent="goToPreviousPage()" disabled><strong>Previous</strong></a>
+                        <a class="page-link ideal-font" href="#" @click.prevent="goToPreviousPage()" disabled><strong>Previous</strong></a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="#" @click.prevent="goToFirstPage()"><strong>First</strong></a>
+                        <a class="page-link ideal-font" href="#" @click.prevent="goToFirstPage()"><strong>First</strong></a>
                     </li>
                     <li class="page-item" :key="index" v-for="(pageNumber, index) in pageNumbers" v-bind:class="isPageActive(pageNumber)">
-                        <a class="page-link" href="#" @click.prevent="goToPage(pageNumber)"><strong>{{ pageNumber }}</strong></a>
+                        <a class="page-link ideal-font" href="#" @click.prevent="goToPage(pageNumber)"><strong>{{ pageNumber }}</strong></a>
                     </li>
                     <li class="page-item" v-bind:class="isNextDisabled">
-                        <a class="page-link" href="#" @click.prevent="goToLastPage()"><strong>Last</strong></a>
+                        <a class="page-link ideal-font" href="#" @click.prevent="goToLastPage()"><strong>Last</strong></a>
                     </li>
                     <li class="page-item" v-bind:class="isNextDisabled">
-                        <a class="page-link" href="#" @click.prevent="goToNextPage()"><strong>Next</strong></a>
+                        <a class="page-link ideal-font" href="#" @click.prevent="goToNextPage()"><strong>Next</strong></a>
                     </li>
                 </ul>
             </nav>
@@ -25,19 +25,19 @@
             <nav class="float-left">
                 <ul class="pagination">
                     <li class="page-item" v-bind:class="isPrevDisabled">
-                        <a class="page-link" href="#" @click.prevent="goToPreviousPage()" disabled><strong>Previous</strong></a>
+                        <a class="page-link ideal-font" href="#" @click.prevent="goToPreviousPage()" disabled><strong>Previous</strong></a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="#" @click.prevent="goToFirstPage()"><strong>First</strong></a>
+                        <a class="page-link ideal-font" href="#" @click.prevent="goToFirstPage()"><strong>First</strong></a>
                     </li>
                     <li class="page-item" :key="index" v-for="(pageNumber, index) in pageNumbers" v-bind:class="isPageActive(pageNumber)">
-                        <a class="page-link" href="#" @click.prevent="goToPage(pageNumber)"><strong>{{ pageNumber }}</strong></a>
+                        <a class="page-link ideal-font" href="#" @click.prevent="goToPage(pageNumber)"><strong>{{ pageNumber }}</strong></a>
                     </li>
                     <li class="page-item" v-bind:class="isNextDisabled">
-                        <a class="page-link" href="#" @click.prevent="goToLastPage()"><strong>Last</strong></a>
+                        <a class="page-link ideal-font" href="#" @click.prevent="goToLastPage()"><strong>Last</strong></a>
                     </li>
                     <li class="page-item" v-bind:class="isNextDisabled">
-                        <a class="page-link" href="#" @click.prevent="goToNextPage()"><strong>Next</strong></a>
+                        <a class="page-link ideal-font" href="#" @click.prevent="goToNextPage()"><strong>Next</strong></a>
                     </li>
                 </ul>
             </nav>
@@ -48,9 +48,9 @@
                 <label class="sr-only" for="number-of-items">Number of Items</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <div class="input-group-text">Items per page</div>
+                        <div class="input-group-text ideal-font">Items per page</div>
                     </div>
-                    <select class="custom-select" id="number-of-items" v-model="meta.per_page" v-on:change="changePerPage()">
+                    <select class="custom-select ideal-font" id="number-of-items" v-model="meta.per_page" v-on:change="changePerPage()">
                         <option value="15">15</option>
                         <option value="25">25</option>
                         <option value="50">50</option>

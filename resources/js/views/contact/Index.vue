@@ -33,10 +33,10 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="email">Email</label>
+                  <label for="email" class="ideal-font">Email</label>
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control ideal-font"
                     v-model="contact.email"
                     autocomplete="off"
                     minlength="2"
@@ -48,10 +48,10 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="instagram_link">Instagram Link</label>
+                  <label for="instagram_link" class="ideal-font">Instagram Link</label>
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control ideal-font"
                     v-model="contact.instagram_link"
                     autocomplete="off"
                     minlength="2"
@@ -65,10 +65,10 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="twitter_link">Twitter Link</label>
+                  <label for="twitter_link" class="ideal-font">Twitter Link</label>
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control ideal-font"
                     v-model="contact.twitter_link"
                     autocomplete="off"
                     minlength="2"
@@ -80,10 +80,10 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="linkedin_link">LinkedIn Link</label>
+                  <label for="linkedin_link" class="ideal-font">LinkedIn Link</label>
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control ideal-font"
                     v-model="contact.linkedin_link"
                     autocomplete="off"
                     minlength="2"
@@ -97,10 +97,10 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="devto_link">Dev.to Link</label>
+                  <label for="devto_link" class="ideal-font">Dev.to Link</label>
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control ideal-font"
                     v-model="contact.devto_link"
                     autocomplete="off"
                     minlength="2"
@@ -112,8 +112,8 @@
               </div>
             </div>
             <div class="form-group">
-              <label>Content</label>
-              <div class="border field-boxes rounded p-2" v-html="contact.content"></div>
+              <label class="ideal-font">Content</label>
+              <div class="border field-boxes rounded p-2 ideal-font" v-html="contact.content"></div>
             </div>
           </div>
         </div>
@@ -131,13 +131,13 @@ export default {
       contact: null,
       hasContent: false,
       action: 'View',
-      title: "Contact",
+      title: "Contact Details",
       routePrefixName: 'contact',
       useName: "plural",
-      pluralName: "Contacts",
-      singularName: "Contact",
+      pluralName: "Contact Details",
+      singularName: "Contact Details",
       apiPath: '/api/contact',
-      toastMessage: 'Contact',
+      toastMessage: 'Contact Details',
       moduleID: null,
       showButtons: true,
       showSearch: false,
