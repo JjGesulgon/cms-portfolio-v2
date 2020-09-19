@@ -1,14 +1,10 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+  <nav class="navbar navbar-expand-md navbar-light navbar-laravel bg-primary text-white">
     <div class="container-fluid">
       <router-link
-        class="navbar-brand d-none d-sm-block"
+        class="navbar-brand d-none d-sm-block text-white"
         :to="{ name: 'overview' }"
       >Content Management And Web Traffic Analysis</router-link>
-      <router-link
-        class="navbar-brand d-block d-sm-none"
-        :to="{ name: 'overview' }"
-      >CMS with Analytics</router-link>
 
       <button
         class="navbar-toggler"
@@ -26,7 +22,7 @@
         <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
           <li class="nav-item dropdown">
             <a
-              class="nav-item nav-link dropdown-toggle mr-md-2"
+              class="nav-item nav-link dropdown-toggle mr-md-2 text-white"
               href="#"
               role="button"
               id="navbarDropdown"
