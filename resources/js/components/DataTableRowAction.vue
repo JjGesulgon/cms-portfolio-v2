@@ -25,33 +25,16 @@
       <strong>Edit</strong>
     </router-link>
     <slot></slot>
-    <div
-      class="modal fade"
-      id="delete-modal-table"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="delete-modal-title"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="delete-modal-title">
-              <strong class="text-danger">WARNING:</strong> You're about to delete this.
-            </h5>
-          </div>
-          <div class="modal-body">Are you sure you want to delete {{ singularName }}?</div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
-            <button
-              type="button"
-              class="btn btn-danger btn-sm"
-              @click.prevent="deleteItem()"
-            >Confirm Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
+
+    <delete-modal
+      :routePrefixName="routePrefixName"
+      :apiPath="apiPath"
+      :singularName="singularName"
+      :object="object"
+      :tbObject="tbObject"
+      :toastMessage="toastMessage"
+      :isTabled ="true"
+    ></delete-modal>
   </div>
 </template>
 
@@ -62,6 +45,7 @@ export default {
     apiPath: String,
     singularName: String,
     object: Object,
+    tbObject: Object,
     toastMessage: String,
     disableView: {
       type: Boolean,
@@ -75,29 +59,26 @@ export default {
     },
   },
 
+  data() {
+    return {
+      ifReady: true
+    };
+  },
+
+  watch: {
+    ifReady: function (){
+      if (!this.ifReady){
+        this.$parent.ifReady = false
+      }
+      else {
+        this.$parent.ifReady = true
+      }
+    }
+  },
+
   methods: {
     openDeleteModalTable() {
       $("#delete-modal-table").modal("show");
-    },
-
-    deleteItem() {
-      $("#delete-modal-table").modal("hide");
-
-      this.$parent.ifReady = false;
-
-      axios
-        .delete(`${this.apiPath}/${this.object.id}`)
-        .then(() => {
-          Broadcast.$emit("ToastMessage", {
-            message: `${this.toastMessage} deleted successfully.`,
-          });
-
-          this.$router.go();
-        })
-        .catch((err) => {
-          console.log(err);
-          this.$parent.ifReady = true;
-        });
     },
   },
 };

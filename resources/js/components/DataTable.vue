@@ -27,6 +27,23 @@
     export default {
         props: {
             pluralName: String
-        }
+        },
+
+        data() {
+          return {
+            ifReady: true
+          };
+        },
+        watch: {
+          ifReady: function (){
+            if (!this.ifReady){
+              this.$parent.ifReady = false
+            }
+            else {
+              this.$parent.ifReady = true
+            }
+          }
+        },
+        
     }
 </script>
