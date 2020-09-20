@@ -15,7 +15,7 @@
               <strong class="text-danger">WARNING:</strong> You're about to delete this.
             </h5>
           </div>
-          <div class="modal-body">Are you sure you want to delete {{ singularName }}?</div>
+          <div class="modal-body">Are you sure you want to delete this {{ singularName }}?</div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
             <button
