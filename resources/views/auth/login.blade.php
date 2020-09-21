@@ -6,7 +6,8 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h2 class=" font-weight-light">{{ __('Login') }}</h2>
+                    <img class="img-fluid accent-image" src="/images/undraw_personalization.svg" alt="Image" />
+                    <h1 class="font-weight-light">{{ __('Login') }}</h1>
                     <hr>
                     <br>
                     <form method="POST" action="{{ route('login') }}">
