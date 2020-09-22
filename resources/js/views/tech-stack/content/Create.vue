@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       createbuttonShow: false,
-      ifReady: true,
+      ifReady: false,
       action: "Create New",
       title: "Create New Technology Stack Content",
       singularName: "Technology Stack Content",
@@ -69,7 +69,7 @@ export default {
       showButtons: false,
       showSearch: false,
       showBack: true,
-      contactContent: null,
+      itemContent: null,
       errors: [],
       tinyMCEReady: false,
     };
@@ -79,8 +79,8 @@ export default {
       axios
         .get("/api/tech-stack-content")
         .then((res) => {
-          this.techStackContent = res.data.techStackContent;
-          if (this.aboutMeContent) {
+          this.itemContent = res.data.techStackContent;
+          if (this.itemContent) {
             this.$router.push({ name: "tech-stack-content.index" });
           } else {
             this.ifReady = true;
