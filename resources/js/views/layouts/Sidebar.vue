@@ -70,6 +70,17 @@
     <div class="">
       <ul class="nav flex-column background py-1 mt-3 sidebar-nav">
         <li class="nav-item">
+          <span class="nav-link">Creative Content</span>
+        </li>
+
+        <li class="nav-item">
+          <router-link class="nav-link list-item" :to="{ name: 'users.index' }">Personal Blog</router-link>
+        </li>
+      </ul>
+    </div>
+    <div class="">
+      <ul class="nav flex-column background py-1 mt-3 sidebar-nav">
+        <li class="nav-item">
           <span class="nav-link">User Management</span>
         </li>
 

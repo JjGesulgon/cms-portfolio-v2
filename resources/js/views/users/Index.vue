@@ -115,7 +115,7 @@ export default {
     return {
       data: null,
       action: "View",
-      title: "User",
+      title: "Users",
       pluralName: "Users",
       singularName: "User",
       apiPath: "/api/users",
