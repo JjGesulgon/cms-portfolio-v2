@@ -57,6 +57,11 @@ export default {
       required: false,
       default: false,
     },
+    disableDelete: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
 
   data() {
@@ -78,6 +83,9 @@ export default {
 
   methods: {
     openDeleteModalTable() {
+      if(this.disableDelete){
+        $("#not-delete-modal-table").modal("show");
+      }else
       $("#delete-modal-table").modal("show");
     },
   },

@@ -41,6 +41,7 @@
                   :singularName="singularName"
                   :object="item"
                   :tbObject="item"
+                  :disableDelete="disableDelete"
                 ></data-table-row-action>
               </td>
             </tr>
@@ -134,6 +135,7 @@ export default {
       hasContent: false,
       ifReady: true,
       showSearch: true,
+      disableDelete: false
     };
   },
 
@@ -188,6 +190,9 @@ export default {
         .then((res) => {
           this.data = res.data;
           this.data.data = res.data.data;
+          if (this.data.data.length <= 1){
+            this.disableDelete = true
+          }
           this.showProgress = false;
         })
         .catch((error) => {

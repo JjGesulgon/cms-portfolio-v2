@@ -27,6 +27,29 @@
         </div>
       </div>
     </div>
+
+    <div
+      class="modal fade"
+      id="not-delete-modal-table"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="delete-modal-title"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="delete-modal-title">
+              <strong class="text-danger">Forbidden:</strong> Unable to delete selected {{singularName}}.
+            </h5>
+          </div>
+          <div class="modal-body">The only existing {{ singularName }} cannot be deleted.</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>

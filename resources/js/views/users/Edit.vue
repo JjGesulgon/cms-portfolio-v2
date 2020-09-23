@@ -1,99 +1,120 @@
 <template>
-    <div>
-        <div class="card">
-            <div class="card-header">
-              <div class="float-left">
-                <router-link class="text-primary" :to="{ name: 'users.index' }">Users</router-link>
-                /
-                <span class="text-secondary">User List</span>
-                /
-                <span class="text-secondary">Edit User</span>
-              </div>
-              <div class="float-right">
-                <router-link class="btn btn-outline-secondary btn-sm" :to="{ name: 'users.index' }"><i class="fas fa-chevron-left"></i>&nbsp; Back</router-link>
+  <div>
+    <breadcrumbs
+      :routePrefixName="routePrefixName"
+      :action="action"
+      :singularName="singularName"
+      :pluralName="pluralName"
+      :useName="useName"
+    ></breadcrumbs>
+
+    <div class="card">
+      <div class="card-body">
+        <form-title
+          :routePrefixName="routePrefixName"
+          :title="title"
+          v-bind:showRightSide="false"
+        ></form-title>
+        <hr />
+        <form-edit
+          :apiPath="apiPath"
+          :routePrefixName="routePrefixName"
+          :singularName="singularName"
+          :toastMessage="toastMessage"
+          :fieldColumns="getFieldColumns()"
+        >
+          <template v-bind:data="$data">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="name"
+                      autocomplete="off"
+                      minlength="2"
+                      maxlength="255"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      v-model="email"
+                      disabled
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="card-body">
-                <div v-if="ifReady">
-                    <form v-on:submit.prevent="updateUser()">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" class="form-control" v-model="name" autocomplete="off" minlength="2" maxlength="255" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="email">Email Address</label>
-                                    <input type="email" class="form-control" v-model="email" disabled>
-                                </div>
-                            </div>
-                        </div>
-
-                        <br>
-
-                        <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i>&nbsp; Update User</button>
-                    </form>
-                </div>
-                <div v-else>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+          </template>
+        </form-edit>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                ifReady: false,
-                name: '',
-                email: '',
-                mobile_number: ''
-            };
-        },
+export default {
+  data() {
+    return {
+      ifReady: false,
+      action: "Edit",
+      title: "Edit Users",
+      singularName: "User",
+      pluralName: "Users",
+      apiPath: "/api/users",
+      routePrefixName: "users",
+      useName: "singular",
+      selectedProperty: "name",
+      toastMessage: "Users",
 
-        mounted() {
-            let retrieveUserPromise = new Promise((resolve, reject) => {
-                axios.get('/api/users/' + this.$route.params.id).then(res => {
-                    this.id            = res.data.user.id;
-                    this.name          = res.data.user.name;
-                    this.email         = res.data.user.email;
+      name: '',
+      email: '',
 
-                    resolve();
-                });
-            });
+      moduleID: null,
+      showButtons: false,
+      showSearch: false,
+      showBack: true,
+      contactContent: null,
+      errors: [],
+      formData: new FormData(),
+    };
+  },
 
-            Promise.all([retrieveUserPromise]).then(() => {
-                this.ifReady = true;
-            });
-        },
+  mounted() {
+    let promise = new Promise((resolve, reject) => {
+      axios
+        .get(`${this.apiPath}/${this.$route.params.id}`)
+        .then((res) => {
+          this.moduleID = res.data.user.id;
+          this.name = res.data.user.name;
+          this.email = res.data.user.email;
+          resolve();
+        })
+        .catch((err) => {
+          reject();
+        });
+    });
 
-        methods: {
-            updateUser() {
-                this.ifReady = false;
+    promise.then(() => {
+      this.ifReady = true;
+    });
+  },
 
-                let data = {
-                    name: this.name
-                };
-
-                axios.patch('/api/users/' + this.$route.params.id, data).then(res => {
-                    Broadcast.$emit('ToastMessage', {
-                        message: 'User Updated Successfully'
-                    });
-
-                    this.$router.push({
-                        name: 'users.view',
-                        params: { id: this.$route.params.id }
-                    });
-                }).catch(err => {
-                    console.log(err);
-                });
-            }
-        }
-    }
+  methods: {
+    getFieldColumns() {
+      this.formData.append("_method", "PATCH");
+      this.formData.append("name", this.name);
+      this.formData.append("experience", this.email);
+      return this.formData;
+    },
+  },
+};
 </script>
