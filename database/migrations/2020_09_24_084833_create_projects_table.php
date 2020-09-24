@@ -21,6 +21,7 @@ class CreateProjectsTable extends Migration
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->string('name');
             $table->string('type');
             $table->string('intro_image')->nullable();
             $table->string('screen_image')->nullable();
