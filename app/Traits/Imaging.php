@@ -113,7 +113,7 @@ trait Imaging
      * @param  array $sizes
      * @return void
      */
-    public static function storeImage($model, $sizes = null)
+    public static function storeImage($model, $sizes = null, $fieldName = null)
     {
         if (request()->hasFile('image') || request()->hasFile('picture') || request()->hasFile('photo')) {
             self::createDirectory();
@@ -123,6 +123,9 @@ trait Imaging
             $defaultResolution = self::defaultResolution();
             $compressionRate   = self::compressionRate();
 
+            /*
+                Todo: If condition = change image to field name
+            */
             $image        = request()->image;
             $imageName    = uniqid() . '.jpg';
             $model->image = $imageName;
