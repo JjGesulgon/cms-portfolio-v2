@@ -26,7 +26,7 @@ class CreateProjectsTable extends Migration
             $table->string('intro_image')->nullable();
             $table->string('screen_image')->nullable();
             $table->string('role');
-            $table->string('date_deployed');
+            $table->date('date_deployed');
             $table->longText('overview');
             $table->longText('concept_description');
             $table->longText('development_description');

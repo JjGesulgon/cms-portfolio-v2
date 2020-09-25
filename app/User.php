@@ -96,4 +96,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(Contact::class);
     }
+
+    /**
+     * The user has many projects
+     *
+     * @return array object
+     */
+    public function projects()
+    {
+        return $this->hasMany(Projects::class);
+    }
 }

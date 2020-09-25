@@ -2,11 +2,6 @@
 
 /*
  * This file is part of Imaging package.
- *
- * (c) Gether Kestrel B. Medel <gether.medel@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
  */
 
 /*
@@ -113,9 +108,9 @@ trait Imaging
      * @param  array $sizes
      * @return void
      */
-    public static function storeImage($model, $sizes = null, $fieldName = null)
+    public static function storeImage($model, $fieldName = null, $sizes = null)
     {
-        if (request()->hasFile('image') || request()->hasFile('picture') || request()->hasFile('photo')) {
+        if (request()->hasFile('image') || request()->hasFile('picture') || request()->hasFile('photo') || request()->hasFile('intro_image') || request()->hasFile('screen_image')) {
             self::createDirectory();
 
             $storagePath       = self::storagePath();
@@ -126,9 +121,21 @@ trait Imaging
             /*
                 Todo: If condition = change image to field name
             */
-            $image        = request()->image;
             $imageName    = uniqid() . '.jpg';
-            $model->image = $imageName;
+
+            switch ($fieldName) {
+              case "intro_image":
+                  $image        = request()->intro_image;
+                  $model->intro_image = $imageName;
+                  break;
+              case "screen_image":
+                  $image        = request()->screen_image;
+                  $model->screen_image = $imageName;
+                  break;
+              default:
+                  $image        = request()->image;
+                  $model->image = $imageName;
+            }
 
             if ($sizes != null && is_array($sizes)) {
                 foreach ($sizes as $size) {
@@ -165,7 +172,7 @@ trait Imaging
      */
     public static function deleteImage($model)
     {
-        if (request()->hasFile('image') || request()->hasFile('picture') || request()->hasFile('photo')) {
+      if (request()->hasFile('image') || request()->hasFile('picture') || request()->hasFile('photo') || request()->hasFile('intro_image') || request()->hasFile('screen_image')) {
             $storagePath = self::storagePath();
             $resolutions = self::resolutions();
 
@@ -184,11 +191,11 @@ trait Imaging
      * @param  Illuminate\Database\Eloquent\Model $model
      * @return void
      */
-    public static function updateImage($model)
+    public static function updateImage($model, $fieldName = null)
     {
-        if (request()->hasFile('image') || request()->hasFile('picture') || request()->hasFile('photo')) {
+      if (request()->hasFile('image') || request()->hasFile('picture') || request()->hasFile('photo') || request()->hasFile('intro_image') || request()->hasFile('screen_image')) {
             self::deleteImage($model->findorFail($model->id));
-            self::storeImage($model);
+            self::storeImage($model, $fieldName);
         }
     }
 }
