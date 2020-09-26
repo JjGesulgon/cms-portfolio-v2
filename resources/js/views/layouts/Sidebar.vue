@@ -59,7 +59,7 @@
         </div>
 
         <li class="nav-item">
-          <router-link class="nav-link list-item" :to="{ name: 'users.index' }">Projects</router-link>
+          <router-link class="nav-link list-item" :to="{ name: 'projects.index' }">Projects</router-link>
         </li>
 
         <li class="nav-item">

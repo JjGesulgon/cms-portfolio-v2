@@ -24,22 +24,22 @@
           <template v-slot:thead>
             <tr>
               <th scope="col" class="ideal-font">Name</th>
-              <th scope="col" class="ideal-font">Experience</th>
-              <th scope="col" class="ideal-font">Proficiency</th>
+              <th scope="col" class="ideal-font">Type</th>
+              <th scope="col" class="ideal-font">Date Deployed</th>
               <th scope="col" class="ideal-font">Options</th>
             </tr>
           </template>
           <template v-slot:tbody v-bind:data="$data">
             <tr :id="item.id" v-for="item in data.data" :key="item.id">
               <td class="ideal-font">{{ item.name }}</td>
-              <td class="ideal-font">{{ item.experience }}</td>
-              <td class="ideal-font">{{ item.proficiency }}</td>
+              <td class="ideal-font">{{ item.type }}</td>
+              <td class="ideal-font">{{ item.date_deployed }}</td>
               <td>
                 <data-table-row-action
                   :apiPath="apiPath"
                   :toastMessage="toastMessage"
                   :routePrefixName="routePrefixName"
-                  :disableView="true"
+                  :disableView="false"
                   :singularName="singularName"
                   :object="item"
                   :tbObject="item"
@@ -95,7 +95,7 @@
             />
           </div>
           <div class="col-md-6 form-group">
-            <label for="experience">Experience</label>
+            <label for="experience">Type</label>
             <input
               id="experience"
               type="text"
@@ -106,12 +106,12 @@
             />
           </div>
           <div class="col-md-6 form-group">
-            <label for="proficiency">Proficiency</label>
+            <label for="proficiency">Date Deployed</label>
             <input
               id="proficiency"
               type="text"
               class="form-control"
-              v-model="$data.proficiency"
+              v-model="$data.date_deployed"
               autocomplete="off"
               maxlength="255"
             />
@@ -128,17 +128,17 @@ export default {
     return {
       data: null,
       action: "View",
-      title: "Technology Stack",
-      pluralName: "Technology Stack",
-      singularName: "Technology Stack",
-      apiPath: "/api/tech-stack-item",
-      routeName: "tech-stack-item.index",
-      routePrefixName: "tech-stack-item",
-      toastMessage: "Technology Stack Item",
+      title: "Projects",
+      pluralName: "Projects",
+      singularName: "Project",
+      apiPath: "/api/projects",
+      routeName: "projects.index",
+      routePrefixName: "projects",
+      toastMessage: "Project",
       useName: "plural",
       name: null,
-      experience: null,
-      proficiency: null,
+      type: null,
+      date_deployed: null,
       order_by: "desc",
       error: null,
       showProgress: false,
@@ -158,8 +158,8 @@ export default {
           page: to.query.page,
           per_page: 15,
           name: to.query.name,
-          experience: to.query.experience,
-          proficiency: to.query.proficiency,
+          type: to.query.experience,
+          date_deployed: to.query.date_deployed,
           order_by: to.query.order_by,
         })
       );
@@ -169,8 +169,8 @@ export default {
           page: to.query.page,
           per_page: to.query.per_page,
           name: to.query.name,
-          experience: to.query.experience,
-          proficiency: to.query.proficiency,
+          type: to.query.type,
+          date_deployed: to.query.date_deployed,
           order_by: to.query.order_by,
         })
       );
@@ -182,8 +182,8 @@ export default {
       page: to.query.page,
       per_page: this.data.meta.per_page,
       name: this.name,
-      experience: this.experience,
-      proficiency: this.proficiency,
+      type: this.type,
+      date_deployed: this.date_deployed,
       order_by: this.order_by,
     });
 
@@ -194,8 +194,8 @@ export default {
     getData(params) {
       this.showProgress = true;
       this.name = params.name;
-      this.experience = params.experience;
-      this.proficiency = params.proficiency;
+      this.type = params.type;
+      this.date_deployed = params.date_deployed;
 
       typeof params.order_by === "undefined" || params.order_by == "desc"
         ? (this.order_by = "desc")
@@ -221,15 +221,15 @@ export default {
     getParameters() {
       return {
         name: this.name,
-        experience: this.experience,
-        proficiency: this.proficiency,
+        type: this.type,
+        date_deployed: this.date_deployed,
         order_by: this.order_by,
       };
     },
     clearParameters() {
       this.name = "";
-      this.experience = "";
-      this.proficiency = "";
+      this.type = "";
+      this.date_deployed = "";
       this.order_by = "desc";
     },
   },

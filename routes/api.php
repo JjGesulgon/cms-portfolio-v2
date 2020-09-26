@@ -38,6 +38,13 @@ Route::group(['middleware' => ['auth:api']], function () {
       ]
     ]);
 
+    // Projects
+    Route::resource('projects', 'ProjectsController', [
+      'only' => [
+          'index', 'store', 'show', 'update', 'destroy'
+      ]
+    ]);
+
     // Passion
     Route::resource('passion', 'PassionsController', [
       'only' => [
