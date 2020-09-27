@@ -28,7 +28,7 @@
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="name" class="ideal-font">Name</label>
+                    <label for="name" class="ideal-font font-weight-bold">Name</label>
                     <input
                       type="text"
                       class="form-control"
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="email" class="ideal-font">Email Address</label>
+                    <label for="email" class="ideal-font font-weight-bold">Email Address</label>
                     <input
                       type="email"
                       class="form-control"
@@ -56,7 +56,7 @@
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="password" class="ideal-font">Password</label>
+                    <label for="password" class="ideal-font font-weight-bold">Password</label>
                     <input
                       type="password"
                       class="form-control"
@@ -70,7 +70,7 @@
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="password_confirmation" class="ideal-font"
+                    <label for="password_confirmation" class="ideal-font font-weight-bold"
                       >Password Confirmation</label
                     >
                     <input

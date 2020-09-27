@@ -26,7 +26,7 @@
             </div>
             <div class="row">
               <div class="form-group col-md-3">
-                <label for="name">Name</label>
+                <label for="name" class="ideal-font font-weight-bold">Name</label>
                 <input
                   type="text"
                   class="form-control"
@@ -39,7 +39,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label>Content <small class="text-danger">* Required</small></label>
+              <label class="ideal-font font-weight-bold">Content <small class="text-danger">* Required</small></label>
               <editor
                 v-model="$data.description"
                 api-key="v8631ogi6aq7uc2h9z8tr72t2r3krmwlsbj5k4swk4i448f9"

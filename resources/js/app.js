@@ -29,6 +29,7 @@ import App from './views/layouts/App';
 import router from './router';
 import store from './store';
 import VueSelect from 'vue-select';
+import DatePicker from 'vuejs-datepicker';
 import Editor from '@tinymce/tinymce-vue'
 
 // Component to Component Broadcasting
@@ -36,6 +37,7 @@ window.Broadcast = new Vue();
 
 // Vue Select
 Vue.component('vue-select', VueSelect);
+Vue.component('datepicker', DatePicker);
 
 // Layouts
 Vue.component('navbar', require('./views/layouts/Navbar.vue'));

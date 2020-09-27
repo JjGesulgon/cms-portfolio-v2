@@ -24,8 +24,9 @@
               <div class="row">
                 <div class="col-lg-4">
                   <div class="form-group">
-                    <label for="name" class="ideal-font">Name</label>
+                    <label for="name" class="ideal-font font-weight-bold">Name</label>
                     <input
+                      id="name"
                       type="text"
                       class="form-control"
                       v-model="name"
@@ -38,8 +39,9 @@
                 </div>
                 <div class="col-lg-4">
                   <div class="form-group">
-                    <label for="proficiency" class="ideal-font">Proficiency (1-10)</label>
+                    <label for="proficiency" class="ideal-font font-weight-bold">Proficiency (1-10)</label>
                     <input
+                      id="proficiency"
                       type="number"
                       class="form-control"
                       v-model="proficiency"
@@ -51,8 +53,9 @@
                 </div>
                 <div class="col-lg-4">
                   <div class="form-group">
-                    <label for="experience" class="ideal-font">Experience length</label>
+                    <label for="experience" class="ideal-font font-weight-bold">Experience length</label>
                     <input
+                      id="experience"
                       type="text"
                       class="form-control"
                       v-model="experience"

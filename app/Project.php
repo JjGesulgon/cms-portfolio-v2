@@ -6,6 +6,7 @@ use App\Traits\Filtering;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\Imaging;
+use Illuminate\Support\Str;
 
 class Project extends Model
 {
@@ -42,7 +43,7 @@ class Project extends Model
   
           static::creating(function ($model) {
               $model->user_id = auth('api')->user()->id;
-              $model->slug = str_slug($model->title . '-' . random_int(100, 999));
+              $model->slug = Str::slug($model->name . '-' . random_int(100, 999));
 
               static::storeImage($model, 'intro_image');
               static::storeImage($model, 'screen_image');

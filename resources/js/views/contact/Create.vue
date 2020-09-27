@@ -21,7 +21,7 @@
         >
           <template v-bind:data="$data">
             <div class="form-group">
-              <label for="email">
+              <label for="email" class="ideal-font font-weight-bold">
                 Email
                 <small class="text-danger">* Required</small>
               </label>
@@ -39,7 +39,7 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="form-group">
-                  <label for="instagram_link">
+                  <label for="instagram_link" class="ideal-font font-weight-bold">
                     Instagram Link
                     <small class="text-danger">* Required</small>
                   </label>
@@ -58,7 +58,7 @@
 
               <div class="col-md-3">
                 <div class="form-group">
-                  <label for="twitter_link">
+                  <label for="twitter_link" class="ideal-font font-weight-bold">
                     Twitter Link
                     <small class="text-danger">* Required</small>
                   </label>
@@ -77,7 +77,7 @@
 
               <div class="col-md-3">
                 <div class="form-group">
-                  <label for="linkedin_link">
+                  <label for="linkedin_link" class="ideal-font font-weight-bold">
                     LinkedIn Link
                     <small class="text-danger">* Required</small>
                   </label>
@@ -96,7 +96,7 @@
 
               <div class="col-md-3">
                 <div class="form-group">
-                  <label for="devto_link">
+                  <label for="devto_link" class="ideal-font font-weight-bold">
                     Dev.to Link
                     <small class="text-danger">* Required</small>
                   </label>
@@ -114,7 +114,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="content">
+              <label for="content" class="ideal-font font-weight-bold">
                 Content
                 <small class="text-danger">* Required</small>
               </label>

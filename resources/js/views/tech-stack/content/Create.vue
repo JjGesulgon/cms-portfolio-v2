@@ -21,7 +21,7 @@
         >
           <template v-bind:data="$data">
             <div class="form-group">
-              <label for="content">
+              <label for="content" class="ideal-font font-weight-bold">
                 Content
                 <small class="text-danger">* Required</small>
               </label>

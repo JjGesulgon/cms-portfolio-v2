@@ -23,13 +23,13 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="form-group">
-                  <label for="image">Image</label>
+                  <label for="image" class="ideal-font font-weight-bold">Image</label>
                   <input id="image" type="file" class="form-control-file" @change="onFileSelected" />
                 </div>
               </div>
             </div>
             <div class="form-group">
-              <label for="content">
+              <label for="content" class="ideal-font font-weight-bold">
                 Content
                 <small class="text-danger">* Required</small>
               </label>

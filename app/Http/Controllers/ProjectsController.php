@@ -61,7 +61,7 @@ class ProjectsController extends Controller
       'intro_image'               => 'required|max:2000',
       'screen_image'              => 'required|max:2000',
       'role'                      => 'required',
-      'date_deployed'             => 'required|date',
+      'date_deployed'             => 'required',
       'overview'                  => 'required',
       'concept_description'       => 'required',
       'development_description'   => 'required',

@@ -28,7 +28,7 @@
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="name">Name</label>
+                    <label for="name" class="ideal-font font-weight-bold">Name</label>
                     <input
                       type="text"
                       class="form-control"
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="email">Email Address</label>
+                    <label for="email" class="ideal-font font-weight-bold">Email Address</label>
                     <input
                       type="email"
                       class="form-control"
