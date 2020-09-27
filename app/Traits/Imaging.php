@@ -108,9 +108,10 @@ trait Imaging
      * @param  array $sizes
      * @return void
      */
-    public static function storeImage($model, $fieldName = null, $sizes = null)
+    public static function storeImage($model, $fieldName = null, $isResize = false, $sizes = null)
     {
         if (request()->hasFile('image') || request()->hasFile('picture') || request()->hasFile('photo') || request()->hasFile('intro_image') || request()->hasFile('screen_image')) {
+
             self::createDirectory();
 
             $storagePath       = self::storagePath();
@@ -118,9 +119,6 @@ trait Imaging
             $defaultResolution = self::defaultResolution();
             $compressionRate   = self::compressionRate();
 
-            /*
-                Todo: If condition = change image to field name
-            */
             $imageName    = uniqid() . '.jpg';
 
             switch ($fieldName) {
@@ -151,11 +149,14 @@ trait Imaging
                     }
                 }
             }
-
-            // Image::make($image)->resize(
-            //     $resolutions[$defaultResolution]['width'],
-            //     $resolutions[$defaultResolution]['height']
-            // )
+            
+            if($isResize){
+              Image::make($image)->resize(
+                $resolutions[$defaultResolution]['width'],
+                $resolutions[$defaultResolution]['height']
+              );
+            }
+            
             Image::make($image)
             ->encode('jpg', $compressionRate)->save(
                 storage_path('app/public/' . $storagePath . '/' . $imageName),

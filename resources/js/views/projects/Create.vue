@@ -328,7 +328,7 @@ export default {
           formData.append("intro_image", this.intro_image);
         }
         if (this.screen_image != null) {
-          formData.append("screen_image", this.intro_image);
+          formData.append("screen_image", this.screen_image);
         }
 
         formData.append("name", this.name);
