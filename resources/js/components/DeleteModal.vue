@@ -43,7 +43,20 @@
               <strong class="text-danger">Forbidden:</strong> Unable to delete selected {{singularName}}.
             </h5>
           </div>
-          <div class="modal-body">The only existing {{ singularName }} cannot be deleted.</div>
+          <div class="modal-body">
+            <div>
+              <strong>
+                Users That Cannot Be Deleted:
+              </strong>
+            </div>
+            <br>
+            <div>
+              &#8226; The only existing {{ singularName }}.
+            </div>
+            <div>
+              &#8226; The {{ singularName }} that you are using right now.
+            </div>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
           </div>

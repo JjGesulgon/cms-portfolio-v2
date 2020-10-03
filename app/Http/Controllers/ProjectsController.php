@@ -68,6 +68,7 @@ class ProjectsController extends Controller
       'github_repository'         => 'required',
       'live'                      => 'required',
       'reason_if_unavailable'     => 'required',
+      'image'                     => 'required|array'
     ]);
 
     if ($validator->fails()) {

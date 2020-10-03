@@ -133,7 +133,7 @@ export default {
 
       showButtons: true,
       hasContent: false,
-      ifReady: true,
+      ifReady: false,
       showSearch: true,
       disableDelete: false
     };
@@ -194,6 +194,7 @@ export default {
             this.disableDelete = true
           }
           this.showProgress = false;
+          this.ifReady = true;
         })
         .catch((error) => {
           if (error.response.status == 401) {

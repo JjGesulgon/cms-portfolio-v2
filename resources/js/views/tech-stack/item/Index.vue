@@ -146,7 +146,7 @@ export default {
 
       showButtons: true,
       hasContent: false,
-      ifReady: true,
+      ifReady: false,
       showSearch: true,
     };
   },
@@ -207,6 +207,7 @@ export default {
           this.data = res.data;
           this.data.data = res.data.data;
           this.showProgress = false;
+          this.ifReady = true;
         })
         .catch((error) => {
           if (error.response.status == 401) {

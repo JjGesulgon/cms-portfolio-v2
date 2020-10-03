@@ -95,7 +95,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="intro_image" class="ideal-font font-weight-bold"
-                      >Intro_imageduction Image</label
+                      >Introduction Image</label
                     >
                     <input
                       id="intro_image"
@@ -110,7 +110,7 @@
                     <label
                       for="screen_image"
                       class="ideal-font font-weight-bold"
-                      >Screen_image Image</label
+                      >Screen Image</label
                     >
                     <input
                       id="screen_image"
@@ -121,16 +121,20 @@
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <label for="date_deployed" class="ideal-font font-weight-bold"
-                    >Date Deployed / Released</label
-                  >
-                  <datepicker
-                    v-model="date_deployed"
-                    input-class="vue-datepicker"
-                    :bootstrap-styling="true"
-                    placeholder="Select Due Date"
-                    required
-                  ></datepicker>
+                  <div class="form-group">
+                    <label
+                      for="screen_image"
+                      class="ideal-font font-weight-bold"
+                      >Sample Page Images</label
+                    >
+                    <input
+                      id="sample_page_images"
+                      type="file"
+                      class="form-control-file"
+                      multiple
+                      @change="onFileSelected"
+                    />
+                  </div>
                 </div>
               </div>
               <br />
@@ -224,7 +228,7 @@
               </div>
               <br />
               <div class="row">
-                <div class="col-lg-4">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label
                       for="github_repository"
@@ -243,7 +247,7 @@
                     />
                   </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label for="live" class="ideal-font font-weight-bold"
                       >Live</label
@@ -260,9 +264,30 @@
                     />
                   </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-md-4">
                   <div class="form-group">
-                    <label for="reason_if_unavailable" class="ideal-font font-weight-bold"
+                    <label
+                      for="date_deployed"
+                      class="ideal-font font-weight-bold"
+                      >Date Deployed / Released</label
+                    >
+                    <datepicker
+                      v-model="date_deployed"
+                      input-class="vue-datepicker"
+                      :bootstrap-styling="true"
+                      placeholder="Select Due Date"
+                      required
+                    ></datepicker>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label
+                      for="reason_if_unavailable"
+                      class="ideal-font font-weight-bold"
                       >Reason If Unavailable</label
                     >
                     <input
@@ -312,6 +337,7 @@ export default {
       github_repository: "",
       live: "",
       reason_if_unavailable: "",
+      sample_page_images: [],
 
       showButtons: false,
       showSearch: false,
@@ -331,16 +357,36 @@ export default {
           formData.append("screen_image", this.screen_image);
         }
 
+        if (this.sample_page_images.length > 1) {
+          for (let file in this.sample_page_images) {
+            formData.append(
+              "image[]",
+              this.sample_page_images[file]
+            );
+          }
+        } else {
+          formData.append("image[]", this.sample_page_images[0]);
+        }
+
         formData.append("name", this.name);
         formData.append("role", this.role);
         formData.append("type", this.type);
-        formData.append("date_deployed", moment(this.date_deployed).format('YYYY-MM-DD'));
+        formData.append(
+          "date_deployed",
+          moment(this.date_deployed).format("YYYY-MM-DD")
+        );
         formData.append("github_repository", this.github_repository);
         formData.append("live", this.live);
         formData.append("reason_if_unavailable", this.reason_if_unavailable);
-        formData.append("development_description", tinyMCE.get('development_description').getContent());
-        formData.append("concept_description", tinyMCE.get('concept_description').getContent());
-        formData.append("overview", tinymce.get('overview').getContent());
+        formData.append(
+          "development_description",
+          tinyMCE.get("development_description").getContent()
+        );
+        formData.append(
+          "concept_description",
+          tinyMCE.get("concept_description").getContent()
+        );
+        formData.append("overview", tinymce.get("overview").getContent());
 
         return formData;
       } else {
@@ -353,12 +399,22 @@ export default {
     },
 
     onFileSelected(event) {
-      if (event.target.id == "intro_image") {
-        this.intro_image = event.target.files[0];
-        console.log(this.intro_image);
-      } else if (event.target.id == "screen_image") {
-        this.screen_image = event.target.files[0];
-        console.log(this.screen_image);
+      switch(event.target.id){
+        case "intro_image":
+          this.intro_image = event.target.files[0];
+          break;
+        case "screen_image":
+          this.screen_image = event.target.files[0];
+          break;
+        case "sample_page_images":
+          if (event.target.files.length > 1) {
+            for (let file in event.target.files) {
+              this.sample_page_images.push(event.target.files[file]);
+            }
+          } else {
+            this.sample_page_images.push(event.target.files[0]);
+          }
+          break;
       }
     },
   },

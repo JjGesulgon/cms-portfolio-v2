@@ -29,6 +29,7 @@
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
+              v-if="ifReady"
             >
               {{ user.name }}
               <span class="caret"></span>
@@ -50,6 +51,7 @@ export default {
   data() {
     return {
       user: "",
+      ifReady: false
     };
   },
 
@@ -57,6 +59,7 @@ export default {
     axios.get("/api/auth/user").then((res) => {
       this.user = res.data.user;
       localStorage.setItem("user", JSON.stringify(res.data.user));
+      this.ifReady = true;
     });
   },
 

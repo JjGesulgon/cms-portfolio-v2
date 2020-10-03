@@ -83,9 +83,14 @@ export default {
 
   methods: {
     openDeleteModalTable() {
-      if(this.disableDelete){
+      var user = JSON.parse(localStorage.getItem("user"))
+      if(user.email == this.object.email){
         $("#not-delete-modal-table").modal("show");
-      }else
+      }
+      else if(this.disableDelete){
+        $("#not-delete-modal-table").modal("show");
+      }
+      else
       $("#delete-modal-table").modal("show");
     },
   },
