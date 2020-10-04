@@ -131,8 +131,8 @@ trait Imaging
                   $model->screen_image = $imageName;
                   break;
               default:
-                  $image        = request()->image;
-                  $model->image = $imageName;
+                  $image        = $model->image;
+                  $model->image = $imageName;  
             }
 
             if ($sizes != null && is_array($sizes)) {

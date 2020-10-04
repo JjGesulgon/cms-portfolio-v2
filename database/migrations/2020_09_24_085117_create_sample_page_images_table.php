@@ -21,8 +21,8 @@ class CreateSamplePageImagesTable extends Migration
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->bigInteger('projects_id')->unsigned();
-            $table->foreign('projects_id')
+            $table->bigInteger('project_id')->unsigned();
+            $table->foreign('project_id')
                 ->references('id')
                 ->on('projects')
                 ->onDelete('cascade')

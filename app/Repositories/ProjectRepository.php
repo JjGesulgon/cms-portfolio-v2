@@ -18,7 +18,7 @@ class ProjectRepository extends Repository
     }
 
     /**
-      * Get the tech stack item
+      * Get the Projects
       *
       * @return array json object
       */

@@ -77,6 +77,6 @@ class Project extends Model
      */
     public function samplePageImages()
     {
-        return $this->hasMany(SamplePageImages::class);
+        return $this->hasMany(SamplePageImage::class);
     }
 }

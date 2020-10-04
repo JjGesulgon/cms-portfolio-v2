@@ -359,10 +359,7 @@ export default {
 
         if (this.sample_page_images.length > 1) {
           for (let file in this.sample_page_images) {
-            formData.append(
-              "image[]",
-              this.sample_page_images[file]
-            );
+              formData.append("image[]", this.sample_page_images[file]);
           }
         } else {
           formData.append("image[]", this.sample_page_images[0]);

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\Imaging;
 
-class SamplePageImages extends Model
+class SamplePageImage extends Model
 {
     use SoftDeletes, Filtering, Imaging;
 

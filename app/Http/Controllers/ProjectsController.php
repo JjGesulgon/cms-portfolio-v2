@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Repositories\ProjectRepository;
 use App\Http\Resources\ProjectResource;
+use App\SamplePageImage;
 
 class ProjectsController extends Controller
 {
@@ -18,7 +19,7 @@ class ProjectsController extends Controller
   protected $project;
 
   /**
-   * Create new instance of about controller.
+   * Create new instance of project controller.
    *
    * @param ProjectRepository project Project repository
    */
@@ -78,10 +79,20 @@ class ProjectsController extends Controller
       ], 400);
     }
 
-    if (! $this->project->store($request)) {
+    $proj = $this->project->store($request);
+
+    if (! $proj) {
       return response()->json([
           'message' => 'Failed to store resource'
       ], 500);
+    }
+
+    if( $request->image ){
+        if(sizeof($request->image) > 0){
+            for ($ctr = 0; $ctr < count($request->image); $ctr++) {
+                $proj->samplePageImages()->save(new SamplePageImage(array('image' => array_values($request->image)[$ctr])));
+            }
+        }
     }
 
     return response()->json([
