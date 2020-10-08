@@ -132,8 +132,8 @@ class ProjectsController extends Controller
     $validator = Validator::make($request->all(), [
       'name'                      => 'required',
       'type'                      => 'required',
-      'intro_image'               => 'required|max:2000',
-      'screen_image'              => 'required|max:2000',
+      'intro_image'               => 'max:2000',
+      'screen_image'              => 'max:2000',
       'role'                      => 'required',
       'date_deployed'             => 'required|date',
       'overview'                  => 'required',
