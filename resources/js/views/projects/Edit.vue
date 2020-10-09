@@ -99,7 +99,7 @@
                     >
                     <img
                       v-if="showcurrentIntro"
-                      class="img-fluid img-thumbnail "
+                      class="img-fluid img-thumbnail"
                       :src="'/storage/images/' + currentIntroImage"
                       alt="Image"
                     />
@@ -120,7 +120,7 @@
                     >
                     <img
                       v-if="showcurrentScreen"
-                      class="img-fluid img-thumbnail "
+                      class="img-fluid img-thumbnail"
                       :src="'/storage/images/' + currentScreenImage"
                       alt="Image"
                     />
@@ -130,6 +130,73 @@
                       class="form-control-file"
                       @change="onFileSelected"
                     />
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label
+                        for="sample_page_images"
+                        class="ideal-font font-weight-bold"
+                        >Sample Page Images</label
+                      >
+                    </div>
+                    <div class="col-md-6">
+                      <router-link
+                        class="btn btn-secondary btn-sm float-right"
+                        :to="{ name: `${routePrefixName}.edit`, params: { id: moduleID }}"
+                      >
+                        <i class="fas fa-edit"></i>
+                        &nbsp; Edit Sample Page Images
+                      </router-link>
+                    </div>
+                  </div>
+                  <div
+                    id="carouselExampleControls"
+                    class="carousel slide"
+                    data-ride="carousel"
+                  >
+                    <div class="carousel-inner">
+                      <div
+                        class="carousel-item"
+                        v-for="images in sample_page_images"
+                        :key="images.id"
+                        :class="{ active: images == sample_page_images[0] }"
+                      >
+                        <img
+                          class="d-block w-100"
+                          :src="'/storage/images/' + images.image"
+                          alt="Image"
+                        />
+                      </div>
+                    </div>
+                    <a
+                      class="carousel-control-prev"
+                      href="#carouselExampleControls"
+                      role="button"
+                      data-slide="prev"
+                    >
+                      <span
+                        class="carousel-control-prev-icon"
+                        aria-hidden="true"
+                      ></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a
+                      class="carousel-control-next"
+                      href="#carouselExampleControls"
+                      role="button"
+                      data-slide="next"
+                    >
+                      <span
+                        class="carousel-control-next-icon"
+                        aria-hidden="true"
+                      ></span>
+                      <span class="sr-only">Next</span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -327,6 +394,7 @@ export default {
       type: "",
       currentIntroImage: null,
       currentScreenImage: null,
+      sample_page_images: [],
       intro_image: null,
       screen_image: null,
       date_deployed: "",
@@ -361,7 +429,7 @@ export default {
           this.role = res.data.project.role
           this.currentIntroImage = res.data.project.intro_image
           this.currentScreenImage = res.data.project.screen_image
-          this.type= res.data.project.type
+          this.type = res.data.project.type
           this.date_deployed = res.data.project.date_deployed
           this.development_description = res.data.project.development_description
           this.concept_description = res.data.project.concept_description
@@ -369,8 +437,8 @@ export default {
           this.github_repository = res.data.project.github_repository
           this.live = res.data.project.live
           this.reason_if_unavailable = res.data.project.reason_if_unavailable
-
-          , resolve();
+          this.sample_page_images = res.data.project.sample_page_images,
+            resolve();
         })
         .catch((err) => {
           reject();
@@ -383,12 +451,13 @@ export default {
   },
 
   watch: {
-    intro_image: function (){
-      this.showcurrentIntro = this.intro_image != null ? this.showcurrentIntro = false : this.showcurrentIntro = true
+    intro_image: function () {
+      this.showcurrentIntro =
+        this.intro_image != null ? (this.showcurrentIntro = false) : (this.showcurrentIntro = true);
     },
 
-    screen_image: function (){
-      this.showcurrentScreen = this.screen_image != null ? this.showcurrentScreen = false : this.showcurrentScreen = true
+    screen_image: function () {
+      this.showcurrentScreen = this.screen_image != null ? (this.showcurrentScreen = false) : (this.showcurrentScreen = true);
     },
   },
 
@@ -407,21 +476,12 @@ export default {
         formData.append("name", this.name);
         formData.append("role", this.role);
         formData.append("type", this.type);
-        formData.append(
-          "date_deployed",
-          moment(this.date_deployed).format("YYYY-MM-DD")
-        );
+        formData.append("date_deployed", moment(this.date_deployed).format("YYYY-MM-DD"));
         formData.append("github_repository", this.github_repository);
         formData.append("live", this.live);
         formData.append("reason_if_unavailable", this.reason_if_unavailable);
-        formData.append(
-          "development_description",
-          tinyMCE.get("development_description").getContent()
-        );
-        formData.append(
-          "concept_description",
-          tinyMCE.get("concept_description").getContent()
-        );
+        formData.append("development_description", tinyMCE.get("development_description").getContent());
+        formData.append("concept_description", tinyMCE.get("concept_description").getContent());
         formData.append("overview", tinymce.get("overview").getContent());
 
         return formData;
@@ -437,10 +497,11 @@ export default {
     onFileSelected(event) {
       switch (event.target.id) {
         case "intro_image":
-          this.intro_image = event.target.value.length == 0 ? this.intro_image = null : this.intro_image = event.target.files[0]
+          this.intro_image =
+            event.target.value.length == 0 ? (this.intro_image = null) : (this.intro_image = event.target.files[0]);
           break;
         case "screen_image":
-          this.screen_image = event.target.value.length == 0 ? this.screen_image = null : this.screen_image = event.target.files[0]
+          this.screen_image = event.target.value.length == 0 ? (this.screen_image = null) : (this.screen_image = event.target.files[0]);
           break;
       }
     },

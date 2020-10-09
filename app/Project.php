@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\FilterRelationships;
 use App\Traits\Filtering;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,7 +11,7 @@ use Illuminate\Support\Str;
 
 class Project extends Model
 {
-    use SoftDeletes, Filtering, Imaging;
+    use SoftDeletes, Filtering, Imaging, FilterRelationships;
 
     /**
      * Projects table.

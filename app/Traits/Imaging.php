@@ -150,15 +150,16 @@ trait Imaging
                 }
             }
             
+            $image = Image::make($image);
+            
             if($isResize){
-              Image::make($image)->resize(
+              $image = Image::make($image)->resize(
                 $resolutions[$defaultResolution]['width'],
                 $resolutions[$defaultResolution]['height']
               );
             }
             
-            Image::make($image)
-            ->encode('jpg', $compressionRate)->save(
+            $image->encode('jpg', $compressionRate)->save(
                 storage_path('app/public/' . $storagePath . '/' . $imageName),
                 $compressionRate
             );
@@ -192,11 +193,11 @@ trait Imaging
      * @param  Illuminate\Database\Eloquent\Model $model
      * @return void
      */
-    public static function updateImage($model, $fieldName = null)
+    public static function updateImage($model, $fieldName = null, $isResize = false)
     {
       if (request()->hasFile('image') || request()->hasFile('picture') || request()->hasFile('photo') || request()->hasFile('intro_image') || request()->hasFile('screen_image')) {
             self::deleteImage($model->findorFail($model->id));
-            self::storeImage($model, $fieldName);
+            self::storeImage($model, $fieldName, $isResize);
         }
     }
 }

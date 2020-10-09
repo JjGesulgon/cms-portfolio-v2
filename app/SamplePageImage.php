@@ -38,7 +38,7 @@ class SamplePageImage extends Model
   
           static::creating(function ($model) {
               $model->user_id = auth('api')->user()->id;
-              static::storeImage($model);
+              static::storeImage($model, null, true);
           });
   
           static::updating(function ($model) {
