@@ -163,7 +163,6 @@ export default {
         $("#not-delete-modal-table").modal("show");
       } else $("#delete-modal-table").modal("show");
       this.$parent.selectedItem = this.object
-      console.log(this.$parent.selectedItem)
     },
 
      deleteItem() {
