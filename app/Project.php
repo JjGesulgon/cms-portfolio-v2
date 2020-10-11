@@ -80,4 +80,14 @@ class Project extends Model
     {
         return $this->hasMany(SamplePageImage::class);
     }
+
+    /**
+     * A Project has many TechUsed
+     *
+     * @return array object
+     */
+    public function techUsed()
+    {
+        return $this->hasMany(TechUsed::class);
+    }
 }

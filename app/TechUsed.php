@@ -2,20 +2,21 @@
 
 namespace App;
 
+use App\Traits\FilterRelationships;
 use App\Traits\Filtering;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TechStackItem extends Model
+class TechUsed extends Model
 {
-    use SoftDeletes, Filtering;
+    use SoftDeletes, Filtering, FilterRelationships;
 
     /**
-     * TechStackItem table.
+     * TechUsed table.
      *
      * @var string
      */
-    protected $table = 'tech_stack_items';
+    protected $table = 'tech_used';
 
     /**
      * The attributes that are mass assignable.
@@ -23,8 +24,9 @@ class TechStackItem extends Model
      * @var array
      */
     protected $fillable = [
-      'user_id', 'name', 'experience', 'proficiency'
+      'user_id', 'project_id', "tech_stack_item_id"
     ];
+
 
     /**
        * Run functions on boot.
@@ -34,18 +36,18 @@ class TechStackItem extends Model
     public static function boot()
     {
         parent::boot();
-  
+    
         static::creating(function ($model) {
             $model->user_id = auth('api')->user()->id;
         });
-  
+    
         static::updating(function ($model) {
             $model->user_id = auth('api')->user()->id;
         });
     }
-  
+
     /**
-     * The techStackItem belongs to a user.
+     * A TechUsed belongs to a user.
      *
      * @return object
      */
@@ -55,12 +57,22 @@ class TechStackItem extends Model
     }
 
     /**
-     * The techStackItem has one techUsed
+     * A TechUsed belongs to a Project.
      *
-     * @return array object
+     * @return object
      */
     public function techUsed()
     {
-        return $this->hasOne(TechUsed::class);
+        return $this->belongsTo(Project::class);
+    }
+
+    /**
+     * A TechUsed belongs to a TechStackItem.
+     *
+     * @return object
+     */
+    public function techStackItem()
+    {
+        return $this->belongsTo(TechStackItem::class);
     }
 }

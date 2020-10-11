@@ -22,7 +22,7 @@ class TechStackItemRepository extends Repository
       *
       * @return array json object
       */
-    public function getTechStackItem()
+    public function getTechStackItems()
     {
         return $this->model->all();
     }

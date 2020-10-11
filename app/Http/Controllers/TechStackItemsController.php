@@ -150,4 +150,24 @@ class TechStackItemsController extends Controller
       'message' => 'Resource successfully deleted'
     ], 200);
   }
+
+  /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getList()
+    {
+        if (! $techStackItem = $this->techStackItem->getTechStackItems()) {
+            return response()->json([
+                'message' => 'Resource does not exist'
+            ], 400);
+        }
+
+        return response()->json([
+            'message' => 'Resource successfully retrieve',
+            'techStackItems' => $techStackItem
+        ], 200);
+    }
 }

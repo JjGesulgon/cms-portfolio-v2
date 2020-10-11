@@ -144,6 +144,7 @@ export default {
       showProgress: false,
       pageNumbers: [],
 
+      selectedItem: null,
       showButtons: true,
       hasContent: false,
       ifReady: false,

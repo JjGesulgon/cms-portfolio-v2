@@ -43,7 +43,7 @@ class SamplePageImage extends Model
   
           static::updating(function ($model) {
               $model->user_id = auth('api')->user()->id;
-              static::updateImage($model);
+              static::updateImage($model, null, true);
           });
 
           static::deleting(function ($model) {

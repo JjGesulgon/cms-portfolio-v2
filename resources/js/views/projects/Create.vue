@@ -102,6 +102,7 @@
                       type="file"
                       class="form-control-file"
                       @change="onFileSelected"
+                      required
                     />
                   </div>
                 </div>
@@ -117,13 +118,14 @@
                       type="file"
                       class="form-control-file"
                       @change="onFileSelected"
+                      required
                     />
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label
-                      for="screen_image"
+                      for="sample_page_images"
                       class="ideal-font font-weight-bold"
                       >Sample Page Images</label
                     >
@@ -133,10 +135,31 @@
                       class="form-control-file"
                       multiple
                       @change="onFileSelected"
+                      required
                     />
                   </div>
                 </div>
               </div>
+              <br />
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="tech_used" class="ideal-font font-weight-bold"
+                    >Technology Used</label
+                  >
+                  <multiselect
+                    id="tech_used"
+                    v-model="techUsed"
+                    tag-placeholder="Add this"
+                    placeholder="Select the frameworks or languages used in this project"
+                    label="name"
+                    track-by="name"
+                    :options="techStackItems"
+                    :multiple="true"
+                    :taggable="true"
+                  ></multiselect>
+                </div>
+              </div>
+
               <br />
               <div class="row">
                 <div class="col-md-6">
@@ -315,7 +338,7 @@ export default {
   data() {
     return {
       createbuttonShow: false,
-      ifReady: true,
+      ifReady: false,
       action: "Create New",
       title: "Create New Project",
       singularName: "Project",
@@ -338,7 +361,9 @@ export default {
       live: "",
       reason_if_unavailable: "",
       sample_page_images: [],
+      techUsed: [],
 
+      techStackItems: null,
       showButtons: false,
       showSearch: false,
       showBack: true,
@@ -346,6 +371,26 @@ export default {
       tinyMCEReady: false,
     };
   },
+
+  mounted() {
+    let promise = new Promise((resolve, reject) => {
+      axios
+        .get(`/api/tech-stack-item/getAll`)
+        .then((res) => {
+          this.techStackItems = res.data.techStackItems;
+          this.ifReady = true;
+          resolve();
+        })
+        .catch((err) => {
+          reject();
+        });
+    });
+
+    promise.then(() => {
+      this.ifReady = true;
+    });
+  },
+
   methods: {
     getFieldColumns() {
       if (this.tinyMCEReady) {
@@ -359,11 +404,20 @@ export default {
 
         if (this.sample_page_images.length > 1) {
           for (let file in this.sample_page_images) {
-              formData.append("image[]", this.sample_page_images[file]);
+            formData.append("image[]", this.sample_page_images[file]);
           }
         } else {
           formData.append("image[]", this.sample_page_images[0]);
         }
+
+
+        if (this.techUsed.length > 1) {
+          for (let file in this.techUsed) {
+            formData.append("tech_used[]", this.techUsed[file].id);
+          }
+        } else if (this.techUsed.length == 1) {
+          formData.append("tech_used[]", this.techUsed[0].id);
+        }        
 
         formData.append("name", this.name);
         formData.append("role", this.role);
@@ -396,7 +450,7 @@ export default {
     },
 
     onFileSelected(event) {
-      switch(event.target.id){
+      switch (event.target.id) {
         case "intro_image":
           this.intro_image = event.target.files[0];
           break;

@@ -36,7 +36,9 @@ class ProjectRepository extends Repository
     public function findOrFail($id)
     {
         return $this->project->with(
-            'samplePageImages'
+            'samplePageImages',
+            'techUsed',
+            'techUsed.techStackItem'
         )->findOrFail($id);
     }
 

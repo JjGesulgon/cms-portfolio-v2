@@ -74,7 +74,7 @@ class User extends Authenticatable
      */
     public function techStackItems()
     {
-        return $this->hasMany(TechStackItems::class);
+        return $this->hasMany(TechStackItem::class);
     }
 
         /**
@@ -115,5 +115,15 @@ class User extends Authenticatable
     public function samplePageImages()
     {
         return $this->hasMany(SamplePageImages::class);
+    }
+
+    /**
+     * The user has many TechUsed
+     *
+     * @return array object
+     */
+    public function TechUsed()
+    {
+        return $this->hasMany(TechUsed::class);
     }
 }

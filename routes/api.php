@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     ]);
 
     // Tech Stack Item
+    Route::get('/tech-stack-item/getAll', 'TechStackItemsController@getList');
     Route::resource('tech-stack-item', 'TechStackItemsController', [
       'only' => [
           'index', 'store', 'show', 'update', 'destroy'

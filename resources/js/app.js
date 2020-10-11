@@ -31,6 +31,7 @@ import store from './store';
 import VueSelect from 'vue-select';
 import DatePicker from 'vuejs-datepicker';
 import Editor from '@tinymce/tinymce-vue'
+import Multiselect from 'vue-multiselect'
 
 // Component to Component Broadcasting
 window.Broadcast = new Vue();
@@ -53,10 +54,12 @@ Vue.component('pagination', require('./components/Pagination.vue'));
 Vue.component('search-modal', require('./components/SearchModal.vue'));
 Vue.component('data-table', require('./components/DataTable.vue'));
 Vue.component('data-table-row-action', require('./components/DataTableRowAction.vue'));
-Vue.component('delete-modal', require('./components/DeleteModal.vue'));
 
 // Tiny MCE
 Vue.component('Editor', require('@tinymce/tinymce-vue').default);
+
+// vue-multiselect
+Vue.component('multiselect', Multiselect)
 
 const app = new Vue({
     el: '#app',
