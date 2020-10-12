@@ -29,7 +29,9 @@
                 <div class="col-lg-4">
                   <div class="form-group">
                     <label for="name" class="ideal-font font-weight-bold"
-                      >Name</label
+                      >Name
+                      <small class="text-danger">* Required</small>
+                      </label
                     >
                     <input
                       id="name"
@@ -46,7 +48,9 @@
                 <div class="col-lg-4">
                   <div class="form-group">
                     <label for="role" class="ideal-font font-weight-bold"
-                      >Role</label
+                      >Role
+                      <small class="text-danger">* Required</small>
+                      </label
                     >
                     <input
                       id="role"
@@ -63,7 +67,9 @@
                 <div class="col-lg-4">
                   <div class="form-group">
                     <label for="type" class="ideal-font font-weight-bold"
-                      >Type</label
+                      >Type
+                      <small class="text-danger">* Required</small>
+                      </label
                     >
                     <div class="row">
                       <div class="col-md-4">
@@ -354,10 +360,13 @@
                     <label
                       for="date_deployed"
                       class="ideal-font font-weight-bold"
-                      >Date Deployed / Released</label
+                      >Date Deployed / Released
+                      <small class="text-danger">* Required</small>
+                      </label
                     >
                     <datepicker
                       v-model="$data.date_deployed"
+                      class="ideal-font"
                       input-class="vue-datepicker"
                       :bootstrap-styling="true"
                       placeholder="Select Due Date"
