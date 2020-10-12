@@ -92,6 +92,25 @@
               </div>
               <br />
               <div class="row">
+                <div class="col-md-12">
+                  <label for="tech_used" class="ideal-font font-weight-bold"
+                    >Technology Used</label
+                  >
+                  <multiselect
+                    id="tech_used"
+                    v-model="$data.techUsed"
+                    tag-placeholder="Add this"
+                    placeholder="Select the frameworks or languages used in this project"
+                    label="name"
+                    track-by="name"
+                    :options="techStackItems"
+                    :multiple="true"
+                    :taggable="true"
+                  ></multiselect>
+                </div>
+              </div>
+              <br />
+              <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="intro_image" class="ideal-font font-weight-bold"
@@ -133,7 +152,7 @@
                   </div>
                 </div>
               </div>
-              <br>
+              <br />
               <div class="row">
                 <div class="col-md-12">
                   <div class="row">
@@ -147,7 +166,10 @@
                     <div class="col-md-6">
                       <router-link
                         class="btn btn-secondary btn-sm float-right"
-                        :to="{ name: `${routePrefixName}.edit`, params: { id: moduleID }}"
+                        :to="{
+                          name: `${routePrefixName}.edit`,
+                          params: { id: moduleID },
+                        }"
                       >
                         <i class="fas fa-edit"></i>
                         &nbsp; Edit Sample Page Images
@@ -404,7 +426,9 @@ export default {
       github_repository: "",
       live: "",
       reason_if_unavailable: "",
+      techUsed: [],
 
+      techStackItems: [],
       showcurrentIntro: true,
       showcurrentScreen: true,
 
@@ -423,22 +447,37 @@ export default {
       axios
         .get(`${this.apiPath}/${this.$route.params.id}`)
         .then((res) => {
-          this.moduleID = res.data.project.id
-          this.body = res.data.project.body
-          this.name = res.data.project.name
-          this.role = res.data.project.role
-          this.currentIntroImage = res.data.project.intro_image
-          this.currentScreenImage = res.data.project.screen_image
-          this.type = res.data.project.type
-          this.date_deployed = res.data.project.date_deployed
-          this.development_description = res.data.project.development_description
-          this.concept_description = res.data.project.concept_description
-          this.overview = res.data.project.overview
-          this.github_repository = res.data.project.github_repository
-          this.live = res.data.project.live
-          this.reason_if_unavailable = res.data.project.reason_if_unavailable
-          this.sample_page_images = res.data.project.sample_page_images,
-            resolve();
+          this.moduleID = res.data.project.id;
+          this.body = res.data.project.body;
+          this.name = res.data.project.name;
+          this.role = res.data.project.role;
+          this.currentIntroImage = res.data.project.intro_image;
+          this.currentScreenImage = res.data.project.screen_image;
+          this.type = res.data.project.type;
+          this.date_deployed = res.data.project.date_deployed;
+          this.development_description = res.data.project.development_description;
+          this.concept_description = res.data.project.concept_description;
+          this.overview = res.data.project.overview;
+          this.github_repository = res.data.project.github_repository;
+          this.live = res.data.project.live;
+          this.reason_if_unavailable = res.data.project.reason_if_unavailable;
+          this.sample_page_images = res.data.project.sample_page_images;
+
+          var usedTech = res.data.project.tech_used;
+          
+          for (let item of usedTech) {
+            this.techUsed.push(item.tech_stack_item);
+          }
+
+          axios
+            .get(`/api/tech-stack-item/getAll`)
+            .then((res) => {
+              this.techStackItems = res.data.techStackItems;
+            })
+            .catch((err) => {
+              console.log(err)
+            });
+          resolve();
         })
         .catch((err) => {
           reject();
@@ -453,11 +492,16 @@ export default {
   watch: {
     intro_image: function () {
       this.showcurrentIntro =
-        this.intro_image != null ? (this.showcurrentIntro = false) : (this.showcurrentIntro = true);
+        this.intro_image != null
+          ? (this.showcurrentIntro = false)
+          : (this.showcurrentIntro = true);
     },
 
     screen_image: function () {
-      this.showcurrentScreen = this.screen_image != null ? (this.showcurrentScreen = false) : (this.showcurrentScreen = true);
+      this.showcurrentScreen =
+        this.screen_image != null
+          ? (this.showcurrentScreen = false)
+          : (this.showcurrentScreen = true);
     },
   },
 
@@ -471,6 +515,14 @@ export default {
         }
         if (this.screen_image != null) {
           formData.append("screen_image", this.screen_image);
+        }
+
+        if (this.techUsed.length > 1) {
+          for (let file in this.techUsed) {
+            formData.append("tech_used[]", this.techUsed[file].id);
+          }
+        } else if (this.techUsed.length == 1) {
+          formData.append("tech_used[]", this.techUsed[0].id);
         }
 
         formData.append("name", this.name);
@@ -498,10 +550,15 @@ export default {
       switch (event.target.id) {
         case "intro_image":
           this.intro_image =
-            event.target.value.length == 0 ? (this.intro_image = null) : (this.intro_image = event.target.files[0]);
+            event.target.value.length == 0
+              ? (this.intro_image = null)
+              : (this.intro_image = event.target.files[0]);
           break;
         case "screen_image":
-          this.screen_image = event.target.value.length == 0 ? (this.screen_image = null) : (this.screen_image = event.target.files[0]);
+          this.screen_image =
+            event.target.value.length == 0
+              ? (this.screen_image = null)
+              : (this.screen_image = event.target.files[0]);
           break;
       }
     },

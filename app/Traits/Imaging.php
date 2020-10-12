@@ -110,60 +110,66 @@ trait Imaging
      */
     public static function storeImage($model, $fieldName = null, $isResize = false, $sizes = null)
     {
-        if (request()->hasFile('image') || request()->hasFile('picture') || request()->hasFile('photo') || request()->hasFile('intro_image') || request()->hasFile('screen_image')) {
+        self::createDirectory();
 
-            self::createDirectory();
+        $storagePath       = self::storagePath();
+        $resolutions       = self::resolutions();
+        $defaultResolution = self::defaultResolution();
+        $compressionRate   = self::compressionRate();
 
-            $storagePath       = self::storagePath();
-            $resolutions       = self::resolutions();
-            $defaultResolution = self::defaultResolution();
-            $compressionRate   = self::compressionRate();
+        $imageName    = uniqid() . '.jpg';
 
-            $imageName    = uniqid() . '.jpg';
-
-            switch ($fieldName) {
+        switch ($fieldName) {
               case "intro_image":
-                  $image        = request()->intro_image;
+                  if (!request()->hasFile('intro_image')) {
+                      return ;
+                  }
+                  $image = request()->intro_image;
                   $model->intro_image = $imageName;
                   break;
               case "screen_image":
-                  $image        = request()->screen_image;
+                  if (!request()->hasFile('screen_image')) {
+                      return ;
+                  }
+                  $image = request()->screen_image;
                   $model->screen_image = $imageName;
                   break;
               default:
-                  $image        = $model->image;
-                  $model->image = $imageName;  
+                  if (!request()->hasFile('image')) {
+                      return ;
+                  }
+                  $image = $model->image;
+                  $model->image = $imageName;
             }
 
-            if ($sizes != null && is_array($sizes)) {
-                foreach ($sizes as $size) {
-                    foreach ($resolutions as $key => $value) {
-                        if ($defaultResolution != $size && $key == $size) {
-                            Image::make($image)->resize($value['width'], $value['height'])
+        if ($sizes != null && is_array($sizes)) {
+            foreach ($sizes as $size) {
+                foreach ($resolutions as $key => $value) {
+                    if ($defaultResolution != $size && $key == $size) {
+                        Image::make($image)->resize($value['width'], $value['height'])
                             ->encode('jpg', $compressionRate)
                             ->save(
                                 storage_path('app/public/' . $storagePath . '/' . $value['width'] . '-' . $value['height'] . '-' . $imageName),
                                 $compressionRate
                             );
-                        }
                     }
                 }
             }
+        }
             
-            $image = Image::make($image);
+        $image = Image::make($image);
             
-            if($isResize){
-              $image = Image::make($image)->resize(
+        if ($isResize) {
+            $image = Image::make($image)->resize(
                 $resolutions[$defaultResolution]['width'],
                 $resolutions[$defaultResolution]['height']
-              );
-            }
-            
-            $image->encode('jpg', $compressionRate)->save(
-                storage_path('app/public/' . $storagePath . '/' . $imageName),
-                $compressionRate
             );
         }
+            
+        $image->encode('jpg', $compressionRate)->save(
+            storage_path('app/public/' . $storagePath . '/' . $imageName),
+            $compressionRate
+        );
     }
 
     /**
@@ -174,7 +180,7 @@ trait Imaging
      */
     public static function deleteImage($model)
     {
-      if (request()->hasFile('image') || request()->hasFile('picture') || request()->hasFile('photo') || request()->hasFile('intro_image') || request()->hasFile('screen_image')) {
+        if (request()->hasFile('image') || request()->hasFile('picture') || request()->hasFile('photo') || request()->hasFile('intro_image') || request()->hasFile('screen_image')) {
             $storagePath = self::storagePath();
             $resolutions = self::resolutions();
 
@@ -195,7 +201,7 @@ trait Imaging
      */
     public static function updateImage($model, $fieldName = null, $isResize = false)
     {
-      if (request()->hasFile('image') || request()->hasFile('picture') || request()->hasFile('photo') || request()->hasFile('intro_image') || request()->hasFile('screen_image')) {
+        if (request()->hasFile('image') || request()->hasFile('picture') || request()->hasFile('photo') || request()->hasFile('intro_image') || request()->hasFile('screen_image')) {
             self::deleteImage($model->findorFail($model->id));
             self::storeImage($model, $fieldName, $isResize);
         }

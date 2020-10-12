@@ -102,7 +102,7 @@
                       type="file"
                       class="form-control-file"
                       @change="onFileSelected"
-                      required
+                      
                     />
                   </div>
                 </div>
@@ -118,7 +118,6 @@
                       type="file"
                       class="form-control-file"
                       @change="onFileSelected"
-                      required
                     />
                   </div>
                 </div>
@@ -135,7 +134,6 @@
                       class="form-control-file"
                       multiple
                       @change="onFileSelected"
-                      required
                     />
                   </div>
                 </div>
@@ -159,7 +157,6 @@
                   ></multiselect>
                 </div>
               </div>
-
               <br />
               <div class="row">
                 <div class="col-md-6">
@@ -410,7 +407,7 @@ export default {
           formData.append("image[]", this.sample_page_images[0]);
         }
 
-
+        
         if (this.techUsed.length > 1) {
           for (let file in this.techUsed) {
             formData.append("tech_used[]", this.techUsed[file].id);

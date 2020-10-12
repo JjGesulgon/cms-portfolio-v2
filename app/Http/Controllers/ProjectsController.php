@@ -108,7 +108,7 @@ class ProjectsController extends Controller
               }
           }
       }
-  }
+    }
 
     return response()->json([
       'message' => 'Resource successfully stored'
@@ -147,11 +147,11 @@ class ProjectsController extends Controller
     $validator = Validator::make($request->all(), [
       'name'                      => 'required',
       'type'                      => 'required',
-      'intro_image'               => 'required|max:2000',
-      'screen_image'              => 'required|max:2000',
+      'intro_image'               => 'max:2000',
+      'screen_image'              => 'max:2000',
       'role'                      => 'required',
       'date_deployed'             => 'required',
-      'image'                     => 'required|array',
+      'image'                     => 'array',
       'tech_used'                 => 'required|array'
     ]);
 
@@ -168,6 +168,21 @@ class ProjectsController extends Controller
       ], 500);
     }
 
+    $proj = $this->project->findOrFail($id);
+    $proj->techUsed()->delete();
+
+    if ($request->tech_used) {
+        if (sizeof($request->tech_used) > 0) {
+            for ($ctr = 0; $ctr < count($request->tech_used); $ctr++) {
+                $techUsed = $proj->techUsed()->save(new TechUsed(array('tech_stack_item_id' => array_values($request->tech_used)[$ctr])));
+                if (! $techUsed) {
+                  return response()->json([
+                      'message' => 'Failed to store resource'
+                  ], 500);
+                }
+            }
+        }
+    }
     return response()->json([
       'message' => 'Resource successfully updated'
     ], 200);
