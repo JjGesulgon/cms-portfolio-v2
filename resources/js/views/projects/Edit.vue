@@ -98,7 +98,7 @@
               </div>
               <br />
               <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-8">
                   <label for="tech_used" class="ideal-font font-weight-bold"
                     >Technology Used</label
                   >
@@ -113,6 +113,25 @@
                     :multiple="true"
                     :taggable="true"
                   ></multiselect>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label
+                      for="date_deployed"
+                      class="ideal-font font-weight-bold"
+                      >Date Deployed / Released
+                      <small class="text-danger">* Required</small>
+                      </label
+                    >
+                    <datepicker
+                      v-model="$data.date_deployed"
+                      class="ideal-font"
+                      input-class="vue-datepicker"
+                      :bootstrap-styling="true"
+                      placeholder="Select Due Date"
+                      required
+                    ></datepicker>
+                  </div>
                 </div>
               </div>
               <br />
@@ -356,28 +375,6 @@
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <div class="form-group">
-                    <label
-                      for="date_deployed"
-                      class="ideal-font font-weight-bold"
-                      >Date Deployed / Released
-                      <small class="text-danger">* Required</small>
-                      </label
-                    >
-                    <datepicker
-                      v-model="$data.date_deployed"
-                      class="ideal-font"
-                      input-class="vue-datepicker"
-                      :bootstrap-styling="true"
-                      placeholder="Select Due Date"
-                      required
-                    ></datepicker>
-                  </div>
-                </div>
-              </div>
-              <br />
-              <div class="row">
-                <div class="col-md-12">
                   <div class="form-group">
                     <label
                       for="reason_if_unavailable"

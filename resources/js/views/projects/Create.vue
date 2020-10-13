@@ -31,8 +31,7 @@
                     <label for="name" class="ideal-font font-weight-bold"
                       >Name
                       <small class="text-danger">* Required</small>
-                      </label
-                    >
+                    </label>
                     <input
                       id="name"
                       type="text"
@@ -50,8 +49,7 @@
                     <label for="role" class="ideal-font font-weight-bold"
                       >Role
                       <small class="text-danger">* Required</small>
-                      </label
-                    >
+                    </label>
                     <input
                       id="role"
                       type="text"
@@ -67,10 +65,9 @@
                 <div class="col-lg-4">
                   <div class="form-group">
                     <label for="type" class="ideal-font font-weight-bold"
-                      >Type 
+                      >Type
                       <small class="text-danger">* Required</small>
-                      </label
-                    >
+                    </label>
                     <div class="row">
                       <div class="col-md-4">
                         <input
@@ -98,6 +95,42 @@
               </div>
               <br />
               <div class="row">
+                <div class="col-md-8">
+                  <label for="tech_used" class="ideal-font font-weight-bold"
+                    >Technology Used</label
+                  >
+                  <multiselect
+                    id="tech_used"
+                    v-model="techUsed"
+                    tag-placeholder="Add this"
+                    placeholder="Select the frameworks or languages used in this project"
+                    label="name"
+                    track-by="name"
+                    :options="techStackItems"
+                    :multiple="true"
+                    :taggable="true"
+                  ></multiselect>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label
+                      for="date_deployed"
+                      class="ideal-font font-weight-bold"
+                      >Date Deployed / Released
+                      <small class="text-danger">* Required</small>
+                    </label>
+                    <datepicker
+                      v-model="date_deployed"
+                      input-class="vue-datepicker"
+                      :bootstrap-styling="true"
+                      placeholder="Select Due Date"
+                      required
+                    ></datepicker>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="intro_image" class="ideal-font font-weight-bold"
@@ -108,7 +141,6 @@
                       type="file"
                       class="form-control-file"
                       @change="onFileSelected"
-                      
                     />
                   </div>
                 </div>
@@ -142,25 +174,6 @@
                       @change="onFileSelected"
                     />
                   </div>
-                </div>
-              </div>
-              <br />
-              <div class="row">
-                <div class="col-md-12">
-                  <label for="tech_used" class="ideal-font font-weight-bold"
-                    >Technology Used</label
-                  >
-                  <multiselect
-                    id="tech_used"
-                    v-model="techUsed"
-                    tag-placeholder="Add this"
-                    placeholder="Select the frameworks or languages used in this project"
-                    label="name"
-                    track-by="name"
-                    :options="techStackItems"
-                    :multiple="true"
-                    :taggable="true"
-                  ></multiselect>
                 </div>
               </div>
               <br />
@@ -293,27 +306,6 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label
-                      for="date_deployed"
-                      class="ideal-font font-weight-bold"
-                      >Date Deployed / Released
-                      <small class="text-danger">* Required</small>
-                      </label
-                    >
-                    <datepicker
-                      v-model="date_deployed"
-                      input-class="vue-datepicker"
-                      :bootstrap-styling="true"
-                      placeholder="Select Due Date"
-                      required
-                    ></datepicker>
-                  </div>
-                </div>
-              </div>
-              <br />
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label
                       for="reason_if_unavailable"
                       class="ideal-font font-weight-bold"
                       >Reason If Unavailable</label
@@ -415,14 +407,13 @@ export default {
           formData.append("image[]", this.sample_page_images[0]);
         }
 
-        
         if (this.techUsed.length > 1) {
           for (let file in this.techUsed) {
             formData.append("tech_used[]", this.techUsed[file].id);
           }
         } else if (this.techUsed.length == 1) {
           formData.append("tech_used[]", this.techUsed[0].id);
-        }        
+        }
 
         formData.append("name", this.name);
         formData.append("role", this.role);
