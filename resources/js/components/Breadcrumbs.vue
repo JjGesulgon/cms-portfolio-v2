@@ -40,6 +40,10 @@ export default {
       type: String,
       required: false,
     },
+    alternateName: {
+      type: String,
+      required: false,
+    },
   },
 
   methods: {
@@ -54,6 +58,10 @@ export default {
 
       if (this.useName == "plural") {
         return `${this.action} ${this.pluralName}`;
+      }
+
+      if (this.useName == "alternate") {
+        return `${this.action} ${this.alternateName}`;
       }
     },
   },

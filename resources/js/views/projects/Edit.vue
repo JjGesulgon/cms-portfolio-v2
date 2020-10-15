@@ -192,8 +192,8 @@
                       <router-link
                         class="btn btn-secondary btn-sm float-right"
                         :to="{
-                          name: `${routePrefixName}.edit`,
-                          params: { id: moduleID },
+                          name: `sample-page-image.edit`,
+                          params: { id: $route.params.id },
                         }"
                       >
                         <i class="fas fa-edit"></i>

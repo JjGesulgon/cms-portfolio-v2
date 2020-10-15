@@ -58,5 +58,11 @@ Route::group(['middleware' => ['auth:api']], function () {
       'only' => [
           'index', 'store', 'update', 'destroy'
       ]
-  ]);
+    ]);
+
+    //Sample Page Image
+    Route::get('/sample-page-image/getAll/{id}', 'SamplePageImageController@getList');
+    Route::resource('sample-page-image', 'SamplePageImageController', [
+      'only' => [ 'destroy' ]
+    ]);
 });

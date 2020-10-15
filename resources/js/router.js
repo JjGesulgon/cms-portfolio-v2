@@ -55,6 +55,11 @@ const ProjectsCreate = () => import('./views/projects/Create');
 // const UsersView   = () => import('./views/users/View');
 const ProjectsEdit   = () => import('./views/projects/Edit');
 
+/**
+ * Sample Page Images
+ */
+const SamplePageImages   = () => import('./views/projects/sample-page-images/Index');
+
 export default new Router({
     mode: 'history',
     routes: [
@@ -96,5 +101,8 @@ export default new Router({
         { path: '/projects/create', name: 'projects.create', component: ProjectsCreate },
         // { path: '/users/:id', name: 'users.view', component: UsersView },
         { path: '/projects/:id/edit', name: 'projects.edit', component: ProjectsEdit },
+
+        // Sample Page Image
+        { path: '/sample-page-image/project/:id', name: 'sample-page-image.edit', component: SamplePageImages },
     ]
 });

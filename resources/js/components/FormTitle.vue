@@ -11,16 +11,33 @@
       <slot name="right-items">
         <div v-if="$parent.showBack && $parent.ifReady">
           <router-link
+            v-if="!altRoute"
             class="btn btn-outline-secondary btn-sm"
             :to="{ name: `${routePrefixName}.index` }"
           >
             <i class="fas fa-chevron-left"></i> &nbsp;Back
           </router-link>
+          <router-link
+            v-else
+            class="btn btn-outline-secondary btn-sm"
+            :to="{ name: `${routePrefixName}.edit`, params: { id: $route.params.id } }"
+          >
+            <i class="fas fa-chevron-left"></i> &nbsp;Back
+          </router-link>
+          <button
+                v-if="$parent.isSamplePageImage"
+                type="button"
+                class="btn btn-primary btn-sm"
+                @click.prevent="openDeleteModal()"
+              >
+                <i class="fas fa-plus"></i>
+                &nbsp; Create {{ singularName }}
+              </button>
         </div>
         <div v-if="$parent.ifReady">
           <div v-if="$parent.showButtons">
             <router-link
-              v-if="$parent.showButtons && !$parent.hasContent"
+              v-if="!$parent.hasContent"
               class="btn btn-primary btn-sm"
               :to="{ name: `${routePrefixName}.create` }"
             >
@@ -129,6 +146,11 @@ export default {
     parameters: {
       type: Object,
       required: false,
+    },
+    altRoute: {
+      type: String,
+      required: false,
+      default: null,
     },
   },
 

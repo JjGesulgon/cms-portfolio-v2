@@ -22,8 +22,9 @@ class SamplePageImageRepository extends Repository
       *
       * @return array json object
       */
-    public function getSamplePageImages()
+    public function getSamplePageImages($id)
     {
-        return $this->model->all();
+      // return $this->model->all();
+        return $this->model->where('project_id', $id)->get();
     }
 }
