@@ -78,7 +78,7 @@
               </h5>
             </div>
             <div class="modal-body">
-              Are you sure you want to delete this {{ singularName }}?
+              Are you sure you want to delete this image?
             </div>
             <div class="modal-footer">
               <button
@@ -115,7 +115,7 @@ export default {
       routePrefixName: "projects",
       useName: "alternate",
       pluralName: "Projects",
-      singularName: "Sample Page Image",
+      singularName: "Project",
       apiPath: "/api/sample-page-image/",
       toastMessage: "Sample Page Image",
       isSamplePageImage: true,
@@ -129,7 +129,6 @@ export default {
   mounted() {
     let promise = new Promise((resolve, reject) => {
       axios.get(this.apiPath +'getAll/'+ this.$route.params.id).then((res) => {
-        console.log(res);
         this.samplePageImages = res.data.samplePageImage;
         resolve();
       });

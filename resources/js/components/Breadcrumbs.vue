@@ -6,6 +6,9 @@
           <li class="breadcrumb-item">
             <router-link :to="{ name: `${routePrefixName}.index` }">{{ pluralName }}</router-link>
           </li>
+          <li class="breadcrumb-item" v-if="this.alternateName">
+            <router-link :to="{ name: `${this.pluralName.toLowerCase()}.edit`, params: { id: $route.params.id } }">{{ `${action} ${singularName}` }}</router-link>
+          </li>
           <li class="breadcrumb-item active" aria-current="page">{{ getCurrentAction() }}</li>
         </ol>
       </nav>

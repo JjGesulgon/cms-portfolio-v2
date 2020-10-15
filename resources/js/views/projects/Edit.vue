@@ -188,9 +188,9 @@
                         >Sample Page Images</label
                       >
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6" v-if="sample_page_images">
                       <router-link
-                        class="btn btn-secondary btn-sm float-right"
+                        class="btn btn-dark btn-sm float-right"
                         :to="{
                           name: `sample-page-image.edit`,
                           params: { id: $route.params.id },
@@ -205,6 +205,7 @@
                     id="carouselExampleControls"
                     class="carousel slide"
                     data-ride="carousel"
+                    v-if="sample_page_images"
                   >
                     <div class="carousel-inner">
                       <div

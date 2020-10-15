@@ -31,7 +31,7 @@
                 @click.prevent="openDeleteModal()"
               >
                 <i class="fas fa-plus"></i>
-                &nbsp; Create {{ singularName }}
+                &nbsp; Create {{ toastMessage }}
               </button>
         </div>
         <div v-if="$parent.ifReady">
