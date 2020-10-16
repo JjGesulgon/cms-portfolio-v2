@@ -149,35 +149,34 @@
                 >
               </h4>
             </div>
-            <div class="modal-body">
-              <div class="form-group m-0">
-                <input
-                  id="image"
-                  type="file"
-                  class="form-control-file"
-                  @change="onFileSelected"
-                />
+            <form v-on:submit.prevent="createSamplePageItem()">
+              <div class="modal-body">
+                <div class="form-group m-0">
+                  <input
+                    id="image"
+                    type="file"
+                    class="form-control-file"
+                    @change="onFileSelected"
+                    required
+                  />
+                </div>
               </div>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary btn-sm"
-                data-dismiss="modal"
-                @click.prevent="CancelUpload()"
-              >
-              <i class="far fa-times-circle"></i>&nbsp;
-                Cancel
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary btn-sm"
-                @click.prevent="deleteItem()"
-              >
-              <i class="fas fa-plus"></i>&nbsp;
-                Confirm Delete
-              </button>
-            </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-sm"
+                  data-dismiss="modal"
+                  @click.prevent="CancelUpload()"
+                >
+                <i class="far fa-times-circle"></i>&nbsp;
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-primary btn-sm">
+                  <i class="fas fa-upload"></i>
+                  &nbsp; Upload Image
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -302,6 +301,30 @@ export default {
           this.$parent.ifReady = true;
         });
     },
+
+    createSamplePageItem(){
+      this.$parent.ifReady = false;
+
+      let formData = new FormData();
+    
+      formData.append("image", this.image);
+      formData.append("project_id", this.$route.params.id);
+
+      axios
+        .post(`${this.apiPath}`, formData)
+        .then(() => {
+          Broadcast.$emit("ToastMessage", {
+            message: `${this.toastMessage} created successfully.`,
+          });
+
+          $("#delete-modal").modal("hide");
+          this.$router.go();
+        })
+        .catch((err) => {
+          console.log(err);
+          this.$parent.ifReady = true;
+        });
+    }
   },
 };
 </script>
