@@ -30,6 +30,7 @@
                   <div class="form-group">
                     <label for="name" class="ideal-font font-weight-bold">Name</label>
                     <input
+                      id="name"
                       type="text"
                       class="form-control"
                       v-model="name"
@@ -44,6 +45,7 @@
                   <div class="form-group">
                     <label for="email" class="ideal-font font-weight-bold">Email Address</label>
                     <input
+                      id="email"
                       type="email"
                       class="form-control"
                       v-model="email"
@@ -58,6 +60,7 @@
                   <div class="form-group">
                     <label for="password" class="ideal-font font-weight-bold">Password</label>
                     <input
+                      id="password"
                       type="password"
                       class="form-control"
                       v-model="password"
@@ -74,6 +77,7 @@
                       >Password Confirmation</label
                     >
                     <input
+                      id="password_confirmation"
                       type="password"
                       class="form-control"
                       v-model="password_confirmation"

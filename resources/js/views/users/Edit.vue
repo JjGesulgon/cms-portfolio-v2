@@ -30,6 +30,7 @@
                   <div class="form-group">
                     <label for="name" class="ideal-font font-weight-bold">Name</label>
                     <input
+                      id="name"
                       type="text"
                       class="form-control"
                       v-model="name"
@@ -44,6 +45,7 @@
                   <div class="form-group">
                     <label for="email" class="ideal-font font-weight-bold">Email Address</label>
                     <input
+                      id="email"
                       type="email"
                       class="form-control"
                       v-model="email"

@@ -124,6 +124,7 @@
                       </label
                     >
                     <datepicker
+                      id="date_deployed"
                       v-model="$data.date_deployed"
                       class="ideal-font"
                       input-class="vue-datepicker"

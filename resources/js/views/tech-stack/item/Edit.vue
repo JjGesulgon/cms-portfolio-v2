@@ -26,6 +26,7 @@
                   <div class="form-group">
                     <label for="name" class="ideal-font font-weight-bold">Name</label>
                     <input
+                      id="name"
                       type="text"
                       class="form-control"
                       v-model="name"
@@ -40,6 +41,7 @@
                   <div class="form-group">
                     <label for="experience" class="ideal-font font-weight-bold">Experience</label>
                     <input
+                      id="experience"
                       type="text"
                       class="form-control"
                       v-model="experience"
@@ -53,7 +55,7 @@
                 <div class="col-lg-4">
                   <div class="form-group">
                     <label for="proficiency" class="ideal-font font-weight-bold">Proficiency</label>
-                    <input type="text" class="form-control" v-model="proficiency" />
+                    <input id="proficiency" type="text" class="form-control" v-model="proficiency" />
                   </div>
                 </div>
               </div>

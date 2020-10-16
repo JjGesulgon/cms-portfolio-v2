@@ -120,6 +120,7 @@
                       <small class="text-danger">* Required</small>
                     </label>
                     <datepicker
+                      id="date_deployed"
                       v-model="date_deployed"
                       input-class="vue-datepicker"
                       :bootstrap-styling="true"

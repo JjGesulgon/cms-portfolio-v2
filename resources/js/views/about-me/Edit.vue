@@ -22,11 +22,12 @@
           <template v-bind:data="$data">
             <div class="form-group">
               <label class="ideal-font font-weight-bold">Image (optional)</label>
-              <input type="file" class="form-control-file" @change="onFileSelected">
+              <input id="image" type="file" class="form-control-file" @change="onFileSelected">
             </div>
             <div class="form-group">
               <label class="ideal-font font-weight-bold">Content <small class="text-danger">* Required</small></label>
               <editor
+                id="body"
                 v-model="$data.body"
                 api-key="v8631ogi6aq7uc2h9z8tr72t2r3krmwlsbj5k4swk4i448f9"
                 :init="{
