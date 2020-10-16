@@ -99,6 +99,54 @@
         </div>
       </div>
     </div>
+
+    <div
+      class="modal fade"
+      id="create-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="create-modal"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="delete-modal-title">
+              <label class="text-primary font-weight-light m-0"
+                >Sample Page Image Upload</label
+              >
+            </h4>
+          </div>
+          <form v-on:submit.prevent="createSamplePageItem()">
+            <div class="modal-body">
+              <div class="form-group m-0">
+                <input
+                  id="image"
+                  type="file"
+                  class="form-control-file"
+                  @change="onFileSelected"
+                  required
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm"
+                data-dismiss="modal"
+                @click.prevent="CancelUpload()"
+              >
+                <i class="far fa-times-circle"></i>&nbsp; Cancel
+              </button>
+              <button type="submit" class="btn btn-primary btn-sm">
+                <i class="fas fa-upload"></i>
+                &nbsp; Upload Image
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -108,6 +156,8 @@ export default {
       samplePageImages: null,
       samplePageImage: null,
       alternateName: "Sample Page Images",
+
+      image: null,
 
       action: "Edit",
       altRoute: "projects",
@@ -141,6 +191,43 @@ export default {
     });
   },
   methods: {
+    openModal(modalID) {
+        $(modalID).modal("show");
+    },
+
+    onFileSelected(event) {
+      this.image = event.target.files[0];
+    },
+
+    CancelUpload(){
+      this.image = null;
+      $("#image").val('');
+    },
+
+    createSamplePageItem(){
+      $("#create-modal").modal("hide");
+      this.ifReady = false;
+
+      let formData = new FormData();
+    
+      formData.append("image", this.image);
+      formData.append("project_id", this.$route.params.id);
+
+      axios
+        .post(`${this.apiPath}`, formData)
+        .then(() => {
+          Broadcast.$emit("ToastMessage", {
+            message: `${this.toastMessage} created successfully.`,
+          });
+
+          this.$router.go();
+        })
+        .catch((err) => {
+          console.log(err);
+          this.ifReady = true;
+        });
+    },
+
     openDeleteModalTable(item) {
       this.samplePageImage = item;
       $("#delete-modal-table").modal("show");

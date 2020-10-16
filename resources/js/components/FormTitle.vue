@@ -31,7 +31,7 @@
             v-if="$parent.isSamplePageImage"
             type="button"
             class="btn btn-primary btn-sm"
-            @click.prevent="openModal('#create-modal')"
+            @click.prevent="$parent.openModal('#create-modal')"
           >
             <i class="fas fa-plus"></i>
             &nbsp; Create {{ toastMessage }}
@@ -131,55 +131,6 @@
           </div>
         </div>
       </div>
-
-      <div
-        class="modal fade"
-        id="create-modal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="create-modal"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title" id="delete-modal-title">
-                <label class="text-primary font-weight-light m-0"
-                  >Sample Page Image Upload</label
-                >
-              </h4>
-            </div>
-            <form v-on:submit.prevent="createSamplePageItem()">
-              <div class="modal-body">
-                <div class="form-group m-0">
-                  <input
-                    id="image"
-                    type="file"
-                    class="form-control-file"
-                    @change="onFileSelected"
-                    required
-                  />
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary btn-sm"
-                  data-dismiss="modal"
-                  @click.prevent="CancelUpload()"
-                >
-                <i class="far fa-times-circle"></i>&nbsp;
-                  Cancel
-                </button>
-                <button type="submit" class="btn btn-primary btn-sm">
-                  <i class="fas fa-upload"></i>
-                  &nbsp; Upload Image
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -224,7 +175,6 @@ export default {
   data() {
     return {
       showClearSearch: false,
-      image: null,
     };
   },
 
@@ -269,19 +219,6 @@ export default {
       }, 100);
     },
 
-    openModal(modalID) {
-        $(modalID).modal("show");
-    },
-
-    onFileSelected(event) {
-      this.image = event.target.files[0];
-    },
-
-    CancelUpload(){
-      this.image = null;
-      $("#image").val('');
-    },
-
     deleteItem() {
       $("#delete-modal").modal("hide");
 
@@ -301,30 +238,6 @@ export default {
           this.$parent.ifReady = true;
         });
     },
-
-    createSamplePageItem(){
-      this.$parent.ifReady = false;
-
-      let formData = new FormData();
-    
-      formData.append("image", this.image);
-      formData.append("project_id", this.$route.params.id);
-
-      axios
-        .post(`${this.apiPath}`, formData)
-        .then(() => {
-          Broadcast.$emit("ToastMessage", {
-            message: `${this.toastMessage} created successfully.`,
-          });
-
-          $("#delete-modal").modal("hide");
-          this.$router.go();
-        })
-        .catch((err) => {
-          console.log(err);
-          this.$parent.ifReady = true;
-        });
-    }
   },
 };
 </script>
