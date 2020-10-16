@@ -62,43 +62,43 @@
     </div>
 
     <div
-        class="modal fade"
-        id="delete-modal-table"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="delete-modal-title"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="delete-modal-title">
-                <strong class="text-danger">WARNING:</strong> You're about to
-                delete this.
-              </h5>
-            </div>
-            <div class="modal-body">
-              Are you sure you want to delete this image?
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary btn-sm"
-                data-dismiss="modal"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                class="btn btn-danger btn-sm"
-                @click.prevent="deleteItem()"
-              >
-                Confirm Delete
-              </button>
-            </div>
+      class="modal fade"
+      id="delete-modal-table"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="delete-modal-title"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="delete-modal-title">
+              <strong class="text-danger">WARNING:</strong> You're about to
+              delete this.
+            </h5>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete this image?
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm"
+              data-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger btn-sm"
+              @click.prevent="deleteItem()"
+            >
+              Confirm Delete
+            </button>
           </div>
         </div>
       </div>
+    </div>
   </div>
 </template>
 <script>
@@ -107,10 +107,10 @@ export default {
     return {
       samplePageImages: null,
       samplePageImage: null,
-      alternateName: 'Sample Page Images',
+      alternateName: "Sample Page Images",
 
       action: "Edit",
-      altRoute: 'projects',
+      altRoute: "projects",
       title: "Sample Page Images",
       routePrefixName: "projects",
       useName: "alternate",
@@ -123,15 +123,17 @@ export default {
       moduleID: null,
       showButtons: true,
       ifReady: false,
-      showBack: true
+      showBack: true,
     };
   },
   mounted() {
     let promise = new Promise((resolve, reject) => {
-      axios.get(this.apiPath +'getAll/'+ this.$route.params.id).then((res) => {
-        this.samplePageImages = res.data.samplePageImage;
-        resolve();
-      });
+      axios
+        .get(this.apiPath + "getAll/" + this.$route.params.id)
+        .then((res) => {
+          this.samplePageImages = res.data.samplePageImage;
+          resolve();
+        });
     });
 
     promise.then(() => {
@@ -156,9 +158,9 @@ export default {
           });
 
           this.ifReady = true;
-          
-          const index = this.samplePageImages.indexOf(this.samplePageImage)
-          this.samplePageImages.splice(index, 1)
+
+          const index = this.samplePageImages.indexOf(this.samplePageImage);
+          this.samplePageImages.splice(index, 1);
         })
         .catch((err) => {
           console.log(err);

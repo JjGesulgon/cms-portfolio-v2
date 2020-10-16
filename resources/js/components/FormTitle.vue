@@ -20,19 +20,22 @@
           <router-link
             v-else
             class="btn btn-outline-secondary btn-sm"
-            :to="{ name: `${routePrefixName}.edit`, params: { id: $route.params.id } }"
+            :to="{
+              name: `${routePrefixName}.edit`,
+              params: { id: $route.params.id },
+            }"
           >
             <i class="fas fa-chevron-left"></i> &nbsp;Back
           </router-link>
           <button
-                v-if="$parent.isSamplePageImage"
-                type="button"
-                class="btn btn-primary btn-sm"
-                @click.prevent="openDeleteModal()"
-              >
-                <i class="fas fa-plus"></i>
-                &nbsp; Create {{ toastMessage }}
-              </button>
+            v-if="$parent.isSamplePageImage"
+            type="button"
+            class="btn btn-primary btn-sm"
+            @click.prevent="openModal('#create-modal')"
+          >
+            <i class="fas fa-plus"></i>
+            &nbsp; Create {{ toastMessage }}
+          </button>
         </div>
         <div v-if="$parent.ifReady">
           <div v-if="$parent.showButtons">
@@ -48,7 +51,7 @@
               <button
                 type="button"
                 class="btn btn-danger btn-sm"
-                @click.prevent="openDeleteModal()"
+                @click.prevent="openModal('#delete-modal')"
               >
                 <i class="fas fa-trash-alt"></i>
                 &nbsp; Delete {{ singularName }}
@@ -56,36 +59,40 @@
 
               <router-link
                 class="btn btn-primary btn-sm"
-                :to="{ name: `${routePrefixName}.edit`, params: { id: moduleID }}"
+                :to="{
+                  name: `${routePrefixName}.edit`,
+                  params: { id: moduleID },
+                }"
               >
                 <i class="fas fa-edit"></i>
                 &nbsp; Edit {{ singularName }}
               </router-link>
             </div>
 
-              <button
-                type="button"
-                class="btn btn-sm btn-dark mr-1"
-                v-if="$parent.showSearch"
-                @click.prevent="$parent.$refs.searchModal.openSearchModal()"
-              >
-                <i class="fas fa-search"></i>
-                &nbsp; Search {{ pluralName }}
-              </button>
+            <button
+              type="button"
+              class="btn btn-sm btn-dark mr-1"
+              v-if="$parent.showSearch"
+              @click.prevent="$parent.$refs.searchModal.openSearchModal()"
+            >
+              <i class="fas fa-search"></i>
+              &nbsp; Search {{ pluralName }}
+            </button>
 
-              <button
-                v-if="showClearSearch"
-                type="button"
-                class="btn btn-sm btn-light"
-                @click.prevent="clearSearch()"
-              >
-                <i class="fas fa-eraser"></i>
-                &nbsp; Clear Search
-              </button>
+            <button
+              v-if="showClearSearch"
+              type="button"
+              class="btn btn-sm btn-light"
+              @click.prevent="clearSearch()"
+            >
+              <i class="fas fa-eraser"></i>
+              &nbsp; Clear Search
+            </button>
           </div>
         </div>
       </slot>
       <slot name="other-buttons"></slot>
+
       <div
         class="modal fade"
         id="delete-modal"
@@ -98,17 +105,78 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="delete-modal-title">
-                <strong class="text-danger">WARNING:</strong> You're about to delete this.
+                <strong class="text-danger">WARNING:</strong> You're about to
+                delete this.
               </h5>
             </div>
-            <div class="modal-body">Are you sure you want to delete {{ singularName }}?</div>
+            <div class="modal-body">
+              Are you sure you want to delete {{ singularName }}?
+            </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm"
+                data-dismiss="modal"
+              >
+                Cancel
+              </button>
               <button
                 type="button"
                 class="btn btn-danger btn-sm"
                 @click.prevent="deleteItem()"
-              >Confirm Delete</button>
+              >
+                Confirm Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="modal fade"
+        id="create-modal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="create-modal"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="delete-modal-title">
+                <label class="text-primary font-weight-light m-0"
+                  >Sample Page Image Upload</label
+                >
+              </h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group m-0">
+                <input
+                  id="image"
+                  type="file"
+                  class="form-control-file"
+                  @change="onFileSelected"
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm"
+                data-dismiss="modal"
+                @click.prevent="CancelUpload()"
+              >
+              <i class="far fa-times-circle"></i>&nbsp;
+                Cancel
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                @click.prevent="deleteItem()"
+              >
+              <i class="fas fa-plus"></i>&nbsp;
+                Confirm Delete
+              </button>
             </div>
           </div>
         </div>
@@ -157,6 +225,7 @@ export default {
   data() {
     return {
       showClearSearch: false,
+      image: null,
     };
   },
 
@@ -201,8 +270,17 @@ export default {
       }, 100);
     },
 
-    openDeleteModal() {
-      $("#delete-modal").modal("show");
+    openModal(modalID) {
+        $(modalID).modal("show");
+    },
+
+    onFileSelected(event) {
+      this.image = event.target.files[0];
+    },
+
+    CancelUpload(){
+      this.image = null;
+      $("#image").val('');
     },
 
     deleteItem() {

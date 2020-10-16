@@ -48,21 +48,51 @@ class SamplePageImageController extends Controller
     }
 
     /**
+   * Store a newly created resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+          'image'         => 'required|max:2000',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+              'message' => 'Validation failed',
+              'errors'  => $validator->errors()
+            ], 400);
+        }
+
+        if (! $this->samplePageImage->store($request)) {
+            return response()->json([
+                'message' => 'Failed to store resource'
+            ], 500);
+        }
+
+        return response()->json([
+          'message' => 'Resource successfully stored'
+        ], 200);
+    }
+
+    /**
    * Remove the specified resource from storage.
    *
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id)
-  {
-    if (! $this->samplePageImage->findOrFail($id)->delete()) {
-      return response()->json([
+    public function destroy($id)
+    {
+        if (! $this->samplePageImage->findOrFail($id)->delete()) {
+            return response()->json([
         'message' => 'Failed to delete resource'
       ], 400);
-    }
+        }
 
-    return response()->json([
+        return response()->json([
       'message' => 'Resource successfully deleted'
     ], 200);
-  }
+    }
 }

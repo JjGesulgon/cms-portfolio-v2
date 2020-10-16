@@ -63,6 +63,6 @@ Route::group(['middleware' => ['auth:api']], function () {
     //Sample Page Image
     Route::get('/sample-page-image/getAll/{id}', 'SamplePageImageController@getList');
     Route::resource('sample-page-image', 'SamplePageImageController', [
-      'only' => [ 'destroy' ]
+      'only' => [ 'store', 'destroy' ]
     ]);
 });
