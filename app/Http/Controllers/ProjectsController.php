@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Repositories\ProjectRepository;
 use App\Http\Resources\ProjectResource;
-use App\SamplePageImage;
-use App\TechUsed;
 
 class ProjectsController extends Controller
 {
@@ -75,41 +73,12 @@ class ProjectsController extends Controller
       ], 400);
     }
 
-    $proj = $this->project->store($request);
-
-    if (! $proj) {
+    if (! $this->project->store($request)) {
       return response()->json([
           'message' => 'Failed to store resource'
       ], 500);
     }
-
-    if( $request->image ){
-        if(sizeof($request->image) > 0){
-            for ($ctr = 0; $ctr < count($request->image); $ctr++) {
-                $samplePageImage = $proj->samplePageImages()->save(new SamplePageImage(array('image' => array_values($request->image)[$ctr])));
-                if (! $samplePageImage) {
-                  return response()->json([
-                      'message' => 'Failed to store resource'
-                  ], 500);
-                }
-
-            }
-        }
-    }
-
-    if( $request->tech_used ){
-      if(sizeof($request->tech_used) > 0){
-          for ($ctr = 0; $ctr < count($request->tech_used); $ctr++) {
-              $techUsed= $proj->techUsed()->save(new TechUsed(array('tech_stack_item_id' => array_values($request->tech_used)[$ctr])));
-              if (! $techUsed) {
-                return response()->json([
-                    'message' => 'Failed to store resource'
-                ], 500);
-              }
-          }
-      }
-    }
-
+    
     return response()->json([
       'message' => 'Resource successfully stored'
     ], 200);
@@ -168,21 +137,6 @@ class ProjectsController extends Controller
       ], 500);
     }
 
-    $proj = $this->project->findOrFail($id);
-    $proj->techUsed()->delete();
-
-    if ($request->tech_used) {
-        if (sizeof($request->tech_used) > 0) {
-            for ($ctr = 0; $ctr < count($request->tech_used); $ctr++) {
-                $techUsed = $proj->techUsed()->save(new TechUsed(array('tech_stack_item_id' => array_values($request->tech_used)[$ctr])));
-                if (! $techUsed) {
-                  return response()->json([
-                      'message' => 'Failed to store resource'
-                  ], 500);
-                }
-            }
-        }
-    }
     return response()->json([
       'message' => 'Resource successfully updated'
     ], 200);

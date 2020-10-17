@@ -453,6 +453,16 @@ export default {
   mounted() {
     let promise = new Promise((resolve, reject) => {
       axios
+        .get(`/api/tech-stack-item/getAll`)
+        .then((res) => {
+          this.techStackItems = res.data.techStackItems;
+          this.ifReady = true;
+        })
+        .catch((err) => {
+          console.log(err)
+        });
+
+      axios
         .get(`${this.apiPath}/${this.$route.params.id}`)
         .then((res) => {
           this.moduleID = res.data.project.id;
@@ -477,14 +487,6 @@ export default {
             this.techUsed.push(item.tech_stack_item);
           }
 
-          axios
-            .get(`/api/tech-stack-item/getAll`)
-            .then((res) => {
-              this.techStackItems = res.data.techStackItems;
-            })
-            .catch((err) => {
-              console.log(err)
-            });
           resolve();
         })
         .catch((err) => {
