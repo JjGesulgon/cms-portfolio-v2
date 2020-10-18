@@ -39,37 +39,42 @@ class ProjectRepository extends Repository
      */
     public function store($request)
     {
-        return DB::transaction(function () use ($request) {
-            $project =  $this->project->create($request->all());
+        try {
+            return DB::transaction(function () use ($request) {
+                $project =  $this->project->create($request->all());
 
-            if ($request->image) {
-                if (sizeof($request->image) > 0) {
-                    for ($ctr = 0; $ctr < count($request->image); $ctr++) {
-                        $samplePageImage = $project->samplePageImages()->save(new SamplePageImage(array('image' => array_values($request->image)[$ctr])));
-                        if (! $samplePageImage) {
-                            return response()->json([
+                if ($request->image) {
+                    if (sizeof($request->image) > 0) {
+                        for ($ctr = 0; $ctr < count($request->image); $ctr++) {
+                            $samplePageImage = $project->samplePageImages()->save(new SamplePageImage(array('image' => array_values($request->image)[$ctr])));
+                            if (! $samplePageImage) {
+                                return response()->json([
                             'message' => 'Failed to store resource'
                         ], 500);
+                            }
                         }
                     }
                 }
-            }
 
-            if ($request->tech_used) {
-                if (sizeof($request->tech_used) > 0) {
-                    for ($ctr = 0; $ctr < count($request->tech_used); $ctr++) {
-                        $techUsed= $project->techUsed()->save(new TechUsed(array('tech_stack_item_id' => array_values($request->tech_used)[$ctr])));
-                        if (! $techUsed) {
-                            return response()->json([
+                if ($request->tech_used) {
+                    if (sizeof($request->tech_used) > 0) {
+                        for ($ctr = 0; $ctr < count($request->tech_used); $ctr++) {
+                            $techUsed= $project->techUsed()->save(new TechUsed(array('tech_stack_item_id' => array_values($request->tech_used)[$ctr])));
+                            if (! $techUsed) {
+                                return response()->json([
                             'message' => 'Failed to store resource'
                         ], 500);
+                            }
                         }
                     }
                 }
-            }
 
-            return $project;
-        });
+                return $project;
+            });
+            
+        } catch (\Exception $e) {
+            DB::rollback();
+        }
     }
 
     /**
@@ -82,7 +87,6 @@ class ProjectRepository extends Repository
     public function update($request, $id)
     {
         try {
-          
             return DB::transaction(function () use ($request, $id) {
                 $project = $this->project->findOrFail($id);
                 $project->fill($request->all());
@@ -105,7 +109,6 @@ class ProjectRepository extends Repository
 
                 return $project;
             });
-
         } catch (\Exception $e) {
             DB::rollback();
         }
