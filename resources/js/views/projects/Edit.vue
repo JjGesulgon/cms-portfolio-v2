@@ -340,7 +340,7 @@
               </div>
               <br />
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <div class="form-group">
                     <label
                       for="github_repository"
@@ -359,7 +359,7 @@
                     />
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <div class="form-group">
                     <label for="live" class="ideal-font font-weight-bold"
                       >Live</label
@@ -376,7 +376,7 @@
                     />
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <div class="form-group">
                     <label
                       for="reason_if_unavailable"
@@ -388,6 +388,25 @@
                       type="text"
                       class="form-control"
                       v-model="$data.reason_if_unavailable"
+                      autocomplete="off"
+                      minlength="2"
+                      maxlength="255"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label
+                      for="industry"
+                      class="ideal-font font-weight-bold"
+                      >Industry</label
+                    >
+                    <input
+                      id="industry"
+                      type="text"
+                      class="form-control"
+                      v-model="$data.industry"
                       autocomplete="off"
                       minlength="2"
                       maxlength="255"
@@ -434,6 +453,7 @@ export default {
       github_repository: "",
       live: "",
       reason_if_unavailable: "",
+      industry: "",
       techUsed: [],
 
       techStackItems: [],
@@ -469,6 +489,7 @@ export default {
           this.body = res.data.project.body;
           this.name = res.data.project.name;
           this.role = res.data.project.role;
+          this.industry = res.data.project.industry;
           this.currentIntroImage = res.data.project.intro_image;
           this.currentScreenImage = res.data.project.screen_image;
           this.type = res.data.project.type;
@@ -538,6 +559,7 @@ export default {
         formData.append("name", this.name);
         formData.append("role", this.role);
         formData.append("type", this.type);
+        formData.append("industry", this.industry);
         formData.append("date_deployed", moment(this.date_deployed).format("YYYY-MM-DD"));
         formData.append("github_repository", this.github_repository);
         formData.append("live", this.live);

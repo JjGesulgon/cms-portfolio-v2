@@ -268,7 +268,7 @@
               </div>
               <br />
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <div class="form-group">
                     <label
                       for="github_repository"
@@ -287,7 +287,7 @@
                     />
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <div class="form-group">
                     <label for="live" class="ideal-font font-weight-bold"
                       >Live</label
@@ -304,7 +304,7 @@
                     />
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <div class="form-group">
                     <label
                       for="reason_if_unavailable"
@@ -316,6 +316,25 @@
                       type="text"
                       class="form-control"
                       v-model="reason_if_unavailable"
+                      autocomplete="off"
+                      minlength="2"
+                      maxlength="255"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label
+                      for="reason_if_unavailable"
+                      class="ideal-font font-weight-bold"
+                      >Industry</label
+                    >
+                    <input
+                      id="industry"
+                      type="text"
+                      class="form-control"
+                      v-model="industry"
                       autocomplete="off"
                       minlength="2"
                       maxlength="255"
@@ -358,6 +377,7 @@ export default {
       github_repository: "",
       live: "",
       reason_if_unavailable: "",
+      industry:"",
       sample_page_images: [],
       techUsed: [],
 
@@ -426,6 +446,7 @@ export default {
         formData.append("github_repository", this.github_repository);
         formData.append("live", this.live);
         formData.append("reason_if_unavailable", this.reason_if_unavailable);
+        formData.append("industry", this.industry);
         formData.append(
           "development_description",
           tinyMCE.get("development_description").getContent()

@@ -32,6 +32,7 @@ class CreateProjectsTable extends Migration
             $table->longText('development_description')->nullable();
             $table->string('github_repository')->nullable();
             $table->string('live')->nullable();
+            $table->string('industry')->nullable();
             $table->string('slug');
             $table->string('reason_if_unavailable')->nullable();
             $table->timestamps();

@@ -30,7 +30,7 @@ class Project extends Model
       'screen_image', 'role', 'date_deployed',
       'overview', 'concept_description',
       'development_description', 'github_repository',
-      'live', 'slug', 'reason_if_unavailable'
+      'live', 'slug', 'reason_if_unavailable', 'industry'
     ];
 
     /**
