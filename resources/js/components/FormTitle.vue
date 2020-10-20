@@ -48,7 +48,7 @@
               <button
                 v-if="$parent.showDelete && $parent.hasContent && $parent.ifReady && $parent.showButtons"
                 type="button"
-                class="btn btn-danger btn-sm"
+                class="btn btn-outline-danger btn-sm"
                 @click.prevent="openModal('#delete-modal')"
               >
                 <i class="fas fa-trash-alt"></i>
@@ -69,7 +69,7 @@
 
             <button
               type="button"
-              class="btn btn-sm btn-dark mr-1"
+              class="btn btn-sm btn-outline-dark mr-1"
               v-if="$parent.showSearch && $parent.ifReady && $parent.showButtons"
               @click.prevent="$parent.$refs.searchModal.openSearchModal()"
             >
