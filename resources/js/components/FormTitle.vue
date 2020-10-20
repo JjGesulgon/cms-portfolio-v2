@@ -9,16 +9,16 @@
 
     <div class="col-md-6 text-right">
       <slot name="right-items">
-        <div v-if="$parent.showBack && $parent.ifReady">
+
           <router-link
-            v-if="!altRoute"
+            v-if="!altRoute && $parent.showBack && $parent.ifReady"
             class="btn btn-outline-secondary btn-sm"
             :to="{ name: `${routePrefixName}.index` }"
           >
             <i class="fas fa-chevron-left"></i> &nbsp;Back
           </router-link>
           <router-link
-            v-else
+            v-else-if="altRoute && $parent.showBack && $parent.ifReady"
             class="btn btn-outline-secondary btn-sm"
             :to="{
               name: `${routePrefixName}.edit`,
@@ -36,19 +36,17 @@
             <i class="fas fa-plus"></i>
             &nbsp; Create {{ toastMessage }}
           </button>
-        </div>
-        <div v-if="$parent.ifReady">
-          <div v-if="$parent.showButtons">
+        
             <router-link
-              v-if="!$parent.hasContent"
+              v-if="!$parent.hasContent && $parent.ifReady && $parent.showButtons"
               class="btn btn-primary btn-sm"
               :to="{ name: `${routePrefixName}.create` }"
             >
               <i class="fas fa-plus"></i>
               &nbsp; Create New {{ singularName }}
             </router-link>
-            <div v-else-if="$parent.showDelete && $parent.hasContent">
               <button
+                v-if="$parent.showDelete && $parent.hasContent && $parent.ifReady && $parent.showButtons"
                 type="button"
                 class="btn btn-danger btn-sm"
                 @click.prevent="openModal('#delete-modal')"
@@ -58,6 +56,7 @@
               </button>
 
               <router-link
+                v-if="$parent.showDelete && $parent.hasContent && $parent.ifReady && $parent.showButtons"
                 class="btn btn-primary btn-sm"
                 :to="{
                   name: `${routePrefixName}.edit`,
@@ -67,12 +66,11 @@
                 <i class="fas fa-edit"></i>
                 &nbsp; Edit {{ singularName }}
               </router-link>
-            </div>
 
             <button
               type="button"
               class="btn btn-sm btn-dark mr-1"
-              v-if="$parent.showSearch"
+              v-if="$parent.showSearch && $parent.ifReady && $parent.showButtons"
               @click.prevent="$parent.$refs.searchModal.openSearchModal()"
             >
               <i class="fas fa-search"></i>
@@ -80,7 +78,7 @@
             </button>
 
             <button
-              v-if="showClearSearch"
+              v-if="showClearSearch && $parent.ifReady && $parent.showButtons"
               type="button"
               class="btn btn-sm btn-light"
               @click.prevent="clearSearch()"
@@ -88,8 +86,8 @@
               <i class="fas fa-eraser"></i>
               &nbsp; Clear Search
             </button>
-          </div>
-        </div>
+          
+        
       </slot>
       <slot name="other-buttons"></slot>
 
@@ -219,11 +217,14 @@ export default {
       }, 100);
     },
 
+    openModal(modal) {
+        $(modal).modal("show");
+    },
+
     deleteItem() {
       $("#delete-modal").modal("hide");
 
       this.$parent.ifReady = false;
-
       axios
         .delete(`${this.apiPath}/${this.moduleID}`)
         .then(() => {

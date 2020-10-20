@@ -49,6 +49,7 @@ Vue.component('breadcrumbs', require('./components/Breadcrumbs.vue'));
 Vue.component('form-title', require('./components/FormTitle.vue'));
 Vue.component('form-create', require('./components/FormCreate.vue'));
 Vue.component('form-edit', require('./components/FormEdit.vue'));
+Vue.component('form-view', require('./components/FormView.vue'));
 Vue.component('search', require('./components/Search.vue'));
 Vue.component('pagination', require('./components/Pagination.vue'));
 Vue.component('search-modal', require('./components/SearchModal.vue'));

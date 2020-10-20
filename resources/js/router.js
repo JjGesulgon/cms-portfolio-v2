@@ -52,7 +52,7 @@ const ContactEdit   = () => import('./views/contact/Edit');
  */
 const ProjectsIndex  = () => import('./views/projects/Index');
 const ProjectsCreate = () => import('./views/projects/Create');
-// const UsersView   = () => import('./views/users/View');
+const ProjectsView   = () => import('./views/projects/View');
 const ProjectsEdit   = () => import('./views/projects/Edit');
 
 /**
@@ -99,7 +99,7 @@ export default new Router({
         // Projects
         { path: '/projects', name: 'projects.index', component: ProjectsIndex },
         { path: '/projects/create', name: 'projects.create', component: ProjectsCreate },
-        // { path: '/users/:id', name: 'users.view', component: UsersView },
+        { path: '/projects/:id', name: 'projects.view', component: ProjectsView },
         { path: '/projects/:id/edit', name: 'projects.edit', component: ProjectsEdit },
 
         // Sample Page Image

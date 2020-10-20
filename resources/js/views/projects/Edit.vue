@@ -137,6 +137,83 @@
               </div>
               <br />
               <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label
+                      for="industry"
+                      class="ideal-font font-weight-bold"
+                      >Industry<small class="text-danger">* Required</small></label
+                    >
+                    <input
+                      id="industry"
+                      type="text"
+                      class="form-control"
+                      v-model="$data.industry"
+                      autocomplete="off"
+                      minlength="2"
+                      maxlength="255"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label
+                      for="github_repository"
+                      class="ideal-font font-weight-bold"
+                      >Github Repository</label
+                    >
+                    <input
+                      id="github_repository"
+                      type="text"
+                      class="form-control"
+                      v-model="$data.github_repository"
+                      autocomplete="off"
+                      minlength="2"
+                      maxlength="255"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="live" class="ideal-font font-weight-bold"
+                      >Live</label
+                    >
+                    <input
+                      id="live"
+                      type="text"
+                      class="form-control"
+                      v-model="live"
+                      autocomplete="off"
+                      minlength="2"
+                      maxlength="255"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label
+                      for="reason_if_unavailable"
+                      class="ideal-font font-weight-bold"
+                      >Reason If Unavailable</label
+                    >
+                    <input
+                      id="reason_if_unavailable"
+                      type="text"
+                      class="form-control"
+                      v-model="$data.reason_if_unavailable"
+                      autocomplete="off"
+                      minlength="2"
+                      maxlength="255"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="intro_image" class="ideal-font font-weight-bold"
@@ -334,83 +411,6 @@
                           'undo redo | bold italic underline strikethrough | fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
                         toolbar_sticky: true,
                       }"
-                    />
-                  </div>
-                </div>
-              </div>
-              <br />
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label
-                      for="github_repository"
-                      class="ideal-font font-weight-bold"
-                      >Github Repository</label
-                    >
-                    <input
-                      id="github_repository"
-                      type="text"
-                      class="form-control"
-                      v-model="$data.github_repository"
-                      autocomplete="off"
-                      minlength="2"
-                      maxlength="255"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label for="live" class="ideal-font font-weight-bold"
-                      >Live</label
-                    >
-                    <input
-                      id="live"
-                      type="text"
-                      class="form-control"
-                      v-model="live"
-                      autocomplete="off"
-                      minlength="2"
-                      maxlength="255"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label
-                      for="reason_if_unavailable"
-                      class="ideal-font font-weight-bold"
-                      >Reason If Unavailable</label
-                    >
-                    <input
-                      id="reason_if_unavailable"
-                      type="text"
-                      class="form-control"
-                      v-model="$data.reason_if_unavailable"
-                      autocomplete="off"
-                      minlength="2"
-                      maxlength="255"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label
-                      for="industry"
-                      class="ideal-font font-weight-bold"
-                      >Industry</label
-                    >
-                    <input
-                      id="industry"
-                      type="text"
-                      class="form-control"
-                      v-model="$data.industry"
-                      autocomplete="off"
-                      minlength="2"
-                      maxlength="255"
-                      required
                     />
                   </div>
                 </div>

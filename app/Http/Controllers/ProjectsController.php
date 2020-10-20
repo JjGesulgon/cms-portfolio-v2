@@ -62,6 +62,7 @@ class ProjectsController extends Controller
       'screen_image'              => 'max:2000',
       'role'                      => 'required',
       'date_deployed'             => 'required',
+      'industry'                  => 'required',
       'image'                     => 'required|array',
       'tech_used'                 => 'array'
     ]);
@@ -120,6 +121,7 @@ class ProjectsController extends Controller
       'screen_image'              => 'max:2000',
       'role'                      => 'required',
       'date_deployed'             => 'required',
+      'industry'                  => 'required',
       'image'                     => 'array',
       'tech_used'                 => 'required|array'
     ]);
