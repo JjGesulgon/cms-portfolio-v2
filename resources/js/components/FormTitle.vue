@@ -7,7 +7,7 @@
       </h3>
     </div>
 
-    <div class="col-md-6 text-right">
+    <div class="col-md-6 text-md-right">
       <slot name="right-items">
 
           <router-link
