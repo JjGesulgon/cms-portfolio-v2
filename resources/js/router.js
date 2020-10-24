@@ -60,6 +60,14 @@ const ProjectsEdit   = () => import('./views/projects/Edit');
  */
 const SamplePageImages   = () => import('./views/projects/sample-page-images/Index');
 
+/**
+ * Blogs
+ */
+const BlogsIndex  = () => import('./views/blogs/Index');
+// const ProjectsCreate = () => import('./views/projects/Create');
+// const ProjectsView   = () => import('./views/projects/View');
+// const ProjectsEdit   = () => import('./views/projects/Edit');
+
 export default new Router({
     mode: 'history',
     routes: [
@@ -104,5 +112,11 @@ export default new Router({
 
         // Sample Page Image
         { path: '/sample-page-image/project/:id', name: 'sample-page-image.edit', component: SamplePageImages },
+
+        // Blogs
+        { path: '/blogs', name: 'blogs.index', component: BlogsIndex },
+        // { path: '/projects/create', name: 'projects.create', component: ProjectsCreate },
+        // { path: '/projects/:id', name: 'projects.view', component: ProjectsView },
+        // { path: '/projects/:id/edit', name: 'projects.edit', component: ProjectsEdit },
     ]
 });

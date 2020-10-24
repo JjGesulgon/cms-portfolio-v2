@@ -29,6 +29,7 @@ class CreateBlogsTable extends Migration
             $table->string('slug');
             $table->string('category');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

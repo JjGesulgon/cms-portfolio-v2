@@ -74,7 +74,7 @@
         </li>
 
         <li class="nav-item">
-          <router-link class="nav-link list-item" :to="{ name: 'users.index' }">Personal Blog</router-link>
+          <router-link class="nav-link list-item" :to="{ name: 'blogs.index' }">Personal Blog</router-link>
         </li>
       </ul>
     </div>

@@ -65,4 +65,11 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::resource('sample-page-image', 'SamplePageImageController', [
       'only' => [ 'store', 'destroy' ]
     ]);
+
+    // Blog
+    Route::resource('blogs', 'BlogsController', [
+      'only' => [
+          'index', 'store', 'update', 'destroy'
+      ]
+    ]);
 });
