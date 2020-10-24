@@ -114,7 +114,7 @@ class User extends Authenticatable
      */
     public function samplePageImages()
     {
-        return $this->hasMany(SamplePageImages::class);
+        return $this->hasMany(SamplePageImage::class);
     }
 
     /**
@@ -125,5 +125,15 @@ class User extends Authenticatable
     public function TechUsed()
     {
         return $this->hasMany(TechUsed::class);
+    }
+
+    /**
+     * The user has many blogs
+     *
+     * @return array object
+     */
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
     }
 }
