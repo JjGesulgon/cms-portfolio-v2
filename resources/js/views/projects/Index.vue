@@ -25,6 +25,7 @@
             <tr>
               <th scope="col" class="ideal-font">Name</th>
               <th scope="col" class="ideal-font">Type</th>
+              <th scope="col" class="ideal-font">Industry</th>
               <th scope="col" class="ideal-font">Date Deployed</th>
               <th scope="col" class="ideal-font">Options</th>
             </tr>
@@ -33,6 +34,7 @@
             <tr :id="item.id" v-for="item in data.data" :key="item.id">
               <td class="ideal-font">{{ item.name }}</td>
               <td class="ideal-font">{{ item.type }}</td>
+              <td class="ideal-font">{{ item.industry }}</td>
               <td class="ideal-font">{{ item.date_deployed }}</td>
               <td>
                 <data-table-row-action
@@ -94,24 +96,35 @@
               autocomplete="off"
             />
           </div>
-          <div class="col-md-6 form-group">
-            <label for="experience">Type</label>
+          <div class="col-md-4 form-group">
+            <label for="type">Type</label>
             <input
-              id="experience"
+              id="type"
               type="text"
               class="form-control"
-              v-model="$data.experience"
+              v-model="$data.type"
               autocomplete="off"
               maxlength="255"
             />
           </div>
-          <div class="col-md-6 form-group">
+          <div class="col-md-4 form-group">
             <label for="proficiency">Date Deployed</label>
             <input
               id="proficiency"
               type="text"
               class="form-control"
               v-model="$data.date_deployed"
+              autocomplete="off"
+              maxlength="255"
+            />
+          </div>
+          <div class="col-md-4 form-group">
+            <label for="industry">Industry</label>
+            <input
+              id="industry"
+              type="text"
+              class="form-control"
+              v-model="$data.industry"
               autocomplete="off"
               maxlength="255"
             />
@@ -139,6 +152,7 @@ export default {
       name: null,
       type: null,
       date_deployed: null,
+      industry: null,
       order_by: "desc",
       error: null,
       showProgress: false,
@@ -161,6 +175,7 @@ export default {
           name: to.query.name,
           type: to.query.experience,
           date_deployed: to.query.date_deployed,
+          industry: to.query.industry,
           order_by: to.query.order_by,
         })
       );
@@ -172,6 +187,7 @@ export default {
           name: to.query.name,
           type: to.query.type,
           date_deployed: to.query.date_deployed,
+          industry: to.query.industry,
           order_by: to.query.order_by,
         })
       );
@@ -185,6 +201,7 @@ export default {
       name: this.name,
       type: this.type,
       date_deployed: this.date_deployed,
+      industry: this.industry,
       order_by: this.order_by,
     });
 
@@ -197,6 +214,7 @@ export default {
       this.name = params.name;
       this.type = params.type;
       this.date_deployed = params.date_deployed;
+      this.industry = params.industry;
 
       typeof params.order_by === "undefined" || params.order_by == "desc"
         ? (this.order_by = "desc")
@@ -225,6 +243,7 @@ export default {
         name: this.name,
         type: this.type,
         date_deployed: this.date_deployed,
+        industry: this.industry,
         order_by: this.order_by,
       };
     },
@@ -232,6 +251,7 @@ export default {
       this.name = "";
       this.type = "";
       this.date_deployed = "";
+      this.industry = "";
       this.order_by = "desc";
     },
   },
