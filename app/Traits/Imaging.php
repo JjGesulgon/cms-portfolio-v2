@@ -120,27 +120,34 @@ trait Imaging
         $imageName    = uniqid() . '.jpg';
 
         switch ($fieldName) {
-              case "intro_image":
-                  if (!request()->hasFile('intro_image')) {
-                      return ;
-                  }
-                  $image = request()->intro_image;
-                  $model->intro_image = $imageName;
-                  break;
-              case "screen_image":
-                  if (!request()->hasFile('screen_image')) {
-                      return ;
-                  }
-                  $image = request()->screen_image;
-                  $model->screen_image = $imageName;
-                  break;
-              default:
-                  if (!request()->hasFile('image')) {
-                      return ;
-                  }
-                  $image = $model->image;
-                  $model->image = $imageName;
-            }
+          case "header_image":
+              if (!request()->hasFile('header_image')) {
+                  return ;
+              }
+              $image = request()->header_image;
+              $model->header_image = $imageName;
+              break;
+          case "intro_image":
+              if (!request()->hasFile('intro_image')) {
+                  return ;
+              }
+              $image = request()->intro_image;
+              $model->intro_image = $imageName;
+              break;
+          case "screen_image":
+              if (!request()->hasFile('screen_image')) {
+                  return ;
+              }
+              $image = request()->screen_image;
+              $model->screen_image = $imageName;
+              break;
+          default:
+              if (!request()->hasFile('image')) {
+                  return ;
+              }
+              $image = $model->image;
+              $model->image = $imageName;
+        }
 
         if ($sizes != null && is_array($sizes)) {
             foreach ($sizes as $size) {
