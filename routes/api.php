@@ -72,4 +72,12 @@ Route::group(['middleware' => ['auth:api']], function () {
           'index', 'store', 'update', 'destroy'
       ]
     ]);
+
+    // Category
+    Route::get('/categories/getAll', 'CategoriesController@getList');
+    Route::resource('categories', 'CategoriesController', [
+      'only' => [
+          'index', 'store', 'update', 'destroy', 'show'
+      ]
+    ]);
 });

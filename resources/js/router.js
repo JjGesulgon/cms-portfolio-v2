@@ -64,9 +64,16 @@ const SamplePageImages   = () => import('./views/projects/sample-page-images/Ind
  * Blogs
  */
 const BlogsIndex  = () => import('./views/blogs/Index');
-// const ProjectsCreate = () => import('./views/projects/Create');
+const BlogsCreate = () => import('./views/blogs/Create');
 // const ProjectsView   = () => import('./views/projects/View');
 // const ProjectsEdit   = () => import('./views/projects/Edit');
+
+/**
+ * Category
+ */
+const CategoryIndex  = () => import('./views/categories/Index');
+const CategoryCreate = () => import('./views/categories/Create');
+const CategoryEdit   = () => import('./views/categories/Edit');
 
 export default new Router({
     mode: 'history',
@@ -115,8 +122,13 @@ export default new Router({
 
         // Blogs
         { path: '/blogs', name: 'blogs.index', component: BlogsIndex },
-        // { path: '/projects/create', name: 'projects.create', component: ProjectsCreate },
+        { path: '/blogs/create', name: 'blogs.create', component: BlogsCreate },
         // { path: '/projects/:id', name: 'projects.view', component: ProjectsView },
         // { path: '/projects/:id/edit', name: 'projects.edit', component: ProjectsEdit },
+
+        // Categories
+        { path: '/categories', name: 'category.index', component: CategoryIndex },
+        { path: '/categories/create', name: 'category.create', component: CategoryCreate },
+        { path: '/categories/:id/edit', name: 'category.edit', component: CategoryEdit },
     ]
 });

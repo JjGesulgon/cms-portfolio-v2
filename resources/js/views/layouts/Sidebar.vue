@@ -76,6 +76,10 @@
         <li class="nav-item">
           <router-link class="nav-link list-item" :to="{ name: 'blogs.index' }">Personal Blog</router-link>
         </li>
+
+        <li class="nav-item">
+          <router-link class="nav-link list-item" :to="{ name: 'category.index' }">Categories</router-link>
+        </li>
       </ul>
     </div>
     <div class="">

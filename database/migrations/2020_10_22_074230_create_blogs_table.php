@@ -21,13 +21,18 @@ class CreateBlogsTable extends Migration
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->bigInteger('category_id')->unsigned();
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->string('title');
             $table->string('author');
             $table->longText('content')->nullable();
             $table->date('published_at')->nullable();
             $table->string('header_image')->nullable();
             $table->string('slug');
-            $table->string('category');
             $table->timestamps();
             $table->softDeletes();
         });
