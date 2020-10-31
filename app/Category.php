@@ -3,12 +3,13 @@
 namespace App;
 
 use App\Traits\Filtering;
+use App\Traits\FilterRelationships;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
-    use SoftDeletes, Filtering;
+    use SoftDeletes, Filtering, FilterRelationships;
 
     /**
      * TechStackItem table.
@@ -52,5 +53,15 @@ class Category extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * The category belongs to a blog.
+     *
+     * @return object
+     */
+    public function blog()
+    {
+        return $this->hasMany(Blog::class);
     }
 }

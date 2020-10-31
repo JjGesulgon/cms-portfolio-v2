@@ -10,7 +10,11 @@
 
     <div class="card">
       <div class="card-body">
-        <form-title :routePrefixName="routePrefixName" :title="title" v-bind:showRightSide="false"></form-title>
+        <form-title
+          :routePrefixName="routePrefixName"
+          :title="pageTitle"
+          v-bind:showRightSide="false"
+        ></form-title>
         <hr />
         <form-create
           :apiPath="apiPath"
@@ -23,8 +27,65 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="form-group">
-                  <label for="image" class="ideal-font font-weight-bold">Image</label>
-                  <input id="image" type="file" class="form-control-file" @change="onFileSelected" />
+                  <label for="title" class="ideal-font font-weight-bold">
+                    Title
+                    <small class="text-danger">* Required</small>
+                  </label>
+                  <input
+                    id="title"
+                    type="text"
+                    class="form-control"
+                    v-model="$data.title"
+                    autocomplete="off"
+                    minlength="2"
+                    maxlength="255"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="Author" class="ideal-font font-weight-bold">
+                    Author
+                    <small class="text-danger">* Required</small>
+                  </label>
+                  <input
+                    id="title"
+                    type="text"
+                    class="form-control"
+                    v-model="$data.author"
+                    autocomplete="off"
+                    minlength="2"
+                    maxlength="255"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="category" class="ideal-font font-weight-bold"
+                    >Category</label
+                  >
+                  <vue-select
+                    class="form-control"
+                    v-model="$data.category"
+                    label="name"
+                    :options="categories"
+                    required
+                  ></vue-select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="image" class="ideal-font font-weight-bold"
+                    >Image</label
+                  >
+                  <input
+                    id="image"
+                    type="file"
+                    class="form-control-file"
+                    @change="onFileSelected"
+                  />
                 </div>
               </div>
             </div>
@@ -35,17 +96,18 @@
               </label>
               <editor
                 @onInit="initFunction"
-                id="body"
-                v-model="$data.body"
+                id="content"
+                v-model="$data.content"
                 api-key="v8631ogi6aq7uc2h9z8tr72t2r3krmwlsbj5k4swk4i448f9"
                 :init="{
-                  height: 500,
+                  height: 600,
                   menubar: false,
                   plugins: [
-                  'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+                    'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
                   ],
                   menubar: 'file edit view insert format tools table help',
-                  toolbar: 'undo redo | bold italic underline strikethrough | fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+                  toolbar:
+                    'undo redo | bold italic underline strikethrough | fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
                   toolbar_sticky: true,
                 }"
               />
@@ -61,9 +123,9 @@ export default {
   data() {
     return {
       createbuttonShow: false,
-      ifReady: true,
+      ifReady: false,
       action: "Create New",
-      title: "Create New Blog",
+      pageTitle: "Create New Blog",
       singularName: "Blog",
       pluralName: "Blog",
       apiPath: "/api/blogs",
@@ -78,6 +140,8 @@ export default {
       category: "",
       title: "",
 
+      categories: [],
+
       showButtons: false,
       showSearch: false,
       showBack: true,
@@ -86,21 +150,41 @@ export default {
       tinyMCEReady: false,
     };
   },
+
+  mounted() {
+    let promise = new Promise((resolve, reject) => {
+      axios
+        .get(`/api/categories/getAll`)
+        .then((res) => {
+          this.categories = res.data.category;
+          this.ifReady = true;
+          resolve();
+        })
+        .catch((err) => {
+          reject();
+        });
+    });
+
+    promise.then(() => {
+      this.ifReady = true;
+    });
+  },
+
   methods: {
     onFileSelected(event) {
-      this.image = event.target.files[0];
+      this.header_image = event.target.files[0];
     },
     getFieldColumns() {
       if (this.tinyMCEReady) {
         let formData = new FormData();
-        if (this.image != null) {
+        if (this.header_image != null) {
           formData.append("header_image", this.header_image);
         }
         formData.append("content", tinyMCE.activeEditor.getContent());
         formData.append("title", this.title);
         formData.append("author", this.author);
-        formData.append("category", this.category);
-        
+        formData.append("category_id", this.category.id);
+
         return formData;
       } else {
         return null;

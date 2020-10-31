@@ -33,7 +33,7 @@
             <tr :id="item.id" v-for="item in data.data" :key="item.id">
               <td class="ideal-font">{{ item.title }}</td>
               <td class="ideal-font">{{ item.author }}</td>
-              <td class="ideal-font">{{ item.category }}</td>
+              <td class="ideal-font">{{ item.category.name }}</td>
               <td>
                 <data-table-row-action
                   :apiPath="apiPath"
@@ -56,7 +56,7 @@
               aria-valuenow="100"
               aria-valuemin="0"
               aria-valuemax="100"
-              style="width: 100%;"
+              style="width: 100%"
             ></div>
           </div>
         </div>
@@ -107,14 +107,12 @@
           </div>
           <div class="col-md-6 form-group">
             <label for="category">Category</label>
-            <input
-              id="category"
-              type="text"
+            <vue-select
               class="form-control"
               v-model="$data.category"
-              autocomplete="off"
-              maxlength="255"
-            />
+              label="name"
+              :options="categories"
+            ></vue-select>
           </div>
         </div>
       </template>
@@ -136,13 +134,16 @@ export default {
       routePrefixName: "blogs",
       toastMessage: "Blog",
       useName: "plural",
-      title: '',
-      author: '',
-      category: '',
+      title: "",
+      author: "",
+      category_id: "",
+      category:"",
       order_by: "desc",
       error: null,
       showProgress: false,
       pageNumbers: [],
+
+      categories:[],
 
       selectedItem: null,
       showButtons: true,
@@ -150,6 +151,25 @@ export default {
       ifReady: false,
       showSearch: true,
     };
+  },
+
+  mounted() {
+    let promise = new Promise((resolve, reject) => {
+      axios
+        .get(`/api/categories/getAll`)
+        .then((res) => {
+          this.categories = res.data.category;
+          this.ifReady = true;
+          resolve();
+        })
+        .catch((err) => {
+          reject();
+        });
+    });
+
+    promise.then(() => {
+      this.ifReady = true;
+    });
   },
 
   beforeRouteEnter(to, from, next) {
@@ -160,7 +180,7 @@ export default {
           per_page: 15,
           title: to.query.title,
           author: to.query.author,
-          category: to.query.category,
+          category_id: to.query.category_id,
           order_by: to.query.order_by,
         })
       );
@@ -171,7 +191,7 @@ export default {
           per_page: to.query.per_page,
           title: to.query.title,
           author: to.query.author,
-          category: to.query.category, 
+          category_id: to.query.category_id,
           order_by: to.query.order_by,
         })
       );
@@ -184,7 +204,7 @@ export default {
       per_page: this.data.meta.per_page,
       title: this.title,
       author: this.author,
-      category: this.category,
+      category_id: this.category == undefined ? this.category : this.category.id,
       order_by: this.order_by,
     });
 
@@ -196,7 +216,7 @@ export default {
       this.showProgress = true;
       this.title = params.title;
       this.author = params.author;
-      this.category = params.category;
+      this.category_id = params.category_id;
 
       typeof params.order_by === "undefined" || params.order_by == "desc"
         ? (this.order_by = "desc")
@@ -231,6 +251,7 @@ export default {
     clearParameters() {
       this.title = "";
       this.author = "";
+      this.category_id = "";
       this.category = "";
       this.order_by = "desc";
     },

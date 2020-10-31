@@ -61,7 +61,7 @@ class BlogsController extends Controller
       'content'       => 'required',
       'published_at'  => 'date',
       'header_image'  => 'max:2000',
-      'category'      => 'required'
+      'category_id'      => 'required'
     ]);
 
     if ($validator->fails()) {

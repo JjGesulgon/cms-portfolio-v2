@@ -27,7 +27,7 @@ class Blog extends Model
      */
     protected $fillable = [
       'user_id', 'title', 'author', 'content',
-      'header_image', 'slug', 'category',
+      'header_image', 'slug', 'category_id',
       'published_at'
     ];
 
@@ -65,5 +65,15 @@ class Blog extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * The user has one Category
+     *
+     * @return array object
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }
