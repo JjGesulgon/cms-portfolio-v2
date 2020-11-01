@@ -25,7 +25,7 @@
         >
           <template v-bind:data="$data">
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <div class="form-group">
                   <label for="title" class="ideal-font font-weight-bold">
                     Title
@@ -43,7 +43,36 @@
                   />
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="category" class="ideal-font font-weight-bold"
+                      >Category</label
+                    >
+                    <vue-select
+                      class="form-control"
+                      v-model="$data.category"
+                      label="name"
+                      :options="categories"
+                      required
+                    ></vue-select>
+                  </div>
+                </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="image" class="ideal-font font-weight-bold"
+                      >Image</label
+                    >
+                    <input
+                      id="image"
+                      type="file"
+                      class="form-control-file"
+                      @change="onFileSelected"
+                    />
+                  </div>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-md-9">
                 <div class="form-group">
                   <label for="Author" class="ideal-font font-weight-bold">
                     Author
@@ -62,32 +91,34 @@
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="form-group">
-                  <label for="category" class="ideal-font font-weight-bold"
-                    >Category</label
-                  >
-                  <vue-select
-                    class="form-control"
-                    v-model="$data.category"
-                    label="name"
-                    :options="categories"
-                    required
-                  ></vue-select>
+                  <div class="form-group">
+                    <label for="type" class="ideal-font font-weight-bold"
+                      >Publish Now?
+                    </label>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <input
+                          type="radio"
+                          id="no"
+                          name="isPublish"
+                          value=false
+                          v-model="isPublish"
+                        />
+                        <label for="no">No</label>
+                      </div>
+                      <div class="col-md-3">
+                        <input
+                          type="radio"
+                          id="yes"
+                          name="isPublish"
+                          value=true
+                          v-model="isPublish"
+                        />
+                        <label for="yes">Yes</label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="image" class="ideal-font font-weight-bold"
-                    >Image</label
-                  >
-                  <input
-                    id="image"
-                    type="file"
-                    class="form-control-file"
-                    @change="onFileSelected"
-                  />
-                </div>
-              </div>
             </div>
             <div class="form-group">
               <label for="content" class="ideal-font font-weight-bold">
@@ -134,7 +165,7 @@ export default {
       toastMessage: "Blog",
 
       content: "",
-      published_at: "",
+      isPublish: false,
       header_image: "",
       author: "",
       category: "",
@@ -184,6 +215,7 @@ export default {
         formData.append("title", this.title);
         formData.append("author", this.author);
         formData.append("category_id", this.category.id);
+        formData.append("isPublish", this.isPublish);
 
         return formData;
       } else {

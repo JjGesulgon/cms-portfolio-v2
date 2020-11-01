@@ -44,12 +44,12 @@ class Blog extends Model
             $model->user_id = auth('api')->user()->id;
             $model->slug = Str::slug($model->name . '-' . random_int(100, 999));
 
-            static::storeImage($model, 'header_image');
+            static::storeImage($model, 'header_image', true);
         });
   
         static::updating(function ($model) {
             $model->user_id = auth('api')->user()->id;
-            static::updateImage($model, 'header_image');
+            static::updateImage($model, 'header_image', true);
         });
 
         static::deleting(function ($model) {

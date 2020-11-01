@@ -4,7 +4,7 @@
       <router-link
         class="navbar-brand d-none d-sm-block text-white"
         :to="{ name: 'overview' }"
-      >Content Management And Web Traffic Analysis</router-link>
+      >Project Snowflake</router-link>
 
       <button
         class="navbar-toggler"

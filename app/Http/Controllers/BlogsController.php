@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Repositories\BlogRepository;
 use App\Http\Resources\BlogResource;
 
+use Carbon\Carbon;
+
 class BlogsController extends Controller
 {
   /**
@@ -59,7 +61,6 @@ class BlogsController extends Controller
       'title'         => 'required',
       'author'        => 'required',
       'content'       => 'required',
-      'published_at'  => 'date',
       'header_image'  => 'max:2000',
       'category_id'      => 'required'
     ]);
@@ -69,6 +70,10 @@ class BlogsController extends Controller
         'message' => 'Validation failed',
         'errors'  => $validator->errors()
       ], 400);
+    }
+
+    if($request->isPublish == true){
+      $request->request->add(['published_at' => Carbon::now()]);
     }
 
     if (! $this->blog->store($request)) {

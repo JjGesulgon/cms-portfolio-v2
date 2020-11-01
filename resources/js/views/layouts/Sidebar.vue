@@ -10,6 +10,17 @@
     <div class="">
       <ul class="nav flex-column background py-1 mt-3 sidebar-nav">
         <li class="nav-item">
+          <span class="nav-link">User Management</span>
+        </li>
+
+        <li class="nav-item">
+          <router-link class="nav-link list-item" :to="{ name: 'users.index' }">Users</router-link>
+        </li>
+      </ul>
+    </div>
+    <div class="">
+      <ul class="nav flex-column background py-1 mt-3 sidebar-nav">
+        <li class="nav-item">
           <span class="nav-link">Content Management</span>
         </li>
 
@@ -59,10 +70,6 @@
         </div>
 
         <li class="nav-item">
-          <router-link class="nav-link list-item" :to="{ name: 'projects.index' }">Projects</router-link>
-        </li>
-
-        <li class="nav-item">
           <router-link class="nav-link list-item" :to="{ name: 'contact.index' }">Contact Details</router-link>
         </li>
       </ul>
@@ -78,28 +85,20 @@
         </li>
 
         <li class="nav-item">
-          <router-link class="nav-link list-item" :to="{ name: 'category.index' }">Categories</router-link>
+          <router-link class="nav-link list-item" :to="{ name: 'category.index' }">Blog Categories</router-link>
         </li>
       </ul>
     </div>
     <div class="">
       <ul class="nav flex-column background py-1 mt-3 sidebar-nav">
         <li class="nav-item">
-          <span class="nav-link">User Management</span>
-        </li>
-
-        <li class="nav-item">
-          <router-link class="nav-link list-item" :to="{ name: 'users.index' }">Users</router-link>
-        </li>
-      </ul>
-    </div>
-    <div class="">
-      <ul class="nav flex-column background py-1 mt-3 sidebar-nav">
-        <li class="nav-item">
-          <span class="nav-link">Monitoring</span>
+          <span class="nav-link">Work</span>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link list-item" :to="{ name: 'users.index' }">Website Analytics</router-link>
+          <router-link class="nav-link list-item" :to="{ name: 'projects.index' }">Software Development</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link list-item" :to="{ name: 'projects.index' }">Photography</router-link>
         </li>
       </ul>
     </div>
