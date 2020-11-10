@@ -20,34 +20,30 @@
           :parameters="getParameters()"
         ></form-title>
         <hr />
-        <data-table :pluralName="pluralName" v-if="ifReady">
-          <template v-slot:thead>
-            <tr>
-              <th scope="col" class="ideal-font">Title</th>
-              <th scope="col" class="ideal-font">Author</th>
-              <th scope="col" class="ideal-font">Category</th>
-              <th scope="col" class="ideal-font">Options</th>
-            </tr>
-          </template>
-          <template v-slot:tbody v-bind:data="$data">
-            <tr :id="item.id" v-for="item in data.data" :key="item.id">
-              <td class="ideal-font">{{ item.title }}</td>
-              <td class="ideal-font">{{ item.author }}</td>
-              <td class="ideal-font">{{ item.category.name }}</td>
-              <td>
-                <data-table-row-action
-                  :apiPath="apiPath"
-                  :toastMessage="toastMessage"
-                  :routePrefixName="routePrefixName"
-                  :disableView="false"
-                  :singularName="singularName"
-                  :object="item"
-                  :tbObject="item"
-                ></data-table-row-action>
-              </td>
-            </tr>
-          </template>
-        </data-table>
+        <div class="card-columns" v-if="ifReady">
+          <div class="card" v-for="blog in blogs" :key="blog.id">
+            <div class="card-header clearfix">
+              <router-link class="btn btn-primary btn-sm float-right ideal-font" :to="{ name: 'blogs.edit', params: { id: blog.id }}">
+                <i class="fas fa-edit"></i>&nbsp; Edit
+              </router-link>
+
+              <label
+                class="btn btn-outline-danger btn-sm mr-1 ideal-font float-right"
+                @click.prevent="openDeleteModalTable(blog)"
+              >
+                <i class="fas fa-trash-alt"></i>&nbsp;
+                <strong class="ideal-font">Delete</strong>
+              </label>
+            </div>
+            <div v-if="blog.header_image" class="text-center">
+              <img class="img-fluid mw-50 h-auto" :src="'storage/images/' + blog.header_image" alt />
+            </div>
+            <div class="card-body"> 
+              <h5 class="card-title">{{ blog.title }}</h5>
+              <h6 class="card-title">{{ blog.author }}</h6>
+            </div>
+          </div>
+        </div>
         <div v-else>
           <div class="progress">
             <div
@@ -117,6 +113,45 @@
         </div>
       </template>
     </search-modal>
+
+    <div
+      class="modal fade"
+      id="delete-modal-table"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="delete-modal-title"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="delete-modal-title">
+              <strong class="text-danger">WARNING:</strong> You're about to
+              delete this.
+            </h5>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete this image?
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm"
+              data-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger btn-sm"
+              @click.prevent="deleteItem()"
+            >
+              Confirm Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -125,6 +160,8 @@ export default {
   data() {
     return {
       data: null,
+      blogs: null,
+      blog: null,
       action: "View",
       formTitle: "Blogs",
       pluralName: "Blogs",
@@ -150,6 +187,7 @@ export default {
       hasContent: false,
       ifReady: false,
       showSearch: true,
+      tinyMCEReady: false,
     };
   },
 
@@ -226,7 +264,7 @@ export default {
         .get(this.apiPath, { params })
         .then((res) => {
           this.data = res.data;
-          this.data.data = res.data.data;
+          this.blogs = res.data.data;
           this.showProgress = false;
           this.ifReady = true;
         })
@@ -254,6 +292,36 @@ export default {
       this.category_id = "";
       this.category = "";
       this.order_by = "desc";
+    },
+    openDeleteModalTable(item) {
+      this.blog = item;
+      console.log(this.blog);
+      $("#delete-modal-table").modal("show");
+    },
+    deleteItem() {
+      $("#delete-modal-table").modal("hide");
+      this.ifReady = false;
+
+      axios
+        .delete(`${this.apiPath}/${this.blog.id}`)
+        .then(() => {
+          Broadcast.$emit("ToastMessage", {
+            message: `${this.toastMessage} deleted successfully.`,
+          });
+
+          this.ifReady = true;
+
+          const index = this.blogs.indexOf(this.blog);
+          this.blogs.splice(index, 1);
+        })
+        .catch((err) => {
+          console.log(err);
+          this.$parent.ifReady = true;
+        });
+    },
+
+    initFunction() {
+      this.tinyMCEReady = true;
     },
   },
 };

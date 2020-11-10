@@ -44,19 +44,19 @@
                 </div>
               </div>
               <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="category" class="ideal-font font-weight-bold"
-                      >Category</label
-                    >
-                    <vue-select
-                      class="form-control"
-                      v-model="$data.category"
-                      label="name"
-                      :options="categories"
-                      required
-                    ></vue-select>
-                  </div>
+                <div class="form-group">
+                  <label for="category" class="ideal-font font-weight-bold"
+                    >Category</label
+                  >
+                  <vue-select
+                    class="form-control"
+                    v-model="$data.category"
+                    label="name"
+                    :options="categories"
+                    required
+                  ></vue-select>
                 </div>
+              </div>
               <div class="col-md-4">
                   <div class="form-group">
                     <label for="image" class="ideal-font font-weight-bold"
@@ -91,34 +91,34 @@
                 </div>
               </div>
               <div class="col-md-3">
-                  <div class="form-group">
-                    <label for="type" class="ideal-font font-weight-bold"
-                      >Publish Now?
-                    </label>
-                    <div class="row">
-                      <div class="col-md-3">
-                        <input
-                          type="radio"
-                          id="no"
-                          name="isPublish"
-                          value=false
-                          v-model="isPublish"
-                        />
-                        <label for="no">No</label>
-                      </div>
-                      <div class="col-md-3">
-                        <input
-                          type="radio"
-                          id="yes"
-                          name="isPublish"
-                          value=true
-                          v-model="isPublish"
-                        />
-                        <label for="yes">Yes</label>
-                      </div>
+                <div class="form-group">
+                  <label for="type" class="ideal-font font-weight-bold"
+                    >Publish Now?
+                  </label>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <input
+                        type="radio"
+                        id="no"
+                        name="isPublish"
+                        value=false
+                        v-model="isPublish"
+                      />
+                      <label for="no">No</label>
+                    </div>
+                    <div class="col-md-3">
+                      <input
+                        type="radio"
+                        id="yes"
+                        name="isPublish"
+                        value=true
+                        v-model="isPublish"
+                      />
+                      <label for="yes">Yes</label>
                     </div>
                   </div>
                 </div>
+              </div>
             </div>
             <div class="form-group">
               <label for="content" class="ideal-font font-weight-bold">

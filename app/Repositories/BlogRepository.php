@@ -36,8 +36,7 @@ class BlogRepository extends Repository
     public function findOrFail($id)
     {
         return $this->blog->with(
-            'category',
-            'category.category'
+            'category'
         )->findOrFail($id);
     }
 

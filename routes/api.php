@@ -69,7 +69,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     // Blog
     Route::resource('blogs', 'BlogsController', [
       'only' => [
-          'index', 'store', 'update', 'destroy'
+          'index', 'store', 'update', 'destroy', 'show'
       ]
     ]);
 

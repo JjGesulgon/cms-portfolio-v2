@@ -72,7 +72,7 @@ class BlogsController extends Controller
       ], 400);
     }
 
-    if($request->isPublish == true){
+    if($request->isPublish === true){
       $request->request->add(['published_at' => Carbon::now()]);
     }
 
@@ -122,7 +122,7 @@ class BlogsController extends Controller
       'content'       => 'required',
       'published_at'  => 'date',
       'header_image'  => 'max:2000',
-      'category'      => 'required'
+      'category_id'      => 'required'
     ]);
 
     if ($validator->fails()) {
@@ -130,6 +130,10 @@ class BlogsController extends Controller
         'message' => 'Validation failed',
         'errors'  => $validator->errors()
       ], 400);
+    }
+
+    if($request->isPublish == true){
+      $request->request->add(['published_at' => Carbon::now()]);
     }
 
     if (! $this->blog->update($request, $id)) {
