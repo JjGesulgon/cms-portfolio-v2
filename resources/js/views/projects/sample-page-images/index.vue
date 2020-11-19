@@ -30,7 +30,7 @@
           >
             <div class="card-header clearfix mb-2">
               <label
-                class="btn btn-outline-danger ideal-font float-right"
+                class="btn btn-outline-danger btn-sm ideal-font float-right"
                 @click.prevent="openDeleteModalTable(samplePageImage)"
               >
                 <i class="fas fa-trash-alt"></i>&nbsp;

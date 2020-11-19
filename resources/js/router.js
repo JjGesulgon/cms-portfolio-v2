@@ -65,7 +65,7 @@ const SamplePageImages   = () => import('./views/projects/sample-page-images/Ind
  */
 const BlogsIndex  = () => import('./views/blogs/Index');
 const BlogsCreate = () => import('./views/blogs/Create');
-// const ProjectsView   = () => import('./views/projects/View');
+const BlogsView   = () => import('./views/blogs/View');
 const BlogsEdit   = () => import('./views/blogs/Edit');
 
 /**
@@ -123,7 +123,7 @@ export default new Router({
         // Blogs
         { path: '/blogs', name: 'blogs.index', component: BlogsIndex },
         { path: '/blogs/create', name: 'blogs.create', component: BlogsCreate },
-        // { path: '/projects/:id', name: 'projects.view', component: ProjectsView },
+        { path: '/blogs/:id', name: 'blogs.view', component: BlogsView },
         { path: '/blogs/:id/edit', name: 'blogs.edit', component: BlogsEdit },
 
         // Categories

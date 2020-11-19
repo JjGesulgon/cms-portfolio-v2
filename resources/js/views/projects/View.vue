@@ -14,7 +14,6 @@
                             <div class="form-group">
                               <label for="name" class="ideal-font font-weight-bold"
                                 >Name
-                                <small class="text-danger">* Required</small>
                                 </label
                               >
                               <input
@@ -33,7 +32,6 @@
                             <div class="form-group">
                               <label for="role" class="ideal-font font-weight-bold"
                                 >Role
-                                <small class="text-danger">* Required</small>
                                 </label
                               >
                               <input
@@ -52,7 +50,6 @@
                             <div class="form-group">
                               <label for="type" class="ideal-font font-weight-bold"
                                 >Type
-                                <small class="text-danger">* Required</small>
                                 </label
                               >
                               <div class="row">
@@ -96,7 +93,6 @@
                                 for="date_deployed"
                                 class="ideal-font font-weight-bold"
                                 >Date Deployed / Released
-                                <small class="text-danger">* Required</small>
                                 </label
                               >
                               <datepicker
@@ -118,8 +114,8 @@
                               <label
                                 for="industry"
                                 class="ideal-font font-weight-bold"
-                                >Industry<small class="text-danger">* Required</small></label
-                              >
+                                >Industry
+                                </label>
                               <input
                                 id="industry"
                                 type="text"

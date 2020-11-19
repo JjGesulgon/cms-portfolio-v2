@@ -15,7 +15,7 @@
         <div class="card-columns" v-if="passions">
           <div class="card" v-for="passion in passions" :key="passion.id">
             <div class="card-header clearfix mb-2">
-              <router-link class="btn btn-primary btn-sm float-right" :to="{ name: 'passion.edit', params: { id: passion.id }}">
+              <router-link class="btn btn-outline-primary btn-sm float-right" :to="{ name: 'passion.edit', params: { id: passion.id }}">
                 <i class="fas fa-edit"></i>&nbsp; Edit
               </router-link>
             </div>

@@ -23,8 +23,12 @@
         <div class="card-columns" v-if="ifReady">
           <div class="card" v-for="blog in blogs" :key="blog.id">
             <div class="card-header clearfix">
-              <router-link class="btn btn-primary btn-sm float-right ideal-font" :to="{ name: 'blogs.edit', params: { id: blog.id }}">
+              <router-link class="btn btn-outline-primary btn-sm float-right ideal-font" :to="{ name: 'blogs.edit', params: { id: blog.id }}">
                 <i class="fas fa-edit"></i>&nbsp; Edit
+              </router-link>
+
+              <router-link class="btn btn-outline-dark btn-sm float-right ideal-font mr-1" :to="{ name: 'blogs.view', params: { id: blog.id }}">
+                <i class="fas fa-eye"></i>&nbsp; View
               </router-link>
 
               <label
@@ -32,7 +36,7 @@
                 @click.prevent="openDeleteModalTable(blog)"
               >
                 <i class="fas fa-trash-alt"></i>&nbsp;
-                <strong class="ideal-font">Delete</strong>
+                <span class="ideal-font">Delete</span>
               </label>
             </div>
             <div v-if="blog.header_image" class="text-center">
@@ -40,6 +44,7 @@
             </div>
             <div class="card-body"> 
               <h5 class="card-title">{{ blog.title }}</h5>
+              <h6 class="card-title">#{{ blog.category.name}}</h6>
               <h6 class="card-title">{{ blog.author }}</h6>
             </div>
           </div>

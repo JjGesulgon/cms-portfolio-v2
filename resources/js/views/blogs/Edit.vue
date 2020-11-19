@@ -167,7 +167,7 @@ export default {
       routePrefixName: "blogs",
       useName: "singular",
       selectedProperty: "title",
-      toastMessage: "Technology Stack Item",
+      toastMessage: "Blog",
 
       content: "",
       isPublish: null,
