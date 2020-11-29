@@ -55,9 +55,11 @@ export default {
     };
   },
 
-  mounted() {
+  created() {
     axios.get("/api/auth/user").then((res) => {
       this.user = res.data.user;
+      console.log('test');
+      console.log(res);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       this.ifReady = true;
     });

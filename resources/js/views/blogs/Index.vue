@@ -209,10 +209,6 @@ export default {
           reject();
         });
     });
-
-    promise.then(() => {
-      this.ifReady = true;
-    });
   },
 
   beforeRouteEnter(to, from, next) {
