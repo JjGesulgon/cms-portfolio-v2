@@ -1,7 +1,7 @@
 <?php
 
 // Auth
-Route::post('/auth/login', 'AuthController@apiLogin');
+Route::post('/auth/login', 'AuthController@login');
 
 Route::group(['middleware' => ['auth:api']], function () {
     // Auth
