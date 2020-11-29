@@ -14,19 +14,19 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('categories')->insert([
+        DB::table('categories')->insert([
         'user_id' => 1,
         'name' => 'Life',
         'created_at' => Carbon::now()
       ]);
 
-      DB::table('categories')->insert([
+        DB::table('categories')->insert([
         'user_id' => 1,
         'name' => 'Tech',
         'created_at' => Carbon::now()
       ]);
 
-      DB::table('categories')->insert([
+        DB::table('categories')->insert([
         'user_id' => 1,
         'name' => 'Productivity',
         'created_at' => Carbon::now()
