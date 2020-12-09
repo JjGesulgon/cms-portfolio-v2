@@ -45,17 +45,17 @@ export default {
     };
   },
   created() {
-    Echo.connector.socket.on("disconnect", (reason) => {
-      alert("No Internet Connection");
-    });
+    // Echo.connector.socket.on("disconnect", (reason) => {
+    //   alert("No Internet Connection");
+    // });
 
-    Echo.connector.socket.on("reconnect", (reason) => {
-      alert("Connected");
-    });
+    // Echo.connector.socket.on("reconnect", (reason) => {
+    //   alert("Connected");
+    // });
 
-    Echo.channel("chat").listen("NewChatMessage", (event) => {
-      console.log(event);
-    });
+    // Echo.channel("chat").listen("NewChatMessage", (event) => {
+    //   console.log(event);
+    // });
   },
   mounted() {
     Broadcast.$on("ToastMessage", (event) => {
@@ -72,7 +72,7 @@ export default {
 </script>
 <style>
 .accent-image {
-  max-width: 50%;
+  max-width: 100%;
   height: auto;
 }
 .image-container {

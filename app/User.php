@@ -84,7 +84,7 @@ class User extends Authenticatable
      */
     public function passions()
     {
-        return $this->hasMany(passions::class);
+        return $this->hasMany(Passion::class);
     }
 
     /**

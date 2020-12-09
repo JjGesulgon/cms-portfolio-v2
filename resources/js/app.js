@@ -41,20 +41,20 @@ Vue.component('vue-select', VueSelect);
 Vue.component('datepicker', DatePicker);
 
 // Layouts
-Vue.component('navbar', require('./views/layouts/Navbar.vue'));
-Vue.component('sidebar', require('./views/layouts/Sidebar.vue'));
-Vue.component('footer-component', require('./views/layouts/Footer.vue'));
+Vue.component('navbar', require('./views/layouts/Navbar.vue').default);
+Vue.component('sidebar', require('./views/layouts/Sidebar.vue').default);
+Vue.component('footer-component', require('./views/layouts/Footer.vue').default);
 
-Vue.component('breadcrumbs', require('./components/Breadcrumbs.vue'));
-Vue.component('form-title', require('./components/FormTitle.vue'));
-Vue.component('form-create', require('./components/FormCreate.vue'));
-Vue.component('form-edit', require('./components/FormEdit.vue'));
-Vue.component('form-view', require('./components/FormView.vue'));
-Vue.component('search', require('./components/Search.vue'));
-Vue.component('pagination', require('./components/Pagination.vue'));
-Vue.component('search-modal', require('./components/SearchModal.vue'));
-Vue.component('data-table', require('./components/DataTable.vue'));
-Vue.component('data-table-row-action', require('./components/DataTableRowAction.vue'));
+Vue.component('breadcrumbs', require('./components/Breadcrumbs.vue').default);
+Vue.component('form-title', require('./components/FormTitle.vue').default);
+Vue.component('form-create', require('./components/FormCreate.vue').default);
+Vue.component('form-edit', require('./components/FormEdit.vue').default);
+Vue.component('form-view', require('./components/FormView.vue').default);
+Vue.component('search', require('./components/Search.vue').default);
+Vue.component('pagination', require('./components/Pagination.vue').default);
+Vue.component('search-modal', require('./components/SearchModal.vue').default);
+Vue.component('data-table', require('./components/DataTable.vue').default);
+Vue.component('data-table-row-action', require('./components/DataTableRowAction.vue').default);
 
 // Tiny MCE
 Vue.component('Editor', require('@tinymce/tinymce-vue').default);
