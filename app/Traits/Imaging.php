@@ -208,7 +208,7 @@ trait Imaging
      */
     public static function updateImage($model, $fieldName = null, $isResize = false)
     {
-        if (request()->hasFile('image') || request()->hasFile('picture') || request()->hasFile('photo') || request()->hasFile('intro_image') || request()->hasFile('screen_image')) {
+        if (request()->hasFile('image') || request()->hasFile('picture') || request()->hasFile('photo') || request()->hasFile('intro_image') || request()->hasFile('screen_image') || request()->hasFile('header_image')) {
             self::deleteImage($model->findorFail($model->id));
             self::storeImage($model, $fieldName, $isResize);
         }

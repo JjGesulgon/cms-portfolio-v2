@@ -247,6 +247,9 @@ export default {
         this.formData.append("author", this.author);
         this.formData.append("category_id", this.category.id);
         this.formData.append("isPublish", this.isPublish);
+        if (this.header_image != null) {
+          this.formData.append("header_image", this.header_image);
+        }
         return this.formData;
       } else {
         return null;
@@ -255,6 +258,7 @@ export default {
     onFileSelected(event) {
       switch (event.target.id) {
         case "header_image":
+          console.log('test')
           this.header_image =
             event.target.value.length == 0
               ? (this.header_image = null)

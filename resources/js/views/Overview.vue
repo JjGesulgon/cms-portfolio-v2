@@ -3,7 +3,7 @@
       <div class="card-body">
         <div class="container">
           <div class="image-container">
-            <img class="img-fluid accent-image" src="/images/undraw_content.svg" alt="Image" />
+            <img class="img-fluid accent-image w-50" src="/images/undraw_content.svg" alt="Image" />
           </div>
           <div class="d-block d-sm-none h1 font-weight-lighter text-center">Welcome to Project Snowflake</div>
           <div class="d-none d-sm-block display-4 px-3 font-weight-lighter text-center">Welcome to Project Snowflake</div>

@@ -13,7 +13,7 @@ class CreateTechStackContentTable extends Migration
      */
     public function up()
     {
-        Schema::create('tech_stack_contents', function (Blueprint $table) {
+        Schema::create('tech_stack_content', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')

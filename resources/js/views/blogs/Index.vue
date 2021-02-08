@@ -296,7 +296,6 @@ export default {
     },
     openDeleteModalTable(item) {
       this.blog = item;
-      console.log(this.blog);
       $("#delete-modal-table").modal("show");
     },
     deleteItem() {
