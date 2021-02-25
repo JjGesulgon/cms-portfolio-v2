@@ -95,7 +95,7 @@
           <span class="nav-link">Work</span>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link list-item" :to="{ name: 'projects.index' }">Software Development</router-link>
+          <router-link class="nav-link list-item" :to="{ name: 'projects.index' }">Software Development Projects</router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link list-item" :to="{ name: 'projects.index' }">Photography</router-link>

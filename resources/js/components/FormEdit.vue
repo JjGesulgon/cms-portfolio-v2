@@ -41,19 +41,30 @@
         methods: {
             update() {
                 this.$parent.ifReady = false;
-                axios.post(`${this.apiPath}/${this.$route.params.id}`,  this.fieldColumns).then(() => {
-                    Broadcast.$emit('ToastMessage', {
-                        message: `${this.toastMessage} updated successfully.`
-                    });
+                if (this.fieldColumns === null){
+                  Broadcast.$emit('ToastMessage', {
+                        message: `No data has been updated.`
+                  });
 
-                    this.$router.push({
-                        name: `${this.routePrefixName}.index`,
-                        params: { id: this.$route.params.id }
-                    });
-                }).catch(err => {
-                    this.$parent.ifReady = true;
-                    console.log(err);
-                });
+                  this.$router.push({
+                      name: `${this.routePrefixName}.index`,
+                      params: { id: this.$route.params.id }
+                  });
+                }else {
+                  axios.post(`${this.apiPath}/${this.$route.params.id}`,  this.fieldColumns).then(() => {
+                      Broadcast.$emit('ToastMessage', {
+                          message: `${this.toastMessage} updated successfully.`
+                      });
+
+                      this.$router.push({
+                          name: `${this.routePrefixName}.index`,
+                          params: { id: this.$route.params.id }
+                      });
+                  }).catch(err => {
+                      this.$parent.ifReady = true;
+                      console.log(err);
+                  });
+                }
             }
         }
     }
