@@ -12,7 +12,7 @@ Project is created with:
 * Vue.js
 	
 ## Setup
-To run this project, follow the steps below:
+To setup this project, follow the steps below:
 
 ```
 $ cd personal-website
