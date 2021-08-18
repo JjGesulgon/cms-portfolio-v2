@@ -171,7 +171,6 @@
                       autocomplete="off"
                       minlength="2"
                       maxlength="255"
-                      required
                     />
                   </div>
                 </div>
@@ -188,7 +187,6 @@
                       autocomplete="off"
                       minlength="2"
                       maxlength="255"
-                      required
                     />
                   </div>
                 </div>
@@ -207,7 +205,6 @@
                       autocomplete="off"
                       minlength="2"
                       maxlength="255"
-                      required
                     />
                   </div>
                 </div>
