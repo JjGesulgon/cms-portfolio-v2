@@ -4,7 +4,7 @@
 * [Setup](#setup)
 
 ## General info
-This is a custom-made internal CMS Website with Website Analytics Integration. This will project will handle the APIs of both the CMS and the Main Website. This system can only be accessed by the admin registered in the system. 
+This is a custom-made internal Content Management System. This system will handle the things that will be shown or displayed on my website. Once deployed, this system can only be accessed by the admin registered in the system. 
 	
 ## Technologies
 Project is created with:
@@ -12,7 +12,7 @@ Project is created with:
 * Vue.js
 	
 ## Setup
-To run this project, follow the steps below:
+To setup this project, follow the steps below:
 
 ```
 $ cd personal-website
