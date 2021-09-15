@@ -22,7 +22,7 @@
           <template v-bind:data="$data">
             <div class="form-group">
               <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                   <div class="form-group">
                     <label for="name" class="ideal-font font-weight-bold">Name</label>
                     <input
@@ -37,9 +37,9 @@
                     />
                   </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                   <div class="form-group">
-                    <label for="proficiency" class="ideal-font font-weight-bold">Proficiency (1-10)</label>
+                    <label for="proficiency" class="ideal-font font-weight-bold">Proficiency (1-5)</label>
                     <input
                       id="proficiency"
                       type="number"
@@ -47,11 +47,12 @@
                       v-model="proficiency"
                       autocomplete="off"
                       step=".01"
+                      max="5"
                       required
                     />
                   </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                   <div class="form-group">
                     <label for="experience" class="ideal-font font-weight-bold">Experience length</label>
                     <input
@@ -63,6 +64,20 @@
                       minlength="2"
                       maxlength="255"
                       required
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label for="icon_link" class="ideal-font font-weight-bold">Icon Link</label>
+                    <input
+                      id="icon_link"
+                      type="text"
+                      class="form-control"
+                      v-model="icon_link"
+                      autocomplete="off"
+                      minlength="2"
+                      maxlength="255"
                     />
                   </div>
                 </div>
@@ -92,6 +107,7 @@ export default {
       name: "",
       experience: "",
       proficiency: "",
+      icon_link: "",
 
       showButtons: false,
       showSearch: false,
@@ -105,6 +121,7 @@ export default {
         name: this.name,
         experience: this.experience,
         proficiency: this.proficiency,
+        icon_link: this.proficiency,
       };
     },
   },

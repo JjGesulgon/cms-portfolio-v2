@@ -22,7 +22,7 @@
           <template v-bind:data="$data">
             <div class="form-group">
               <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                   <div class="form-group">
                     <label for="name" class="ideal-font font-weight-bold">Name</label>
                     <input
@@ -37,7 +37,7 @@
                     />
                   </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                   <div class="form-group">
                     <label for="experience" class="ideal-font font-weight-bold">Experience</label>
                     <input
@@ -52,10 +52,24 @@
                     />
                   </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                   <div class="form-group">
                     <label for="proficiency" class="ideal-font font-weight-bold">Proficiency</label>
-                    <input id="proficiency" type="text" class="form-control" v-model="proficiency" />
+                    <input id="proficiency" type="number" class="form-control" v-model="proficiency" />
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label for="icon_link" class="ideal-font font-weight-bold">Icon Link</label>
+                    <input
+                      id="icon_link"
+                      type="text"
+                      class="form-control"
+                      v-model="icon_link"
+                      autocomplete="off"
+                      minlength="2"
+                      maxlength="255"
+                    />
                   </div>
                 </div>
               </div>
@@ -85,6 +99,7 @@ export default {
       name: "",
       experience: "",
       proficiency: "",
+      icon_link: "",
 
       moduleID: null,
       showButtons: false,
@@ -105,6 +120,7 @@ export default {
           this.name = res.data.techStackItem.name;
           this.experience = res.data.techStackItem.experience;
           this.proficiency = res.data.techStackItem.proficiency;
+          this.icon_link = res.data.techStackItem.icon_link;
           resolve();
         })
         .catch((err) => {
@@ -123,6 +139,7 @@ export default {
       this.formData.append("name", this.name);
       this.formData.append("experience", this.experience);
       this.formData.append("proficiency", this.proficiency);
+      this.formData.append("icon_link", this.icon_link);
       return this.formData;
     },
   },

@@ -26,6 +26,7 @@
               <th scope="col" class="ideal-font">Name</th>
               <th scope="col" class="ideal-font">Experience</th>
               <th scope="col" class="ideal-font">Proficiency</th>
+              <th scope="col" class="ideal-font">Icon</th>
               <th scope="col" class="ideal-font">Options</th>
             </tr>
           </template>
@@ -34,6 +35,9 @@
               <td class="ideal-font">{{ item.name }}</td>
               <td class="ideal-font">{{ item.experience }}</td>
               <td class="ideal-font">{{ item.proficiency }}</td>
+              <td class="ideal-font">
+                <img :src="item.icon_link" v-if="!item.icon_link"/>
+              </td>
               <td>
                 <data-table-row-action
                   :apiPath="apiPath"
@@ -139,6 +143,7 @@ export default {
       name: null,
       experience: null,
       proficiency: null,
+      icon_link:null,
       order_by: "desc",
       error: null,
       showProgress: false,
