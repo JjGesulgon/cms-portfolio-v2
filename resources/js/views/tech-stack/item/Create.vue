@@ -121,7 +121,7 @@ export default {
         name: this.name,
         experience: this.experience,
         proficiency: this.proficiency,
-        icon_link: this.proficiency,
+        icon_link: this.icon_link,
       };
     },
   },
