@@ -58,7 +58,7 @@ const ProjectsEdit   = () => import('./views/projects/Edit');
 /**
  * Sample Page Images
  */
-const SamplePageImages   = () => import('./views/projects/sample-page-images/Index');
+const SamplePageImages   = () => import('./views/projects/sample-page-images/index');
 
 /**
  * Blogs
