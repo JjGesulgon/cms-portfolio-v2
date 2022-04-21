@@ -35,6 +35,7 @@ import VueSelect from 'vue-select';
 import DatePicker from 'vuejs-datepicker';
 import Editor from '@tinymce/tinymce-vue'
 import Multiselect from 'vue-multiselect'
+import Vue from 'vue'
 
 // Component to Component Broadcasting
 window.Broadcast = new Vue();

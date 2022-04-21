@@ -15,7 +15,8 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     <!-- Icons -->
     <script src="https://kit.fontawesome.com/3c3b50fc94.js" crossorigin="anonymous"></script>
